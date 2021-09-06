@@ -37,29 +37,21 @@ public class EmployeesController {
 			@PathVariable(value = "size") int size) throws Exception {
 
 		logger.info("------------> getEmployees()");
-
-		EmployeesBean employesResource = null;
-		List<EmployeesBean> employeesResourceList = new ArrayList<EmployeesBean>();
-
+		List<EmployeesBean> employeesBeans = null;
 		try {
-			List<EmployeesBean> employeesBeans = employeeService.getEmployees(pageNo, size);			
+			employeesBeans = employeeService.getEmployees(pageNo, size);			
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());
 		}
-
-		return employeesResourceList;
+		return employeesBeans;
 	}
 
 	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public EmployeesBean getEmployeeById(@PathVariable(value = "id") Long employeeId) throws Exception {
-
-		EmployeesBean employesResource = null;
+		EmployeesBean employeesBean = null;
 		try {
-
-			EmployeesBean employeesBean = employeeService.getEmployeesById(employeeId);
-
-			return employesResource;
+			employeesBean = employeeService.getEmployeesById(employeeId);
 		} catch (RestClientException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,7 +61,7 @@ public class EmployeesController {
 			throw e;
 		}
 
-		return null;
+		return employeesBean;
 	}
 
 	@PostMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
