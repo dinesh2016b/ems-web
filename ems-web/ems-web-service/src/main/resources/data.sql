@@ -1,3 +1,7 @@
+INSERT INTO `userdetails` VALUES 
+('1001','admin','admin'),
+('1002','dinesh','dinesh'),
+('1003','admin1','admin1');
 
 INSERT INTO `departments` VALUES 
 ('1001','Marketing'),
@@ -112,8 +116,8 @@ INSERT INTO `employees` VALUES
 (10099,'2009-10-09','firstname1','lastname1','M','2011-03-08'),	
 (10100,'2009-10-09','firstname1','lastname1','M','2011-03-08');
 
-
-INSERT INTO `dept_emp` VALUES (10001,'1005','2020-12-15','2020-08-11'),
+INSERT INTO `dept_emp` VALUES 
+(10001,'1005','2020-12-15','2020-08-11'),
 (10002,'1007','2020-12-15','2020-08-11'),
 (10003,'1004','2020-12-15','2020-08-11'),
 (10004,'1004','2020-12-15','2020-08-11'),
@@ -313,8 +317,6 @@ INSERT INTO `titles` VALUES
 (10065,'Engineer','2005-12-30','2002-04-13'),
 (10066,'Assistant Engineer','2005-12-30','2002-04-13'),
 (10066,'Engineer','2005-12-30','2002-04-13');
-
-
 
 INSERT INTO `salaries` VALUES 
 (10001,60117,'2002-03-11','2005-01-12'),

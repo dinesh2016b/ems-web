@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ems.bean.SalariesBean;
 import com.ems.dao.SalariesRepositoryDAO;
+import com.ems.entity.Salaries;
 import com.ems.exception.ResourceNotFoundException;
-import com.ems.model.Salaries;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")

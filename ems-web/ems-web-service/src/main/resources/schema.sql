@@ -1,11 +1,19 @@
 
-DROP TABLE IF EXISTS dept_emp,
+DROP TABLE IF EXISTS userdetails,
+					 dept_emp,
                      dept_manager,
                      titles,
                      salaries, 
                      employees, 
                      departments;
-                     
+
+CREATE TABLE userdetails(
+	user_id	INT NOT NULL,
+	user_name VARCHAR(20) NOT NULL,
+	password VARCHAR(20) NOT NULL,
+	PRIMARY KEY (user_id)
+);
+
 CREATE TABLE employees (
     emp_no      INT             NOT NULL,
     birth_date  DATE            NOT NULL,

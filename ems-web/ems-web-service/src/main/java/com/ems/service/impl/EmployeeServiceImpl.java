@@ -15,8 +15,8 @@ import com.ems.bean.DepartmentsBean;
 import com.ems.bean.EmployeesBean;
 import com.ems.bean.SalariesBean;
 import com.ems.dao.EmployeeRepository;
+import com.ems.entity.Employees;
 import com.ems.exception.ResourceNotFoundException;
-import com.ems.model.Employees;
 import com.ems.service.DepartmentService;
 import com.ems.service.SalariesService;
 

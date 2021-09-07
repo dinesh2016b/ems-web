@@ -11,7 +11,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ems.model.Employees;
+import com.ems.entity.Employees;
 
 /**
  * @author dinesh

@@ -23,8 +23,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.ems.bean.DepartmentsBean;
 import com.ems.dao.DepartmentRepositoryDAO;
+import com.ems.entity.Departments;
 import com.ems.exception.ResourceNotFoundException;
-import com.ems.model.Departments;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")

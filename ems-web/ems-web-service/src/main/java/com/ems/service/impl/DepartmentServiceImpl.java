@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 
 import com.ems.bean.DepartmentsBean;
 import com.ems.dao.DepartmentRepositoryDAO;
+import com.ems.entity.Departments;
 import com.ems.exception.ResourceNotFoundException;
-import com.ems.model.Departments;
 import com.ems.service.DepartmentService;
 
 /**
