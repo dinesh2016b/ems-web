@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ems.dao.UserDetailsRepositoryDAO;
 import com.ems.entity.UserDetails;
-import com.ems.service.UserDetailsService;
+import com.ems.service.EMSUserDetailsService;
 
 /**
  * @author dinesh
@@ -20,7 +20,7 @@ import com.ems.service.UserDetailsService;
 
 @Service
 @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true, timeout = 20)
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class EMSUserDetailsServiceImpl implements EMSUserDetailsService {
 
 	@Autowired
 	private UserDetailsRepositoryDAO userDetailsRepositoryDAO;

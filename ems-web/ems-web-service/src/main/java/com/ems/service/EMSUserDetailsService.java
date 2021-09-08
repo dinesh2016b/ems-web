@@ -9,7 +9,7 @@ import com.ems.entity.UserDetails;
  * @author dinesh
  *
  */
-public interface UserDetailsService {
+public interface EMSUserDetailsService {
 	
 	public boolean loginUser(UserDetails userDetails);
 
