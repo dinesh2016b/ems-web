@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS userdetails,
                      departments;
 
 CREATE TABLE userdetails(
-	user_id	INT NOT NULL,
+	user_id	INT AUTO_INCREMENT NOT NULL,
 	user_name VARCHAR(20) NOT NULL,
 	password VARCHAR(20) NOT NULL,
 	PRIMARY KEY (user_id)
