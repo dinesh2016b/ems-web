@@ -10,6 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ems.bean.DepartmentsBean;
 import com.ems.bean.EmployeesBean;
@@ -21,6 +24,7 @@ import com.ems.service.DepartmentService;
 import com.ems.service.SalariesService;
 
 @Service
+@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true, timeout = 20)
 public class EmployeeServiceImpl {
 
 	private final Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);

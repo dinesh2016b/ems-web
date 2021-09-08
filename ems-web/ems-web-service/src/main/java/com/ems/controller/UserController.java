@@ -30,18 +30,17 @@ public class UserController {
 	private UserDetailsService userDetailsService;
 	
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-/*
-	public UserController(UserDetailsRepositoryDAO userDetailsRepositoryDAO,
-			BCryptPasswordEncoder bCryptPasswordEncoder) {
 	
-		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	public UserController() {	
+		this.bCryptPasswordEncoder = new BCryptPasswordEncoder();;
 	}
-*/
+
 	@PostMapping("/login")
-	public void loginUser(@RequestBody UserDetails userDetails) {
-		//userDetails.setPassword(bCryptPasswordEncoder.encode(userDetails.getPassword()));
+	public void loginUser(@RequestBody UserDetails userDetails) {		
 		boolean loginFlag = userDetailsService.loginUser(userDetails);
+		userDetails.setPassword(bCryptPasswordEncoder.encode(userDetails.getPassword()));
 		logger.info("------------> loginUser : "+loginFlag);
+		logger.info("------------> loginUser : "+userDetails.toString());
 	}
 	
 	@PostMapping("/saveUser")

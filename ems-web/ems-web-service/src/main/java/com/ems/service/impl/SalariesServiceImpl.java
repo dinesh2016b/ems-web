@@ -4,6 +4,9 @@
 package com.ems.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ems.bean.SalariesBean;
 import com.ems.service.SalariesService;
@@ -13,6 +16,7 @@ import com.ems.service.SalariesService;
  *
  */
 @Service
+@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true, timeout = 20)
 public class SalariesServiceImpl implements SalariesService {
 
 	@Override

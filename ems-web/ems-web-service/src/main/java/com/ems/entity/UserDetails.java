@@ -68,4 +68,10 @@ public class UserDetails {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	@Override
+	public String toString() {
+		return "UserDetails [userId=" + userId + ", userName=" + userName + ", password=" + password + "]";
+	}
+
 }
