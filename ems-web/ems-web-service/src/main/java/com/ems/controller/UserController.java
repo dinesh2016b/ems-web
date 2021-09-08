@@ -40,7 +40,7 @@ public class UserController {
 	public ResponseEntity<UserDetails> loginUser(@RequestBody UserDetails userDetails) {
 		userDetails.setPassword(bCryptPasswordEncoder.encode(userDetails.getPassword()));
 		boolean loginFlag = userDetailsService.loginUser(userDetails);
-		
+
 		logger.info("------------> loginUser : " + loginFlag);
 		if (loginFlag) {
 			logger.info("------------> loginUser : " + userDetails.toString());
