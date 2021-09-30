@@ -8,6 +8,21 @@ public class EmployeesBean {
 	private String birthDate;
 	private DepartmentsBean departmentsBean;
 	private SalariesBean salariesBean;
+	
+	public EmployeesBean() {
+		super();
+	}
+
+	public EmployeesBean(long empNo, String firstName, String lastName, String birthDate,
+			DepartmentsBean departmentsBean, SalariesBean salariesBean) {
+		super();
+		this.empNo = empNo;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthDate = birthDate;
+		this.departmentsBean = departmentsBean;
+		this.salariesBean = salariesBean;
+	}
 
 	public long getEmpNo() {
 		return empNo;
