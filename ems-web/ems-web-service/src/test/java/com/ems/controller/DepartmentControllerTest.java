@@ -29,9 +29,6 @@ class DepartmentControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 	
-	//@InjectMocks
-	//private DepartmentRepositoryDAO departmentRepositoryDAO;
-
 	@DisplayName("Test testFindDepartmentById()")
 	@Test
 	public void testFindDepartmentById() throws Exception {

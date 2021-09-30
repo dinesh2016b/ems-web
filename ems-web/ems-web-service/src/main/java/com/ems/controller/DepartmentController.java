@@ -33,8 +33,12 @@ public class DepartmentController {
 
 	private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
 
-	@Autowired
 	private DepartmentRepositoryDAO departmentRepository;
+
+	@Autowired
+	public DepartmentController(DepartmentRepositoryDAO departmentRepository) {
+		this.departmentRepository = departmentRepository;
+	}
 
 	@GetMapping(path = "/pageNo/{pageNo}/size/{size}")
 	public ResponseEntity<List<DepartmentsBean>> getAllDepartments(@PathVariable(value = "pageNo") int pageNo,
