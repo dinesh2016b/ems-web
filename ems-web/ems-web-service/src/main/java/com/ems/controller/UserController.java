@@ -41,9 +41,9 @@ public class UserController {
 		userDetails.setPassword(bCryptPasswordEncoder.encode(userDetails.getPassword()));
 		boolean loginFlag = userDetailsService.loginUser(userDetails);
 
-		System.out.println("------------> loginUser : " + loginFlag);
+		logger.info("------------> loginUser : " + loginFlag);
 		if (loginFlag) {
-			System.out.println("------------> loginUser : " + userDetails.toString());
+			logger.info("------------> loginUser : " + userDetails.toString());
 			return ResponseEntity.ok().body(userDetails);
 		}
 		
