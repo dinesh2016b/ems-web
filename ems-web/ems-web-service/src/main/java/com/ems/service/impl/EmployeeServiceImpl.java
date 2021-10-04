@@ -7,8 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -17,9 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ems.bean.DepartmentsBean;
 import com.ems.bean.EmployeesBean;
 import com.ems.bean.SalariesBean;
-import com.ems.dao.EmployeeRepository;
+import com.ems.dao.EmployeeDAO;
 import com.ems.entity.Employees;
-import com.ems.exception.ResourceNotFoundException;
 import com.ems.service.DepartmentService;
 import com.ems.service.SalariesService;
 
@@ -36,13 +33,11 @@ public class EmployeeServiceImpl {
 	private SalariesService salariesService;
 
 	@Autowired
-	private EmployeeRepository employeeRepository;
+	private EmployeeDAO employeeDAO;
 
 	public List<EmployeesBean> getEmployees(int firstRecord, int size) throws Exception {
 
-		Pageable pageable = PageRequest.of(firstRecord, size);
-
-		Page<Employees> employeeList = employeeRepository.findAll(pageable);
+		Page<Employees> employeeList = employeeDAO.getEmployees(firstRecord, size);
 
 		List<EmployeesBean> employeesBeans = new ArrayList<EmployeesBean>();
 		EmployeesBean employeesBean = null;
@@ -75,9 +70,8 @@ public class EmployeeServiceImpl {
 	public EmployeesBean getEmployeesById(Long employeeId) throws Exception {
 
 		EmployeesBean employeesBean = null;
-		Employees employees = employeeRepository.findById(employeeId).orElseThrow(
-				() -> new ResourceNotFoundException("Employees not found for this empNo :: " + employeeId));
-
+		Employees employees = employeeDAO.getEmployeeById(employeeId);
+		
 		if (employees != null) {
 			employeesBean = new EmployeesBean();
 			employeesBean.setEmpNo(employees.getEmpNo());
@@ -110,6 +104,6 @@ public class EmployeeServiceImpl {
 		employees.setLastName(employeesBean.getLastName());
 		employees.setBirthDate(employeesBean.getBirthDate());
 
-		employeeRepository.save(employees);
+		employeeDAO.addEmployee(employees);
 	}
 }

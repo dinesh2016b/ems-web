@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ems.dao;
+package com.ems.repositories;
 
 import java.util.Optional;
 

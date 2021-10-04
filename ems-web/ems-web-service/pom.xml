@@ -16,6 +16,9 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<!-- skip unit tests compile time skip -->
+		<test.unit.skipTests>true</test.unit.skipTests>
+		<test.integration.skipTests>true</test.integration.skipTests>
 		<junit-jupiter.version>5.3.2</junit-jupiter.version>
 		<mockito.version>2.24.0</mockito.version>
 	</properties>
@@ -102,15 +105,21 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
-		<!-- 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<!-- runtime skip integration tests -->
+					<skipTests>${test.integration.skipTests}</skipTests>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<!-- runtime skip unit tests -->
+					<skipTests>${test.unit.skipTests}</skipTests>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -120,7 +129,23 @@
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
-		 -->
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>local</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<warName>${project.artifactId}</warName>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

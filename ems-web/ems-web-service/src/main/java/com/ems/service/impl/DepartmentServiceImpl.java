@@ -8,13 +8,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ems.bean.DepartmentsBean;
-import com.ems.dao.DepartmentRepositoryDAO;
+import com.ems.dao.DepartmentDAO;
 import com.ems.entity.Departments;
 import com.ems.exception.ResourceNotFoundException;
 import com.ems.service.DepartmentService;
@@ -28,12 +29,12 @@ import com.ems.service.DepartmentService;
 public class DepartmentServiceImpl implements DepartmentService {
 
 	@Autowired
-	private DepartmentRepositoryDAO departmentRepository;
+	private DepartmentDAO departmentDAO;
 
 	@Override
 	public List<DepartmentsBean> getAllDepartments(int pageNo, int size) throws Exception {
 
-		List<Departments> departmentList = departmentRepository.findAll();
+		Page<Departments> departmentList = departmentDAO.getAllDepartments(pageNo, size);
 		List<DepartmentsBean> departmentsBeanList = new ArrayList<DepartmentsBean>();
 
 		for (Departments departments : departmentList) {
@@ -49,9 +50,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	@Override
 	public DepartmentsBean getDepartmentsById(String departmentId) throws Exception {
 
-		Departments departments = departmentRepository.findById(departmentId).orElseThrow(
-				() -> new ResourceNotFoundException("Departments not found for this departmentId :: " + departmentId));
-
+		Departments departments = departmentDAO.getDepartmentsById(departmentId);
 		DepartmentsBean departmentsBean = new DepartmentsBean();
 		departmentsBean.setDeptNo(departments.getDeptNo());
 		departmentsBean.setDeptName(departments.getDeptName());

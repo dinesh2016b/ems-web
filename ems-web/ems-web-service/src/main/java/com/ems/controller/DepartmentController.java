@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.ems.bean.DepartmentsBean;
-import com.ems.dao.DepartmentRepositoryDAO;
 import com.ems.entity.Departments;
 import com.ems.exception.ResourceNotFoundException;
+import com.ems.repositories.DepartmentRepository;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
@@ -33,10 +33,10 @@ public class DepartmentController {
 
 	private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
 
-	private DepartmentRepositoryDAO departmentRepository;
+	private DepartmentRepository departmentRepository;
 
 	@Autowired
-	public DepartmentController(DepartmentRepositoryDAO departmentRepository) {
+	public DepartmentController(DepartmentRepository departmentRepository) {
 		this.departmentRepository = departmentRepository;
 	}
 

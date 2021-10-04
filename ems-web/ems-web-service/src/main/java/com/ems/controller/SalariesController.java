@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ems.bean.SalariesBean;
-import com.ems.dao.SalariesRepositoryDAO;
 import com.ems.entity.Salaries;
 import com.ems.exception.ResourceNotFoundException;
+import com.ems.repositories.SalariesRepository;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
@@ -31,7 +31,7 @@ public class SalariesController {
 	private Logger logger = LoggerFactory.getLogger(SalariesController.class);
 
 	@Autowired
-	private SalariesRepositoryDAO salariesRepositoryDAO;
+	private SalariesRepository salariesRepositoryDAO;
 
 	@GetMapping("/salaries")
 	public ResponseEntity<List<Salaries>> getAllSalaries() throws Exception {

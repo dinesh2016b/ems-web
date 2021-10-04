@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ems.dao.UserDetailsRepositoryDAO;
 import com.ems.entity.UserDetails;
+import com.ems.repositories.UserDetailsRepository;
 import com.ems.service.EMSUserDetailsService;
 
 /**
@@ -23,7 +23,7 @@ import com.ems.service.EMSUserDetailsService;
 public class EMSUserDetailsServiceImpl implements EMSUserDetailsService {
 
 	@Autowired
-	private UserDetailsRepositoryDAO userDetailsRepositoryDAO;
+	private UserDetailsRepository userDetailsRepositoryDAO;
 
 	@Override
 	public boolean loginUser(UserDetails userDetails) {
