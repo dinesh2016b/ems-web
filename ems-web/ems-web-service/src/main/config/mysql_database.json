@@ -1,0 +1,28 @@
+
+{
+	"emsdb" :{
+		"url" : "",
+		"username":"",
+		"password":"",
+		"driverClassName":"",
+		"connectionPoolMaxSize":40,
+		"connectionPoolIdleSize":15,
+		"connectionAutoCommit":true,
+		"connectionPoolTimeoutMs":300000,
+		"connectionPoolMaxLisfetimeMs":300000,
+		"connectionLeakedDetectionThreasholdMs":10000
+	},
+	
+	"emsdb1" :{
+		"url" : "",
+		"username":"",
+		"password":"",
+		"driverClassName":"",
+		"connectionPoolMaxSize":40,
+		"connectionPoolIdleSize":15,
+		"connectionAutoCommit":true,
+		"connectionPoolTimeoutMs":300000,
+		"connectionPoolMaxLisfetimeMs":300000,
+		"connectionLeakedDetectionThreasholdMs":10000
+	}
+}

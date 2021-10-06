@@ -13,17 +13,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.ems.bean.EmployeesBean;
 import com.ems.service.impl.EmployeeServiceImpl;
+import com.ems.util.ApplicationConstants;
 
 @RestController
 @CrossOrigin(origins = "https://localhost:8080")
-@RequestMapping("/employees")
 public class EmployeesController {
 
 	private final Logger logger = LoggerFactory.getLogger(EmployeesController.class);
@@ -31,7 +30,7 @@ public class EmployeesController {
 	@Autowired
 	private EmployeeServiceImpl employeeService;
 
-	@GetMapping(path = "/pageNo/{pageNo}/size/{size}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = ApplicationConstants.ENDPOINT_GET_EMPLOYEES, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<EmployeesBean> getEmployees(@PathVariable(value = "pageNo") int pageNo,
 			@PathVariable(value = "size") int size) throws Exception {
 
@@ -46,7 +45,7 @@ public class EmployeesController {
 		return employeesBeans;
 	}
 
-	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = ApplicationConstants.ENDPOINT_GET_EMPLOYEE_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
 	public EmployeesBean getEmployeeById(@PathVariable(value = "id") Long employeeId) throws Exception {
 		EmployeesBean employeesBean = null;
 		try {
@@ -63,7 +62,7 @@ public class EmployeesController {
 		return employeesBean;
 	}
 
-	@PostMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = ApplicationConstants.ENDPOINT_CREATE_EMPLOYEE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EmployeesBean> addEmployee(@RequestBody EmployeesBean employeesBean)
 			throws Exception {
 
@@ -81,4 +80,43 @@ public class EmployeesController {
 
 		return ResponseEntity.created(location).build();
 	}
+
+	@PostMapping(path = ApplicationConstants.ENDPOINT_UPDATE_EMPLOYEE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<EmployeesBean> updateEmployee(@RequestBody EmployeesBean employeesBean)
+			throws Exception {
+
+		logger.debug("--------> updateEmployee() :" + employeesBean.toString());
+
+		try {
+			employeeService.addEmployee(employeesBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+		}
+
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(employeesBean.getEmpNo()).toUri();
+
+		return ResponseEntity.created(location).build();
+	}
+
+	@PostMapping(path = ApplicationConstants.ENDPOINT_DELETE_EMPLOYEE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<EmployeesBean> deleteEmployee(@RequestBody EmployeesBean employeesBean)
+			throws Exception {
+
+		logger.debug("--------> updateEmployee() :" + employeesBean.toString());
+
+		try {
+			employeeService.addEmployee(employeesBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+		}
+
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(employeesBean.getEmpNo()).toUri();
+
+		return ResponseEntity.created(location).build();
+	}
+
 }

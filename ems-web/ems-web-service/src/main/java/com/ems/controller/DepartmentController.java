@@ -9,6 +9,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,10 +26,10 @@ import com.ems.bean.DepartmentsBean;
 import com.ems.entity.Departments;
 import com.ems.exception.ResourceNotFoundException;
 import com.ems.repositories.DepartmentRepository;
+import com.ems.util.ApplicationConstants;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
-@RequestMapping("/departments")
 public class DepartmentController {
 
 	private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
@@ -40,7 +41,7 @@ public class DepartmentController {
 		this.departmentRepository = departmentRepository;
 	}
 
-	@GetMapping(path = "/pageNo/{pageNo}/size/{size}")
+	@GetMapping(path = ApplicationConstants.ENDPOINT_GET_DEPARTMENTS, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<DepartmentsBean>> getAllDepartments(@PathVariable(value = "pageNo") int pageNo,
 			@PathVariable(value = "size") int size) throws Exception {
 		try {
@@ -64,7 +65,7 @@ public class DepartmentController {
 		}
 	}
 
-	@GetMapping(path = "/{id}")
+	@GetMapping(path = ApplicationConstants.ENDPOINT_GET_DEPARTMENT_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<DepartmentsBean> getDepartmentsById(@PathVariable(value = "id") String departmentId)
 			throws Exception {
 
@@ -85,7 +86,7 @@ public class DepartmentController {
 		}
 	}
 
-	@PostMapping(path = "/")
+	@PostMapping(path = ApplicationConstants.ENDPOINT_CREATE_DEPARTMENT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Departments> createDepartment(@RequestBody Departments department) throws Exception {
 
 		try {
@@ -101,7 +102,7 @@ public class DepartmentController {
 
 	}
 
-	@PutMapping(path = "/{deptId}")
+	@PostMapping(path = ApplicationConstants.ENDPOINT_UPDATE_DEPARTMENT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Departments> updateEmployee(@PathVariable(value = "deptId") String departmentId,
 			@RequestBody Departments employeeDetails) throws ResourceNotFoundException {
 
@@ -124,7 +125,8 @@ public class DepartmentController {
 
 	}
 
-	@DeleteMapping(path = "/{deptId}")
+	@DeleteMapping(path = ApplicationConstants.ENDPOINT_DELETE_DEPARTMENT, produces = MediaType.APPLICATION_JSON_VALUE)
+
 	public Map<String, Boolean> deleteEmployee(@PathVariable(value = "deptId") String departmentId)
 			throws ResourceNotFoundException {
 
