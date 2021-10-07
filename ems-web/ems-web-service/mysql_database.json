@@ -1,10 +1,10 @@
 
 {
-	"emsdb" :{
-		"url" : "",
-		"username":"",
-		"password":"",
-		"driverClassName":"",
+	"ems_h2_db" :{
+		"url" : "jdbc:h2:mem:employees",
+		"username":"admin",
+		"password":"admin",
+		"driverClassName":"org.h2.Driver",
 		"connectionPoolMaxSize":40,
 		"connectionPoolIdleSize":15,
 		"connectionAutoCommit":true,
@@ -13,11 +13,11 @@
 		"connectionLeakedDetectionThreasholdMs":10000
 	},
 	
-	"emsdb1" :{
-		"url" : "",
-		"username":"",
-		"password":"",
-		"driverClassName":"",
+	"ems_mysql_db" :{
+		"url" : "jdbc:mysql://employee-mysqldb:3306/employees",
+		"username":"root",
+		"password":"Dinesh@123",
+		"driverClassName":"com.mysql.jdbc.Driver",
 		"connectionPoolMaxSize":40,
 		"connectionPoolIdleSize":15,
 		"connectionAutoCommit":true,

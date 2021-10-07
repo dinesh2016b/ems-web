@@ -28,6 +28,7 @@ public class Employees {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "emp_no", nullable = false)
 	public long getEmpNo() {
 		return empNo;
 	}
