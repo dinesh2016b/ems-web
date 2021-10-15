@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ems.bean.SalariesBean;
 import com.ems.entity.Salaries;
+import com.ems.exception.EMSException;
 import com.ems.exception.ResourceNotFoundException;
 import com.ems.repositories.SalariesRepository;
 
@@ -34,7 +35,7 @@ public class SalariesController {
 	private SalariesRepository salariesRepositoryDAO;
 
 	@GetMapping("/salaries")
-	public ResponseEntity<List<Salaries>> getAllSalaries() throws Exception {
+	public ResponseEntity<List<Salaries>> getAllSalaries() throws EMSException {
 		logger.info("----> department list ");
 
 		List<Salaries> salariesList = new ArrayList<Salaries>();
@@ -44,13 +45,13 @@ public class SalariesController {
 	}
 	
 	@GetMapping("/salaries/{id}")
-	public SalariesBean getSalariesByEmployeeId(@PathVariable(value = "id") long id) throws Exception {
+	public SalariesBean getSalariesByEmployeeId(@PathVariable(value = "id") long id) throws EMSException {
 		try {
 
 			logger.info("----> employeeId - " + id);
 			/*
 			Salaries salaries = salariesRepositoryDAO.findById(String.valueOf(id))
-					.orElseThrow(() -> new Exception("Salaries not found for this employeeId :: " + String.valueOf(id)));
+					.orElseThrow(() -> new EMSException("Salaries not found for this employeeId :: " + String.valueOf(id)));
 			*/
 			SalariesBean salariesBean = new SalariesBean();
 			salariesBean.setSalary(100);

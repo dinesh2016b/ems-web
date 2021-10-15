@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ems.bean.SalariesBean;
 import com.ems.dao.SalariesDAO;
 import com.ems.entity.Salaries;
+import com.ems.exception.EMSException;
 import com.ems.service.SalariesService;
 
 /**
@@ -26,7 +27,7 @@ public class SalariesServiceImpl implements SalariesService {
 	private SalariesDAO salariesDAO;
 	
 	@Override
-	public SalariesBean getSalariesByEmployeeId(long employeesId) throws Exception {
+	public SalariesBean getSalariesByEmployeeId(long employeesId) throws EMSException {
 		
 		Salaries salaries = salariesDAO.getSalariesByEmployeeId(employeesId);
 		SalariesBean salariesBean = new SalariesBean(); 

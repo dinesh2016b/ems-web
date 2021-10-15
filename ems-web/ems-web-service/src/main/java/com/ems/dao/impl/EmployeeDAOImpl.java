@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ems.dao.EmployeeDAO;
 import com.ems.entity.Employees;
-import com.ems.exception.APIException;
+import com.ems.exception.EMSException;
 import com.ems.exception.ResourceNotFoundException;
 import com.ems.repositories.EmployeeRepository;
 
@@ -22,7 +22,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	private EmployeeRepository employeeRepository;
 
 	@Override
-	public Page<Employees> getEmployees(int firstRecord, int size) throws APIException {
+	public Page<Employees> getEmployees(int firstRecord, int size) throws EMSException {
 
 		Pageable pageable = PageRequest.of(firstRecord, size);
 		Page<Employees> employeeList = employeeRepository.findAll(pageable);
@@ -30,21 +30,15 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 
 	@Override
-	public Employees getEmployeeById(Long employeeId) throws APIException, ResourceNotFoundException {
-
-		Employees employees = null;
-		try {
-			employees = employeeRepository.findById(employeeId).orElseThrow(
-					() -> new ResourceNotFoundException("Employees not found for this empNo :: " + employeeId));
-		} catch (ResourceNotFoundException e) {
-			throw e;
-		}
+	public Employees getEmployeeById(Long employeeId) throws EMSException, ResourceNotFoundException {
+		Employees employees = employeeRepository.findById(employeeId).orElseThrow(
+				() -> new ResourceNotFoundException("Employees not found for this empNo :: " + employeeId));
 
 		return employees;
 	}
 
 	@Override
-	public void addEmployee(Employees employees) throws APIException {
+	public void addEmployee(Employees employees) throws EMSException {
 		employeeRepository.save(employees);
 	}
 

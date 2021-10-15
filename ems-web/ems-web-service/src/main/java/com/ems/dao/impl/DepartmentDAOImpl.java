@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ems.dao.DepartmentDAO;
 import com.ems.entity.Departments;
+import com.ems.exception.EMSException;
 import com.ems.exception.ResourceNotFoundException;
 import com.ems.repositories.DepartmentRepository;
 
@@ -20,7 +21,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 	private DepartmentRepository departmentRepository;
 
 	@Override
-	public Page<Departments> getAllDepartments(int pageNo, int size) throws Exception {
+	public Page<Departments> getAllDepartments(int pageNo, int size) throws EMSException {
 		Pageable pageable = PageRequest.of(pageNo, size);
 		Page<Departments> departments = departmentRepository.findAll(pageable);
 
@@ -28,7 +29,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 	}
 
 	@Override
-	public Departments getDepartmentsById(String departmentId) throws Exception {
+	public Departments getDepartmentsById(String departmentId) throws EMSException, ResourceNotFoundException {
 		Departments departments = departmentRepository.findById(departmentId).orElseThrow(
 				() -> new ResourceNotFoundException("Departments not found for this departmentId :: " + departmentId));
 
@@ -36,19 +37,20 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 	}
 
 	@Override
-	public Departments createDepartment(Departments department) throws Exception {
+	public Departments createDepartment(Departments department) throws EMSException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Departments updateDepartment(String departmentId, Departments departments) throws ResourceNotFoundException {
+	public Departments updateDepartment(String departmentId, Departments departments)
+			throws EMSException, ResourceNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Map<String, Boolean> deleteDepartment(String departmentId) throws ResourceNotFoundException {
+	public Map<String, Boolean> deleteDepartment(String departmentId) throws EMSException, ResourceNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}

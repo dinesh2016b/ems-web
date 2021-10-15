@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.ems.dao.SalariesDAO;
 import com.ems.entity.Salaries;
 import com.ems.entity.SalariesId;
+import com.ems.exception.EMSException;
 import com.ems.repositories.SalariesRepository;
 
 @Repository
@@ -15,7 +16,7 @@ public class SalariesDAOImpl implements SalariesDAO {
 	private SalariesRepository salariesRepository;
 
 	@Override
-	public Salaries getSalariesByEmployeeId(long emplooyeeId) throws Exception {
+	public Salaries getSalariesByEmployeeId(long emplooyeeId) throws EMSException {
 		SalariesId salariesId = new SalariesId();
 		salariesId.setEmpNo(emplooyeeId);
 		//return salariesRepository.getById("0");

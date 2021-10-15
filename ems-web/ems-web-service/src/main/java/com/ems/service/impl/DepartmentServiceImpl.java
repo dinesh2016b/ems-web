@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ems.bean.DepartmentsBean;
 import com.ems.dao.DepartmentDAO;
 import com.ems.entity.Departments;
+import com.ems.exception.EMSException;
 import com.ems.exception.ResourceNotFoundException;
 import com.ems.service.DepartmentService;
 
@@ -32,7 +33,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	private DepartmentDAO departmentDAO;
 
 	@Override
-	public List<DepartmentsBean> getAllDepartments(int pageNo, int size) throws Exception {
+	public List<DepartmentsBean> getAllDepartments(int pageNo, int size) throws EMSException {
 
 		Page<Departments> departmentList = departmentDAO.getAllDepartments(pageNo, size);
 		List<DepartmentsBean> departmentsBeanList = new ArrayList<DepartmentsBean>();
@@ -48,7 +49,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	}
 
 	@Override
-	public DepartmentsBean getDepartmentsById(String departmentId) throws Exception {
+	public DepartmentsBean getDepartmentsById(String departmentId) throws EMSException, ResourceNotFoundException {
 
 		Departments departments = departmentDAO.getDepartmentsById(departmentId);
 		DepartmentsBean departmentsBean = new DepartmentsBean();
@@ -59,7 +60,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	}
 
 	@Override
-	public DepartmentsBean createDepartment(DepartmentsBean department) throws Exception {
+	public DepartmentsBean createDepartment(DepartmentsBean department) throws EMSException {
 		// TODO Auto-generated method stub
 		return null;
 	}

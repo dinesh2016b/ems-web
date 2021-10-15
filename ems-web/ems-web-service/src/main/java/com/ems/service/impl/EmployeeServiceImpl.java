@@ -17,6 +17,8 @@ import com.ems.bean.EmployeesBean;
 import com.ems.bean.SalariesBean;
 import com.ems.dao.EmployeeDAO;
 import com.ems.entity.Employees;
+import com.ems.exception.EMSException;
+import com.ems.exception.ResourceNotFoundException;
 import com.ems.service.DepartmentService;
 import com.ems.service.SalariesService;
 
@@ -35,7 +37,7 @@ public class EmployeeServiceImpl {
 	@Autowired
 	private EmployeeDAO employeeDAO;
 
-	public List<EmployeesBean> getEmployees(int firstRecord, int size) throws Exception {
+	public List<EmployeesBean> getEmployees(int firstRecord, int size) throws EMSException, ResourceNotFoundException {
 
 		Page<Employees> employeeList = employeeDAO.getEmployees(firstRecord, size);
 
@@ -67,7 +69,7 @@ public class EmployeeServiceImpl {
 		return employeesBeans;
 	}
 
-	public EmployeesBean getEmployeesById(Long employeeId) throws Exception {
+	public EmployeesBean getEmployeesById(Long employeeId) throws EMSException, ResourceNotFoundException {
 
 		EmployeesBean employeesBean = null;
 		Employees employees = employeeDAO.getEmployeeById(employeeId);
@@ -94,7 +96,7 @@ public class EmployeeServiceImpl {
 		return employeesBean;
 	}
 
-	public void addEmployee(EmployeesBean employeesBean) throws Exception {
+	public void addEmployee(EmployeesBean employeesBean) throws EMSException {
 
 		logger.debug("------------> getEmployeesById() : " + employeesBean.toString());
 		
