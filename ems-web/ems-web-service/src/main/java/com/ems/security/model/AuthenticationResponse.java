@@ -7,13 +7,13 @@ public class AuthenticationResponse implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final String jwt;
+	private final String jwt_access_token;
 
-    public AuthenticationResponse(String jwt) {
-        this.jwt = jwt;
+    public AuthenticationResponse(String jwt_access_token) {
+        this.jwt_access_token = jwt_access_token;
     }
 
     public String getJwt() {
-        return jwt;
+        return jwt_access_token;
     }
 }
