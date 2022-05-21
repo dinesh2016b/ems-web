@@ -17,6 +17,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.ems.bean.EmployeesBean;
+import com.ems.security.util.JwtUtil;
+import com.ems.service.MyUserDetailsService;
 import com.ems.service.impl.EmployeeServiceImpl;
 
 @ExtendWith(SpringExtension.class)
@@ -28,6 +30,12 @@ class EmployeesControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
+	
+	@MockBean 
+	private MyUserDetailsService myUserDetailsService;
+	
+	@MockBean
+	private JwtUtil jwtUtil;
 
 	@DisplayName("Test testFindEmployeeById()")
 	@Test
@@ -36,7 +44,7 @@ class EmployeesControllerTest {
 
 		Mockito.when(employeeService.getEmployeesById(1000L)).thenReturn(employeesBean);
 
-		mockMvc.perform(get("/employees/10000")).andExpect(status().isOk());
+		mockMvc.perform(get("/employees/10000")).andExpect(status().isForbidden());
 	}
 
 	@DisplayName("Test testFindEmployees()")
@@ -50,6 +58,6 @@ class EmployeesControllerTest {
 		employees.add(new EmployeesBean(1004L, "Dinesh5", "Dinesh5", "05/09/2006", null, null));
 
 		Mockito.when(employeeService.getEmployees(0, 5)).thenReturn(employees);
-		mockMvc.perform(get("/employees/pageNo/0/size/5")).andExpect(status().isOk());
+		mockMvc.perform(get("/employees/pageNo/0/size/5")).andExpect(status().isForbidden());
 	}
 }

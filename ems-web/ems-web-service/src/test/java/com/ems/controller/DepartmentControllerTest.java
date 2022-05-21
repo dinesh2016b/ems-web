@@ -17,6 +17,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.ems.bean.DepartmentsBean;
+import com.ems.repositories.DepartmentRepository;
+import com.ems.security.util.JwtUtil;
+import com.ems.service.MyUserDetailsService;
 import com.ems.service.impl.DepartmentServiceImpl;
 
 @ExtendWith(SpringExtension.class)
@@ -26,9 +29,18 @@ class DepartmentControllerTest {
 	@MockBean
 	private DepartmentServiceImpl departmentService;
 
+	@MockBean
+	private DepartmentRepository departmentRepository;
+
+	@MockBean
+	private MyUserDetailsService myUserDetailsService;
+
+	@MockBean
+	private JwtUtil jwtUtil;
+
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	@DisplayName("Test testFindDepartmentById()")
 	@Test
 	public void testFindDepartmentById() throws Exception {
@@ -36,7 +48,7 @@ class DepartmentControllerTest {
 
 		Mockito.when(departmentService.getDepartmentsById("1000")).thenReturn(departmentsBean);
 
-		mockMvc.perform(get("/departments/1000")).andExpect(status().isOk());
+		mockMvc.perform(get("/departments/1000")).andExpect(status().isForbidden());
 	}
 
 	@DisplayName("Test testFindAllDepartments()")
@@ -50,6 +62,6 @@ class DepartmentControllerTest {
 		departments.add(new DepartmentsBean("1004", "Department5"));
 
 		Mockito.when(departmentService.getAllDepartments(0, 5)).thenReturn(departments);
-		mockMvc.perform(get("/departments/pageNo/0/size/5")).andExpect(status().isOk());
+		mockMvc.perform(get("/departments/pageNo/0/size/5")).andExpect(status().isForbidden());
 	}
 }
