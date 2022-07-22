@@ -18,9 +18,15 @@ export class EmployeeListComponent implements OnInit {
     constructor(private modalService: NgbModal, private employeeService: EmployeeService) { }
 
     ngOnInit() {
+        /*let jwt_token = localStorage.getItem("jwt");
+        console.log('-----> jwt_token : '+jwt_token);
+        localStorage.setItem("employees_jwt_token", jwt_token);
+        sessionStorage.setItem("employees_jwt_token", jwt_token);
+        */
         this.employeeService.findAll().subscribe(data => {
             this.employees = data;
         });
+        localStorage.setItem("employees", JSON.stringify(this.employees));
     }
 
     editEmployee(employee: Employee) {

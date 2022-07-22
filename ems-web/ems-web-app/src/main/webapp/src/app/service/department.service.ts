@@ -3,13 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Departments } from '../model/departments';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+  })
 export class DepartmentService {
 
     private departmentUrl: string = 'http://localhost:8095/ems-departments';
 
     constructor(private http: HttpClient) {
-        // this.departmentUrl = 'http://localhost:8080/departments';
+        this.departmentUrl = 'http://localhost:8080/departments';
     }
 
     public findById(departmentsId): Observable<Departments> {

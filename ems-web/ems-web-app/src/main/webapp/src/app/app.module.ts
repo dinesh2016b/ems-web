@@ -24,11 +24,6 @@ import { HeaderComponent } from './component/header/header.component';
 import { DepartmentEmployeeListComponent } from './component/departments/department-employee-list/department-employee-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-// Service
-import { EmployeeService } from './service/employee.service';
-import { DepartmentService } from './service/department.service';
-import { SalariesService } from './service/salaries.service';
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -59,7 +54,7 @@ import { SalariesService } from './service/salaries.service';
         FormsModule,
         NgbModule
     ],
-    providers: [EmployeeService, DepartmentService, SalariesService],
+    providers: [],
     bootstrap: [AppComponent]
 })
 

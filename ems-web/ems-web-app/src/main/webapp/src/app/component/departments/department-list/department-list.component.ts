@@ -18,6 +18,8 @@ export class DepartmentListComponent implements OnInit {
     this.departmentService.findAll().subscribe(data => {
       this.departments = data;
     });
+
+    localStorage.setItem("departments", JSON.stringify(this.departments));
   }
 
   editDepartment(event) {
