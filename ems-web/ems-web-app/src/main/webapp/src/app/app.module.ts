@@ -23,6 +23,7 @@ import { LoginComponent } from './component/login/login.component';
 import { HeaderComponent } from './component/header/header.component';
 import { DepartmentEmployeeListComponent } from './component/departments/department-employee-list/department-employee-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//import { httpInterceptorProviders } from './service/httpRequestInterceptor';
 
 @NgModule({
     declarations: [
@@ -37,8 +38,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         LoginComponent,
         DepartmentEmployeeListComponent,
         HeaderComponent
-  //      NgbdModalBasic,
-        
+        //NgbdModalBasic,
     ],
     imports: [
         BrowserModule,
@@ -55,6 +55,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         NgbModule
     ],
     providers: [],
+    //providers: [httpInterceptorProviders],
     bootstrap: [AppComponent]
 })
 

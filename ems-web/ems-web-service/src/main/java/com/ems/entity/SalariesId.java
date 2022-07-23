@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class SalariesId implements java.io.Serializable {
 
-	private int empNo;
+	private long empNo;
 	private Date fromDate;
 
 	public SalariesId() {
@@ -23,11 +23,11 @@ public class SalariesId implements java.io.Serializable {
 	}
 
 	@Column(name = "emp_no", nullable = false)
-	public int getEmpNo() {
+	public long getEmpNo() {
 		return this.empNo;
 	}
 
-	public void setEmpNo(int empNo) {
+	public void setEmpNo(long empNo) {
 		this.empNo = empNo;
 	}
 
@@ -57,7 +57,7 @@ public class SalariesId implements java.io.Serializable {
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + this.getEmpNo();
+		result = (int) (37 * result + this.getEmpNo());
 		result = 37 * result + (getFromDate() == null ? 0 : this.getFromDate().hashCode());
 		return result;
 	}

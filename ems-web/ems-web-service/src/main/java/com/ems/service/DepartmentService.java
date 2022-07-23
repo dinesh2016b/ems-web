@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ems.bean.DepartmentsBean;
+import com.ems.exception.EMSException;
 import com.ems.exception.ResourceNotFoundException;
 
 public interface DepartmentService {
@@ -18,15 +19,15 @@ public interface DepartmentService {
 	// @GetMapping(path = "/departments/pageNo/{pageNo}/size/{size}")
 	@GetMapping(path = "/backend-department-service/departments/pageNo/{pageNo}/size/{size}")
     List<DepartmentsBean> getAllDepartments(@PathVariable(value = "pageNo") int pageNo,
-                                            @PathVariable(value = "size") int size) throws Exception;
+                                            @PathVariable(value = "size") int size) throws EMSException;
 
 	// @GetMapping(path = "/departments/{id}")
 	@GetMapping(path = "/backend-department-service/departments/{id}")
-    DepartmentsBean getDepartmentsById(@PathVariable(value = "id") String departmentId) throws Exception;
+    DepartmentsBean getDepartmentsById(@PathVariable(value = "id") String departmentId) throws EMSException, ResourceNotFoundException;
 
 	// @PostMapping(path = "/departments")
 	@PostMapping(path = "/backend-department-service/departments")
-    DepartmentsBean createDepartment(@RequestBody DepartmentsBean department) throws Exception;
+    DepartmentsBean createDepartment(@RequestBody DepartmentsBean department) throws EMSException;
 
 	// @PutMapping(path = "/departments/{deptId}")
 	@PutMapping(path = "/backend-department-service/departments/{deptId}")

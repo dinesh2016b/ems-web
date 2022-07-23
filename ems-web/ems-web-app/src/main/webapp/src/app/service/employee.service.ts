@@ -6,7 +6,7 @@ import { BackendApiService } from './backend-api.service';
 @Injectable({ providedIn: 'root'})
 export class EmployeeService {
 
-    private employeeUrl: string =  'http://localhost:8080/employees';
+    private employeeUrl: string = 'http://localhost:8080/employees';
     private employeeDataSubject: BehaviorSubject<Employee[]>;
     private employeeData: Observable<Employee[]>;
     private employees: Employee[];
@@ -26,8 +26,8 @@ export class EmployeeService {
         //return this.http.get<Employee[]>((`${this.employeeUrl}/${employeesId}`),{ headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});
     }
 
-    public findAll() {
-        return this.backendAPISerivce.sendGetAPIRequest(this.employeeUrl + '/pageNo/0/size/10');
+    public findAll(jwtToken: String) {
+        return this.backendAPISerivce.sendPostRequest(this.employeeUrl + '/pageNo/0/size/10', {jwtToken});
 
         //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'));
         //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'), { headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});
@@ -43,4 +43,3 @@ export class EmployeeService {
         return 'Basic ' + window.btoa(username + ":" + password)
     }
 }
-

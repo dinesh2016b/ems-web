@@ -5,6 +5,20 @@ public class DepartmentsBean {
 	private String deptNo;
 	private String deptName;
 
+	public DepartmentsBean() {
+		super();
+	}
+		
+	/**
+	 * @param deptNo
+	 * @param deptName
+	 */
+	public DepartmentsBean(String deptNo, String deptName) {
+		super();
+		this.deptNo = deptNo;
+		this.deptName = deptName;
+	}
+
 	public String getDeptNo() {
 		return deptNo;
 	}

@@ -12,21 +12,19 @@ import { EmployeeDetailsComponent } from '../employee-details/employee-details.c
 })
 
 export class EmployeeListComponent implements OnInit {
-
+    TOKEN_KEY = 'auth-token';
     employees: Employee[];
 
     constructor(private modalService: NgbModal, private employeeService: EmployeeService) { }
 
     ngOnInit() {
-        /*let jwt_token = localStorage.getItem("jwt");
-        console.log('-----> jwt_token : '+jwt_token);
-        localStorage.setItem("employees_jwt_token", jwt_token);
-        sessionStorage.setItem("employees_jwt_token", jwt_token);
-        */
-        this.employeeService.findAll().subscribe(data => {
-            this.employees = data;
-        });
-        localStorage.setItem("employees", JSON.stringify(this.employees));
+        let jwtToken = window.sessionStorage.getItem(this.TOKEN_KEY);
+        if (jwtToken == null || jwtToken === '' || jwtToken != undefined) {
+            this.employeeService.findAll(jwtToken).subscribe(data => {
+                this.employees = data;
+            });
+            sessionStorage.setItem("employees", JSON.stringify(this.employees));
+        }
     }
 
     editEmployee(employee: Employee) {
