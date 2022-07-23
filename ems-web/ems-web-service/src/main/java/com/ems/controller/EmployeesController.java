@@ -25,7 +25,7 @@ import com.ems.service.impl.EmployeeServiceImpl;
 import com.ems.util.ApplicationConstants;
 
 @RestController
-@CrossOrigin(origins = "https://localhost:8080")
+@CrossOrigin(origins = "https://localhost:8080", maxAge = 3600, allowCredentials="true")
 public class EmployeesController {
 
 	private final Logger logger = LoggerFactory.getLogger(EmployeesController.class);

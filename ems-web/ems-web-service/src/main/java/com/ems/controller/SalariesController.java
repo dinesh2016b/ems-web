@@ -26,7 +26,7 @@ import com.ems.exception.ResourceNotFoundException;
 import com.ems.repositories.SalariesRepository;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "https://localhost:8080", maxAge = 3600, allowCredentials="true")
 public class SalariesController {
 
 	private Logger logger = LoggerFactory.getLogger(SalariesController.class);

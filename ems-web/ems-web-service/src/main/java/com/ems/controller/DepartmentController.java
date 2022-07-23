@@ -27,7 +27,7 @@ import com.ems.repositories.DepartmentRepository;
 import com.ems.util.ApplicationConstants;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600, allowCredentials="true")
 public class DepartmentController {
 
 	private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
