@@ -33,7 +33,7 @@ public class EmployeesController {
 	@Autowired
 	private EmployeeServiceImpl employeeService;
 
-	@GetMapping(path = ApplicationConstants.ENDPOINT_GET_EMPLOYEES, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = ApplicationConstants.ENDPOINT_GET_EMPLOYEES, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<EmployeesBean>> getEmployees(@PathVariable(value = "pageNo") int pageNo,
 			@PathVariable(value = "size") int size) throws EMSException, ResourceNotFoundException {
 
@@ -51,7 +51,7 @@ public class EmployeesController {
 		return new ResponseEntity<List<EmployeesBean>>(employeesBeans, new HttpHeaders(), HttpStatus.OK);
 	}
 
-	@GetMapping(path = ApplicationConstants.ENDPOINT_GET_EMPLOYEE_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = ApplicationConstants.ENDPOINT_GET_EMPLOYEE_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EmployeesBean> getEmployeeById(@PathVariable(value = "id") Long employeeId)
 			throws EMSException, ResourceNotFoundException {
 		EmployeesBean employeesBean = null;
