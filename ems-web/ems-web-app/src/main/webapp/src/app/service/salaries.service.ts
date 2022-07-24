@@ -3,7 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import { Salaries } from '../model/salaries';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 
 export class SalariesService {
 
