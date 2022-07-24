@@ -39,7 +39,7 @@ public class DepartmentController {
 		this.departmentRepository = departmentRepository;
 	}
 
-	@GetMapping(path = ApplicationConstants.ENDPOINT_GET_DEPARTMENTS, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = ApplicationConstants.ENDPOINT_GET_DEPARTMENTS, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<DepartmentsBean>> getAllDepartments(@PathVariable(value = "pageNo") String pageNo,
 			@PathVariable(value = "size") String size) throws Exception {
 		try {
@@ -63,7 +63,7 @@ public class DepartmentController {
 		}
 	}
 
-	@GetMapping(path = ApplicationConstants.ENDPOINT_GET_DEPARTMENT_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = ApplicationConstants.ENDPOINT_GET_DEPARTMENT_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<DepartmentsBean> getDepartmentsById(@PathVariable(value = "id") String departmentId)
 			throws Exception {
 

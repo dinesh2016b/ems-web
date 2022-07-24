@@ -3,8 +3,6 @@
  */
 package com.ems.repositories;
 
-import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -17,14 +15,12 @@ import com.ems.entity.Employees;
  * @author dinesh
  *
  */
-
 @Repository
 public interface EmployeeRepository extends PagingAndSortingRepository<Employees, Long> {
-
+	
 	Page<Employees> findAll(Pageable pageable);
 
 	Page<Employees> findByFirstName(String firstName, Pageable pageable);
 
 	Slice<Employees> findByFirstNameAndLastName(String firstName, String lastName, Pageable pageable);
-
 }
