@@ -22,8 +22,8 @@ export class EmployeeListComponent implements OnInit {
         if (jwtToken == null || jwtToken === '' || jwtToken != undefined) {
             this.employeeService.findAll(jwtToken).subscribe(data => {
                 this.employees = data;
+                sessionStorage.setItem("employees", JSON.stringify(this.employees));
             });
-            sessionStorage.setItem("employees", JSON.stringify(this.employees));
         }
     }
 
