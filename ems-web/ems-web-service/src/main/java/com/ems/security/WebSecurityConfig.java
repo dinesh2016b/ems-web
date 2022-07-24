@@ -8,6 +8,7 @@ import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private MyUserDetailsService myUserDetailsService;
-	
+
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
 
@@ -37,17 +38,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(myUserDetailsService);
 	}
-	
+
 	/*
 	 * @Override protected void configure(AuthenticationManagerBuilder auth) throws
 	 * Exception { auth.userDetailsService(myUserDetailsService); }
 	 */
-	
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return NoOpPasswordEncoder.getInstance();
 	}
-	
+
 	@Override
 	@Bean
 	public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -56,27 +57,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-	
-		httpSecurity.csrf().disable()
-			.authorizeRequests().antMatchers("/authenticate").permitAll()
-			.anyRequest().authenticated().and().exceptionHandling().and().sessionManagement()
-			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		
+
+		httpSecurity.csrf().disable().authorizeRequests()
+			.antMatchers("/authenticate").permitAll()
+			.antMatchers(HttpMethod.POST, "/employees/**/*").permitAll()
+			.antMatchers(HttpMethod.POST, "/departments/**/*").permitAll()
+			.anyRequest().authenticated()
+			.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.and().exceptionHandling();
+
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-		
+
 		httpSecurity.cors().configurationSource(corsConfigurationSource());
 	}
-	
-	 @Bean
-	    CorsConfigurationSource corsConfigurationSource() {
-	        CorsConfiguration configuration = new CorsConfiguration();
-	        configuration.setAllowedOrigins(Arrays.asList("*"));
-	        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
-	        configuration.setAllowedHeaders(Collections.singletonList("*"));
-	        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-	        source.registerCorsConfiguration("/**", configuration);
-	        return source;
-	    }
+
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.setAllowedOrigins(Arrays.asList("*"));
+		configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
+		configuration.setAllowedHeaders(Collections.singletonList("*"));
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+	}
 }
 
 /*
