@@ -39,11 +39,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(myUserDetailsService);
 	}
 
-	/*
-	 * @Override protected void configure(AuthenticationManagerBuilder auth) throws
-	 * Exception { auth.userDetailsService(myUserDetailsService); }
-	 */
-
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return NoOpPasswordEncoder.getInstance();
@@ -57,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-
+		
 		httpSecurity.csrf().disable().authorizeRequests()
 			.antMatchers("/authenticate").permitAll()
 			.antMatchers(HttpMethod.POST, "/employees/**/*").permitAll()
@@ -67,7 +62,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and().exceptionHandling();
 
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
 		httpSecurity.cors().configurationSource(corsConfigurationSource());
 	}
 
@@ -82,15 +76,3 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return source;
 	}
 }
-
-/*
- * @Configuration public class SecurityConfiguration extends
- * WebSecurityConfigurerAdapter {
- * 
- * @Override protected void configure(HttpSecurity httpSecurity) throws
- * Exception {
- * httpSecurity.authorizeRequests().antMatchers("/").permitAll().and().
- * authorizeRequests() .antMatchers("/console/**").permitAll();
- * httpSecurity.csrf().disable();
- * httpSecurity.headers().frameOptions().disable(); } }
- */
