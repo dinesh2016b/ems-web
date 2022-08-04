@@ -3,15 +3,12 @@ package com.ems.controller;
 import java.net.URI;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,11 +21,12 @@ import com.ems.exception.ResourceNotFoundException;
 import com.ems.service.impl.EmployeeServiceImpl;
 import com.ems.util.ApplicationConstants;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @CrossOrigin(origins = "https://localhost:8080", maxAge = 3600, allowCredentials="true")
 public class EmployeesController {
-
-	private final Logger logger = LoggerFactory.getLogger(EmployeesController.class);
 
 	@Autowired
 	private EmployeeServiceImpl employeeService;
@@ -37,13 +35,13 @@ public class EmployeesController {
 	public ResponseEntity<List<EmployeesBean>> getEmployees(@PathVariable(value = "pageNo") int pageNo,
 			@PathVariable(value = "size") int size) throws EMSException, ResourceNotFoundException {
 
-		logger.info("------------> getEmployees()");
+		log.info("------------> getEmployees()");
 		List<EmployeesBean> employeesBeans = null;
 		try {
 			employeesBeans = employeeService.getEmployees(pageNo, size);
 		} catch (EMSException e) {
 			e.printStackTrace();
-			logger.error(e.getMessage());
+			log.error(e.getMessage());
 			throw e;
 		}
 		// return employeesBeans;
@@ -58,11 +56,11 @@ public class EmployeesController {
 		try {
 			employeesBean = employeeService.getEmployeesById(employeeId);
 		} catch (ResourceNotFoundException e) {
-			logger.error(e.getMessage());
+			log.error(e.getMessage());
 			throw e;
 		} catch (EMSException e) {
 			e.printStackTrace();
-			logger.error(e.getMessage());
+			log.error(e.getMessage());
 			throw e;
 		}
 
@@ -73,13 +71,13 @@ public class EmployeesController {
 	@PostMapping(path = ApplicationConstants.ENDPOINT_CREATE_EMPLOYEE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EmployeesBean> addEmployee(@RequestBody EmployeesBean employeesBean) throws EMSException {
 
-		logger.debug("--------> addEmployee() :" + employeesBean.toString());
+		log.debug("--------> addEmployee() :" + employeesBean.toString());
 
 		try {
 			employeeService.addEmployee(employeesBean);
 		} catch (EMSException e) {
 			e.printStackTrace();
-			logger.error(e.getMessage());
+			log.error(e.getMessage());
 			throw e;
 		}
 
@@ -92,13 +90,13 @@ public class EmployeesController {
 	@PostMapping(path = ApplicationConstants.ENDPOINT_UPDATE_EMPLOYEE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EmployeesBean> updateEmployee(@RequestBody EmployeesBean employeesBean) throws EMSException {
 
-		logger.debug("--------> updateEmployee() :" + employeesBean.toString());
+		log.debug("--------> updateEmployee() :" + employeesBean.toString());
 
 		try {
 			employeeService.addEmployee(employeesBean);
 		} catch (EMSException e) {
 			e.printStackTrace();
-			logger.error(e.getMessage());
+			log.error(e.getMessage());
 			throw e;
 		}
 
@@ -111,13 +109,13 @@ public class EmployeesController {
 	@PostMapping(path = ApplicationConstants.ENDPOINT_DELETE_EMPLOYEE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EmployeesBean> deleteEmployee(@RequestBody EmployeesBean employeesBean) throws EMSException {
 
-		logger.debug("--------> updateEmployee() :" + employeesBean.toString());
+		log.debug("--------> updateEmployee() :" + employeesBean.toString());
 
 		try {
 			employeeService.addEmployee(employeesBean);
 		} catch (EMSException e) {
 			e.printStackTrace();
-			logger.error(e.getMessage());
+			log.error(e.getMessage());
 			throw e;
 		}
 

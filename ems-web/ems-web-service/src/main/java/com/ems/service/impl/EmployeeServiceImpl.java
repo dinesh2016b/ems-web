@@ -3,8 +3,6 @@ package com.ems.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -22,12 +20,13 @@ import com.ems.exception.ResourceNotFoundException;
 import com.ems.service.DepartmentService;
 import com.ems.service.SalariesService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true, timeout = 20)
 public class EmployeeServiceImpl {
 
-	private final Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
-	
 	@Autowired
 	private DepartmentService departmentService;
 	
@@ -52,19 +51,19 @@ public class EmployeeServiceImpl {
 			
 			String departmentId = "1001";
 			DepartmentsBean departmentsBean = departmentService.getDepartmentsById(departmentId);
-			logger.debug("---------> Departments :" + departmentsBean);
+			log.debug("---------> Departments :" + departmentsBean);
 			
 			employeesBean.setDepartmentsBean(departmentsBean);
 
 			SalariesBean salariesBean = salariesService.getSalariesByEmployeeId(employees.getEmpNo());
 			employeesBean.setSalariesBean(salariesBean);
 
-			logger.debug("------------> getEmployeesById() : " + employeesBean);
+			log.debug("------------> getEmployeesById() : " + employeesBean);
 
 			employeesBeans.add(employeesBean);
 		}
 
-		logger.debug("------------> getEmployees() : " + employeeList);
+		log.debug("------------> getEmployees() : " + employeeList);
 
 		return employeesBeans;
 	}
@@ -84,21 +83,21 @@ public class EmployeeServiceImpl {
 		
 		String departmentId = "1001";
 		DepartmentsBean departmentsBean = departmentService.getDepartmentsById(departmentId);
-		logger.debug("---------> Departments :" + departmentsBean);
+		log.debug("---------> Departments :" + departmentsBean);
 		
 		employeesBean.setDepartmentsBean(departmentsBean);
 
 		SalariesBean salariesBean = salariesService.getSalariesByEmployeeId(employees.getEmpNo());
 		employeesBean.setSalariesBean(salariesBean);
 
-		logger.debug("------------> getEmployeesById() : " + employeesBean);
+		log.debug("------------> getEmployeesById() : " + employeesBean);
 
 		return employeesBean;
 	}
 
 	public void addEmployee(EmployeesBean employeesBean) throws EMSException {
 
-		logger.debug("------------> getEmployeesById() : " + employeesBean.toString());
+		log.debug("------------> getEmployeesById() : " + employeesBean.toString());
 		
 		Employees employees = new Employees();
 		employees.setEmpNo(employeesBean.getEmpNo());

@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,18 +23,19 @@ import com.ems.exception.EMSException;
 import com.ems.exception.ResourceNotFoundException;
 import com.ems.repositories.SalariesRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @CrossOrigin(origins = "https://localhost:8080", maxAge = 3600, allowCredentials="true")
 public class SalariesController {
-
-	private Logger logger = LoggerFactory.getLogger(SalariesController.class);
 
 	@Autowired
 	private SalariesRepository salariesRepositoryDAO;
 
 	@GetMapping("/salaries")
 	public ResponseEntity<List<Salaries>> getAllSalaries() throws EMSException {
-		logger.info("----> department list ");
+		log.info("----> department list ");
 
 		List<Salaries> salariesList = new ArrayList<Salaries>();
 		salariesList = salariesRepositoryDAO.findAll();
@@ -48,7 +47,7 @@ public class SalariesController {
 	public SalariesBean getSalariesByEmployeeId(@PathVariable(value = "id") long id) throws EMSException {
 		try {
 
-			logger.info("----> employeeId - " + id);
+			log.info("----> employeeId - " + id);
 			/*
 			Salaries salaries = salariesRepositoryDAO.findById(String.valueOf(id))
 					.orElseThrow(() -> new EMSException("Salaries not found for this employeeId :: " + String.valueOf(id)));

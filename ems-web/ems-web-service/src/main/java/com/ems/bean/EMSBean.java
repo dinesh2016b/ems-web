@@ -1,22 +1,19 @@
 package com.ems.bean;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+@ToString
+@EqualsAndHashCode
 public class EMSBean {
 	private String title;
 	private String environment;
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getEnvironment() {
-		return environment;
-	}
-
-	public void setEnvironment(String environment) {
-		this.environment = environment;
-	}
 }

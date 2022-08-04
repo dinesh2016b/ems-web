@@ -15,10 +15,14 @@ import com.ems.entity.Salaries;
 import com.ems.exception.EMSException;
 import com.ems.service.SalariesService;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author dinesh
  *
  */
+
+@Slf4j
 @Service
 @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true, timeout = 20)
 public class SalariesServiceImpl implements SalariesService {

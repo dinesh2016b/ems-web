@@ -3,12 +3,9 @@
  */
 package com.ems.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,17 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ems.entity.UserDetails;
 import com.ems.service.EMSUserDetailsService;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author dinesh
  *
  */
 
 //@CrossOrigin(origins = "https://localhost:8080", maxAge = 3600, allowCredentials="true")
+@Slf4j
 @RestController
 @RequestMapping("/users")
 public class UserController {
-
-	private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
 	private EMSUserDetailsService userDetailsService;
@@ -43,9 +41,9 @@ public class UserController {
 		userDetails.setPassword(bCryptPasswordEncoder.encode(userDetails.getPassword()));
 		boolean loginFlag = userDetailsService.loginUser(userDetails);
 
-		logger.info("------------> loginUser : " + loginFlag);
+		log.info("------------> loginUser : " + loginFlag);
 		if (loginFlag) {
-			logger.info("------------> loginUser : " + userDetails.toString());
+			log.info("------------> loginUser : " + userDetails.toString());
 			return ResponseEntity.ok().body(userDetails);
 		}
 		
