@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>ems-web-app</artifactId>
 	<packaging>war</packaging>
-	
+
 	<build>
 		<plugins>
 			<plugin>
