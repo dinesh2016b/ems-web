@@ -13,11 +13,14 @@ import com.ems.entity.UserDetails;
 import com.ems.repositories.UserDetailsRepository;
 import com.ems.service.EMSUserDetailsService;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author dinesh
  *
  */
 
+@Slf4j
 @Service
 @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true, timeout = 20)
 public class EMSUserDetailsServiceImpl implements EMSUserDetailsService {

@@ -21,10 +21,13 @@ import com.ems.exception.EMSException;
 import com.ems.exception.ResourceNotFoundException;
 import com.ems.service.DepartmentService;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author dinesh
  *
  */
+@Slf4j
 @Service
 @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true, timeout = 20)
 public class DepartmentServiceImpl implements DepartmentService {

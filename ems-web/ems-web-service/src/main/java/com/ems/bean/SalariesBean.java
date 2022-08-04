@@ -2,28 +2,21 @@ package com.ems.bean;
 
 import java.util.Date;
 
-public class SalariesBean {
-	
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+@ToString
+@EqualsAndHashCode
+public class SalariesBean {	
 	private EmployeesBean employeesBean;
 	private int salary;
-	private Date toDate;
-	
-	public EmployeesBean getEmployeesBean() {
-		return employeesBean;
-	}
-	public void setEmployeesBean(EmployeesBean employeesBean) {
-		this.employeesBean = employeesBean;
-	}
-	public int getSalary() {
-		return salary;
-	}
-	public void setSalary(int salary) {
-		this.salary = salary;
-	}
-	public Date getToDate() {
-		return toDate;
-	}
-	public void setToDate(Date toDate) {
-		this.toDate = toDate;
-	}
+	private Date toDate;	
 }

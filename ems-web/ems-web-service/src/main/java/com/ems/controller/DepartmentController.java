@@ -6,14 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,24 +23,21 @@ import com.ems.exception.ResourceNotFoundException;
 import com.ems.repositories.DepartmentRepository;
 import com.ems.util.ApplicationConstants;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600, allowCredentials="true")
 public class DepartmentController {
 
-	private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
-
-	private DepartmentRepository departmentRepository;
-
 	@Autowired
-	public DepartmentController(DepartmentRepository departmentRepository) {
-		this.departmentRepository = departmentRepository;
-	}
+	private DepartmentRepository departmentRepository;
 
 	@PostMapping(path = ApplicationConstants.ENDPOINT_GET_DEPARTMENTS, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<DepartmentsBean>> getAllDepartments(@PathVariable(value = "pageNo") String pageNo,
 			@PathVariable(value = "size") String size) throws Exception {
 		try {
-			logger.info("----> department list ");
+			log.info("----> department list ");
 
 			List<Departments> departmentList = departmentRepository.findAll();
 			List<DepartmentsBean> departmentsBeans = new ArrayList<DepartmentsBean>();
@@ -69,7 +63,7 @@ public class DepartmentController {
 
 		try {
 
-			logger.info("----> departmentId - " + departmentId);
+			log.info("----> departmentId - " + departmentId);
 			Departments departments = departmentRepository.findById(departmentId)
 					.orElseThrow(() -> new Exception("Departments not found for this deptId :: " + departmentId));
 
@@ -124,7 +118,6 @@ public class DepartmentController {
 	}
 
 	@DeleteMapping(path = ApplicationConstants.ENDPOINT_DELETE_DEPARTMENT, produces = MediaType.APPLICATION_JSON_VALUE)
-
 	public Map<String, Boolean> deleteEmployee(@PathVariable(value = "deptId") String departmentId)
 			throws ResourceNotFoundException {
 

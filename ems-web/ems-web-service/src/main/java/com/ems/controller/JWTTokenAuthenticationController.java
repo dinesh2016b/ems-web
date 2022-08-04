@@ -7,7 +7,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +17,9 @@ import com.ems.security.model.AuthenticationResponse;
 import com.ems.security.util.JwtUtil;
 import com.ems.service.MyUserDetailsService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 public class JWTTokenAuthenticationController {
 
@@ -42,6 +44,7 @@ public class JWTTokenAuthenticationController {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
 					authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+			log.info("-----> Authenicated");
 		} catch (BadCredentialsException e) {
 			throw new EMSException("Incorrect username or password", e);
 		}
