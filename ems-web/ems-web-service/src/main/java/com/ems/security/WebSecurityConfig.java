@@ -58,6 +58,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.POST, "/employees/**/*").permitAll()
 			.antMatchers(HttpMethod.POST, "/departments/**/*").permitAll()
 			.anyRequest().authenticated()
+			.and()
+			.formLogin().loginPage("/login").permitAll()
+			.and()
+			.logout().permitAll()
 			.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and().exceptionHandling();
 

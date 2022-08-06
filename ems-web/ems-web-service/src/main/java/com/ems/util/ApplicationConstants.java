@@ -8,6 +8,12 @@ public class ApplicationConstants {
 	public static final String URI_PARAM_PAGE_NUMBER = "pageNo";
 	public static final String URI_PARAM_PAGE_SIZE = "size";
 
+	//Login 
+	public static final String ENDPOINT_LOGIN = "/login";
+	
+	//Logout 
+	public static final String ENDPOINT_LOGOUT = "/logout";
+	
 	// Employee API
 	public static final String ENDPOINT_GET_EMPLOYEES = "/employees/pageNo/{" + URI_PARAM_PAGE_NUMBER + "}/size/{"+ URI_PARAM_PAGE_SIZE + "}";
 	public static final String ENDPOINT_GET_EMPLOYEE_BY_ID = "/employees/{" + URI_PARAM_ID + "}";
