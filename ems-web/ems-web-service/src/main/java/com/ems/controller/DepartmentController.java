@@ -25,9 +25,9 @@ import com.ems.util.ApplicationConstants;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @RestController
 @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600, allowCredentials="true")
+@Slf4j
 public class DepartmentController {
 
 	@Autowired

@@ -19,8 +19,8 @@ import com.ems.service.MyUserDetailsService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @RestController
+@Slf4j
 public class JWTTokenAuthenticationController {
 
 	@Autowired

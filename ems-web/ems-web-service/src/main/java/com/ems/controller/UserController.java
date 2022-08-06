@@ -22,9 +22,9 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 //@CrossOrigin(origins = "https://localhost:8080", maxAge = 3600, allowCredentials="true")
-@Slf4j
 @RestController
 @RequestMapping("/users")
+@Slf4j
 public class UserController {
 
 	@Autowired
