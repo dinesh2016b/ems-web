@@ -29,10 +29,10 @@ public class EMSRequestResponseFilter implements Filter {
 
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		httpServletRequest.setAttribute("EMS-Request-Filter-Attribute", "Testing header...");
-
-		log.info("----> Remote Host: " + request.getRemoteHost());
-		log.info("----> Remote Address: " + request.getRemoteAddr());
-
+		
+		log.info("----> Local Address: " + request.getLocalAddr());
+		log.info("----> Local Port: " + request.getLocalPort());
+		
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 		httpServletResponse.setHeader("EMS-Response-Filter-Header", "Testing header...");
 

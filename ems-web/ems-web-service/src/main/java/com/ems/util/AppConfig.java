@@ -41,13 +41,11 @@ public class AppConfig {
 		return jsonMap;
 	}
 
-	public static void main(String[] args) {
-		try {
-			AppConfig.getInstance().getJsonMapConfigNoCached("mysql_database.json");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	/*
+	 * public static void main(String[] args) { try {
+	 * AppConfig.getInstance().getJsonMapConfigNoCached("mysql_database.json"); }
+	 * catch (IOException e) { // TODO Auto-generated catch block
+	 * e.printStackTrace(); } }
+	 */
 
 }
