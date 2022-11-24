@@ -7,6 +7,7 @@ import { DepartmentDetailsComponent } from './component/departments/department-d
 import { SalariesComponent } from './component/salaries/salaries.component';
 import { LoginComponent } from './component/login/login.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
+import { SignupComponent } from './component/signup/signup.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/ems-login', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
     { path: 'ems-departments/:id', component: DepartmentDetailsComponent },
     { path: 'ems-salaries', component: SalariesComponent },
     { path: 'ems-login', component: LoginComponent },
+    { path: 'ems-signup', component: SignupComponent},
     { path: '**', component: PageNotFoundComponent }
 ];
 
