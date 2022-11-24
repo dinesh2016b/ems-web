@@ -33,6 +33,7 @@
 }
 
 html {
+    background-color: none;
     font-family: sans-serif;
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
@@ -149,6 +150,8 @@ h1 {
     text-align: center;
     margin-top: 0;
     margin-bottom: .5rem;
+    margin-left: .5rem;
+    margin-right: .5rem;
 }
 
 .highlight {
