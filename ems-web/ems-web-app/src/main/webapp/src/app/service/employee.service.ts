@@ -3,7 +3,7 @@ import { Employee } from '../model/employee';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { BackendApiService } from './backend-api.service';
 
-@Injectable({ providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class EmployeeService {
 
     private employeeUrl: string = 'http://localhost:8080/employees';
@@ -21,13 +21,13 @@ export class EmployeeService {
         console.log(`${this.employeeUrl + 'employees'}/${employeesId}`);
 
         return this.backendAPISerivce.sendGetAPIRequest(`${this.employeeUrl}/${employeesId}`);
-            
+
         //return this.http.get<Employee[]>(`${this.employeeUrl}/${employeesId}`);
         //return this.http.get<Employee[]>((`${this.employeeUrl}/${employeesId}`),{ headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});
     }
 
     public findAll(jwtToken: String) {
-        return this.backendAPISerivce.sendPostRequest(this.employeeUrl + '/pageNo/0/size/10', {jwtToken});
+        return this.backendAPISerivce.sendPostRequest(this.employeeUrl + '/pageNo/0/size/10', { jwtToken });
 
         //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'));
         //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'), { headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});
