@@ -11,6 +11,6 @@ export class AppComponent {
     title = 'Employee Management System';
 
     constructor() {
-        console.log('-------> environment : '+environment.production); // Logs false for default environment
+        console.log('-------> environment : ' + environment.production); // Logs false for default environment
     }
 }

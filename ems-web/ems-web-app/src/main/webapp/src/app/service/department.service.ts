@@ -6,7 +6,7 @@ import { BackendApiService } from './backend-api.service';
 
 @Injectable({
     providedIn: 'root'
-  })
+})
 export class DepartmentService {
 
     private departmentUrl: string = 'http://localhost:8080/departments';
@@ -17,18 +17,18 @@ export class DepartmentService {
     constructor(private backendAPISerivce: BackendApiService) {
         this.employeeDataSubject = new BehaviorSubject(this.employees);
         this.employeeData = this.employeeDataSubject.asObservable();
-    }  
-    
-    public findById(departmentsId){
+    }
+
+    public findById(departmentsId) {
         console.log(`${this.departmentUrl + 'departments'}/${departmentsId}`);
-        return this.backendAPISerivce.sendGetAPIRequest(`${this.departmentUrl }/${departmentsId}`);
+        return this.backendAPISerivce.sendGetAPIRequest(`${this.departmentUrl}/${departmentsId}`);
         //return this.http.get<Departments>((`${this.departmentUrl }/${departmentsId}`));
-       // return this.http.get<Departments>((`${this.departmentUrl }/${departmentsId}`),{ headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});
+        // return this.http.get<Departments>((`${this.departmentUrl }/${departmentsId}`),{ headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});
     }
 
     public findAll(jwtToken: String): Observable<Departments[]> {
         console.log('----> departments');
-        return this.backendAPISerivce.sendPostRequest(this.departmentUrl + '/pageNo/0/size/10', {jwtToken});
+        return this.backendAPISerivce.sendPostRequest(this.departmentUrl + '/pageNo/0/size/10', { jwtToken });
         //return this.http.get<Departments[]>((this.departmentUrl + '/pageNo/0/size/10'), { headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});
     }
 

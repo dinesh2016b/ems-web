@@ -17,7 +17,7 @@ const routes: Routes = [
     { path: 'ems-departments/:id', component: DepartmentDetailsComponent },
     { path: 'ems-salaries', component: SalariesComponent },
     { path: 'ems-login', component: LoginComponent },
-    { path: 'ems-signup', component: SignupComponent},
+    { path: 'ems-signup', component: SignupComponent },
     { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -13,16 +13,16 @@ export class AuthenticateService {
   private authenticateDataSubject: BehaviorSubject<any>;
   private authenticateData: Observable<any>;
 
-  constructor(private backendApiService: BackendApiService) { 
+  constructor(private backendApiService: BackendApiService) {
     this.authenticateDataSubject = new BehaviorSubject(this.jwtToken);
     this.authenticateData = this.authenticateDataSubject.asObservable();
   }
 
-  authenticate(){
+  authenticate() {
     console.log('----> authenticate()');
     return this.backendApiService.sendPostRequest(this.authenticateUrl, {
       "userName": "admin",
       "password": "admin"
-  });
+    });
   }
 }
