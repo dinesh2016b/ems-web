@@ -24,6 +24,8 @@ import { HeaderComponent } from './component/header/header.component';
 import { DepartmentEmployeeListComponent } from './component/departments/department-employee-list/department-employee-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignupComponent } from './component/signup/signup.component';
+import { HomeComponent } from './component/home/home.component';
+import { FooterComponent } from './component/footer/footer.component';
 //import { httpInterceptorProviders } from './service/httpRequestInterceptor';
 
 @NgModule({
@@ -39,7 +41,9 @@ import { SignupComponent } from './component/signup/signup.component';
         LoginComponent,
         DepartmentEmployeeListComponent,
         HeaderComponent,
-        SignupComponent
+        SignupComponent,
+        HomeComponent,
+        FooterComponent
         //NgbdModalBasic,
     ],
     imports: [
