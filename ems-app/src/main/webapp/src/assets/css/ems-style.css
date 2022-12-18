@@ -1,6 +1,6 @@
 body,
 #mainWrapper {
-    color: #fff;
+    color: #cad1d6;
     font-family: verdana;
     font-size: 10px;
     width: 100%;
@@ -91,7 +91,7 @@ body,
 }
 
 .ems-header {
-    outline: 1px solid #1c1c1c;
+    outline: 1px solid #cad1d6;
 }
 
 .ems-header-nav {
