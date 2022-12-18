@@ -27,6 +27,12 @@ export class EmployeeListComponent implements OnInit {
         }
     }
 
+    redirectToEmployeeDetailsPage(employee: Employee) {
+        //Get employee details and store in sessionStorage.setItem(employee)
+        sessionStorage.setItem("employees", JSON.stringify(this.employees));
+        console.log('Employee -->> ' + employee);
+    }
+
     editEmployee(employee: Employee) {
         console.log('------> employee' + employee.empNo);
         const modalRef = this.modalService.open(EmployeeDetailsComponent);
