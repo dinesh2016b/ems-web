@@ -1,36 +1,74 @@
+<div class="container">
+	<div class="row mt-40 mb-10">
+		<div class="col-12 panel-heading heading-text  d-flex justify-content-between">
+			<h1><span class="lead">Departments</span></h1>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class=" ems_table row ">
+		<div class="col-6 mt-15 mb-15">
+			<p class="m-0"><strong>Departments</strong></p>
+		</div>
+		<div class="col-6 mt-15 mb-15 d-flex align-items-end justify-content-end">
+			<span class="ml-5">Add Departments</span>
+		</div>
+	</div>
+	<div class="tab-content">
+		<div class="row tab-pane fade show active">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-30">
+				<div class="ems_table">
+					<div class="row ems_head_table ">
+						<div class="col-2 col-sm-2 col-md-2 col-lg-2">
+							Dept. ID
+						</div>
+						<div class="col-3 col-sm-3 col-md-3 col-lg-3">
+							Department Name
+						</div>
+						<div class="col-3 col-sm-3 col-md-3 col-lg-3">
+							Manager Name
+						</div>
+						<div class="col-2 col-sm-2 col-md-2 col-lg-2">
+							Birth Date
+						</div>
+						<div class="col-2 col-sm-2 col-md-2 col-lg-2">
+							Department
+						</div>
+					</div>
+
+					<div class="" *ngFor="let department of departments">
+						<div class="row">
+							<div class="col-auto col-sm-auto col-md-auto col-lg-auto ">
+
+							</div>
+							<div class="col-2 col-sm-2 col-md-2 col-lg-2">
+								{{ department.deptNo }}
+							</div>
+							<div class="col-3 col-sm-3 col-md-3 col-lg-3">
+								{{ department.deptName }}
+							</div>
+							<div class="col-3 col-sm-3 col-md-3 col-lg-3">
+								{{ department.deptName }}
+							</div>
+							<div class="col-2 col-sm-2 col-md-2 col-lg-2">
+								{{ department.deptName }}
+							</div>
+							<div class="col-2 col-sm-2 col-md-2 col-lg-2">
+								Department
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="generic-container">
 	<div class="row">
-		<div class="col">
-			<!-- Default panel contents -->
-			<div class="panel-heading heading-text">
-				<span class="lead">Departments</span>
-			</div>
-			<div class="tablecontainer">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>ID.</th>
-							<th>Department Name</th>
-							<th width="08%">Edit</th>
-							<th width="08%">Remove</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr *ngFor="let department of departments">
-							<td><span>{{ department.deptNo }}</span></td>
-							<td><span>{{ department.deptName }}</span></td>
-							<td><a class="btn btn-primary btn-sm"
-								routerLink="/departments/{{ department.deptNo }}"> Edit </a></td>
-							<td>
-								<button type="button" class="btn btn-danger btn-sm"
-									(click)="removeDepartment($event)">Remove</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
 		<div class="col">
 			<div class="panel-heading heading-text">
 				<span class="lead">Department Details</span>
@@ -38,13 +76,12 @@
 			<div class="accordion" id="accordionExample">
 				<div class="accordion-item">
 					<h2 class="accordion-header" id="headingOne">
-						<button class="accordion-button" type="button"
-							data-bs-toggle="collapse" data-bs-target="#collapseOne"
-							aria-expanded="true" aria-controls="collapseOne">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse"
+							data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 							Department Details #1</button>
 					</h2>
-					<div id="collapseOne" class="accordion-collapse collapse show"
-						aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+					<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+						data-bs-parent="#accordionExample">
 						<div class="accordion-body">
 							<strong>TBD</strong>
 						</div>
@@ -52,13 +89,12 @@
 				</div>
 				<div class="accordion-item">
 					<h2 class="accordion-header" id="headingTwo">
-						<button class="accordion-button collapsed" type="button"
-							data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-							aria-expanded="false" aria-controls="collapseTwo">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+							data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
 							Department Details #2</button>
 					</h2>
-					<div id="collapseTwo" class="accordion-collapse collapse"
-						aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+					<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+						data-bs-parent="#accordionExample">
 						<div class="accordion-body">
 							<strong>TBD</strong>
 						</div>
@@ -66,13 +102,12 @@
 				</div>
 				<div class="accordion-item">
 					<h2 class="accordion-header" id="headingThree">
-						<button class="accordion-button collapsed" type="button"
-							data-bs-toggle="collapse" data-bs-target="#collapseThree"
-							aria-expanded="false" aria-controls="collapseThree">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+							data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
 							Department Details #3</button>
 					</h2>
-					<div id="collapseThree" class="accordion-collapse collapse"
-						aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+					<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+						data-bs-parent="#accordionExample">
 						<div class="accordion-body">
 							<strong>TBD</strong>
 						</div>
