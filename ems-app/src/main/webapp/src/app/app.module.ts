@@ -26,6 +26,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignupComponent } from './component/signup/signup.component';
 import { HomeComponent } from './component/home/home.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { ProfileComponent } from './component/profile/profile.component';
 //import { httpInterceptorProviders } from './service/httpRequestInterceptor';
 
 @NgModule({
@@ -43,7 +44,8 @@ import { FooterComponent } from './component/footer/footer.component';
         HeaderComponent,
         SignupComponent,
         HomeComponent,
-        FooterComponent
+        FooterComponent,
+        ProfileComponent
         //NgbdModalBasic,
     ],
     imports: [
