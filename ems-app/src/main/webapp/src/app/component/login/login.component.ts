@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { Constants } from 'src/app/model/constants';
 import { AuthenticateService } from 'src/app/service/authenticate.service';
 
@@ -12,9 +12,9 @@ export class LoginComponent implements OnInit {
   TOKEN_KEY = 'auth-token';
   USER_KEY = 'auth-user';
 
-  loginForm = new FormGroup({
-    userName: new FormControl(''),
-    password: new FormControl('')
+  loginForm = new UntypedFormGroup({
+    userName: new UntypedFormControl(''),
+    password: new UntypedFormControl('')
   });
 
   constructor(private authenticateService: AuthenticateService) { }
