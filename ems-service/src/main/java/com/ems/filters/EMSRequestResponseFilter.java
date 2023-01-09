@@ -38,7 +38,7 @@ public class EMSRequestResponseFilter implements Filter {
 		 */
 
 		log.info("----> EMSRequestResponseFilter.doFilter()");
-		
+
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 		httpServletResponse.setHeader("EMS-Response-Filter-Header", "Testing header...");
 

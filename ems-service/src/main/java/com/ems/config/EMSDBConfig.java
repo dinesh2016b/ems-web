@@ -1,5 +1,7 @@
 package com.ems.config;
 
+import static java.util.Collections.singletonMap;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,7 +9,6 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +19,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import com.ems.util.AppConfig;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-
-import static java.util.Collections.singletonMap;
 
 @Configuration
 @EnableJpaRepositories(entityManagerFactoryRef = "emsEntityManager", transactionManagerRef = "emsTransactionManager", basePackages = {
