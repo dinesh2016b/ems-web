@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.stereotype.Repository;
 
 import com.ems.entity.Employees;
 
@@ -15,7 +14,6 @@ import com.ems.entity.Employees;
  * @author dinesh
  *
  */
-@Repository
 public interface EmployeeRepository extends PagingAndSortingRepository<Employees, Long> {
 	
 	Page<Employees> findAll(Pageable pageable);

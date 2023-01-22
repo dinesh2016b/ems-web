@@ -1,5 +1,7 @@
 package com.ems.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import com.ems.security.model.AuthenticationRequest;
 import com.ems.security.model.AuthenticationResponse;
 import com.ems.security.util.JwtUtil;
 import com.ems.service.MyUserDetailsService;
+import com.ems.util.ApplicationConstants;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,9 +40,9 @@ public class JWTTokenAuthenticationController {
 	 * "Hello World"; }
 	 */
 
-	@PostMapping(value = "/authenticate", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
-			throws EMSException {
+	@PostMapping(value = ApplicationConstants.ENDPOINT_AUTHENTICATE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest,
+			HttpServletRequest httpServletRequest) throws EMSException {
 
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -50,8 +53,9 @@ public class JWTTokenAuthenticationController {
 		}
 
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-
 		final String jwt_access_token = jwtTokenUtil.generateToken(userDetails);
+
+		httpServletRequest.getSession().setAttribute("jwt_access_token", jwt_access_token);
 
 		return ResponseEntity.ok(new AuthenticationResponse(jwt_access_token));
 	}
