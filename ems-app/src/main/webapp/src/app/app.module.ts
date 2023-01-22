@@ -45,7 +45,7 @@ import { ProfileComponent } from './component/profile/profile.component';
         SignupComponent,
         HomeComponent,
         FooterComponent,
-        ProfileComponent
+        ProfileComponent,
         //NgbdModalBasic,
     ],
     imports: [
