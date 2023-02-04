@@ -12,7 +12,7 @@
 		</File>
 	</Appenders>
 	<Loggers>
-		<Logger name="com.online" level="debug" additivity="false">
+		<Logger name="com.ems" level="debug" additivity="false">
 			<AppenderRef ref="LogToFile" />
 			<AppenderRef ref="LogToConsole" />
 		</Logger>
