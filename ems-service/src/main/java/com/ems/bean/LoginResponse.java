@@ -2,31 +2,13 @@ package com.ems.bean;
 
 public class LoginResponse {
 
-	private String userName;
-	private String password;
-	private boolean isLoogin;
+	private boolean isLogin;
 
-	public String getUserName() {
-		return userName;
+	public boolean isLogin() {
+		return isLogin;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public boolean isLoogin() {
-		return isLoogin;
-	}
-
-	public void setLoogin(boolean isLoogin) {
-		this.isLoogin = isLoogin;
+	public void setLogin(boolean isLogin) {
+		this.isLogin = isLogin;
 	}
 }

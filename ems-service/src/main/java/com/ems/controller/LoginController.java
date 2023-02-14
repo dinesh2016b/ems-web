@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ems.bean.LoginRequest;
 import com.ems.bean.LoginResponse;
 import com.ems.exception.EMSException;
-import com.ems.service.LoginManagementService;
+import com.ems.service.LoginService;
 import com.ems.util.ApplicationConstants;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,16 +24,25 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginController {
 
 	@Autowired
-	private LoginManagementService loginManagementService;
+	private LoginService loginService;
 
 	@PostMapping(path = ApplicationConstants.ENDPOINT_LOGIN, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest, HttpServletRequest httpServletRequest) throws Exception {
 		LoginResponse loginResponse;
 		try {
 			log.info("----> login EMS..");
-			loginResponse = loginManagementService.loginProcess(loginRequest, httpServletRequest);
-			log.info("---> Cookies : "+httpServletRequest.getSession().getAttribute("jwt_access_token"));
-			log.info("---> Cookies : "+httpServletRequest.getSession().getAttribute("ems_cookies"));
+			
+			loginResponse = new LoginResponse();
+			boolean isAuthenticated = loginService.authenticate(loginRequest, httpServletRequest);
+			
+			if(isAuthenticated) {
+				final String jwt_access_token = loginService.createAuthenticationToken(loginRequest, httpServletRequest);
+				
+				httpServletRequest.getSession().setAttribute("jwt_access_token", jwt_access_token);
+				httpServletRequest.getSession().setAttribute("cookies", jwt_access_token);
+			}
+			log.info("---> jwt_access_token : "+httpServletRequest.getSession().getAttribute("jwt_access_token"));
+			log.info("---> Cookies : "+httpServletRequest.getSession().getAttribute("cookies"));
 		} catch (EMSException e) {
 			log.error("EMS exception: " + e.getMessage());
 			throw e;
