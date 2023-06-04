@@ -11,7 +11,7 @@ import com.ems.entity.UserDetails;
  */
 public interface EMSUserDetailsService {
 	
-	public boolean loginUser(UserDetails userDetails);
+	boolean loginUser(UserDetails userDetails);
 
-	public void saveUser(UserDetails userDetails);
+	void saveUser(UserDetails userDetails);
 }

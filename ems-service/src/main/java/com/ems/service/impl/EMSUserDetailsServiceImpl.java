@@ -33,12 +33,8 @@ public class EMSUserDetailsServiceImpl implements EMSUserDetailsService {
 
 		UserDetails userDetailsDB = userDetailsRepositoryDAO.findUserByUserName(userDetails.getUserName());
 
-		if (userDetailsDB != null && userDetailsDB.getPassword().equals(userDetails.getPassword())) {
-			return true;
-		}
-
-		return false;
-	}
+        return userDetailsDB != null && userDetailsDB.getPassword().equals(userDetails.getPassword());
+    }
 
 	@Override
 	public void saveUser(UserDetails userDetails) {

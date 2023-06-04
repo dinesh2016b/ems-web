@@ -30,7 +30,7 @@ public class UserController {
 	@Autowired
 	private EMSUserDetailsService userDetailsService;
 
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	public UserController() {
 		this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -43,7 +43,7 @@ public class UserController {
 
 		log.info("------------> loginUser : " + loginFlag);
 		if (loginFlag) {
-			log.info("------------> loginUser : " + userDetails.toString());
+			log.info("------------> loginUser : " + userDetails);
 			return ResponseEntity.ok().body(userDetails);
 		}
 		
