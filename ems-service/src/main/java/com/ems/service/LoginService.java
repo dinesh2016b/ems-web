@@ -3,12 +3,12 @@
  */
 package com.ems.service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.ems.bean.LoginRequest;
 import com.ems.bean.LoginResponse;
 import com.ems.exception.EMSException;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * @author Dinesh

@@ -10,7 +10,7 @@
 	<artifactId>ems-web-service</artifactId>
 	<packaging>war</packaging>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
@@ -76,9 +76,17 @@
 			<version>0.9.1</version>
 		</dependency>
 		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.orm</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
+		<!--		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
-			</dependency>
+			</dependency>-->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -108,7 +116,8 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- <plugin> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-maven-plugin</artifactId> 
+			<!-- <plugin> <groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId> 
 				</plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -136,7 +145,9 @@
 			</plugin>
 		</plugins>
 	</build>
-	<!-- <profiles> <profile> <id>local</id> <build> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
-		<artifactId>maven-war-plugin</artifactId> <configuration> <warName>${project.artifactId}</warName> 
+	<!-- <profiles> <profile> <id>local</id> <build> <plugins> <plugin>
+	<groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-war-plugin</artifactId> <configuration>
+	<warName>${project.artifactId}</warName> 
 		</configuration> </plugin> </plugins> </build> </profile> </profiles> -->
 </project>

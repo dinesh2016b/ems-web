@@ -21,4 +21,8 @@ public interface EmployeeRepository extends PagingAndSortingRepository<Employees
 	Page<Employees> findByFirstName(String firstName, Pageable pageable);
 
 	Slice<Employees> findByFirstNameAndLastName(String firstName, String lastName, Pageable pageable);
+
+	Employees findById(Long employeeId);
+
+	void save(Employees employees);
 }

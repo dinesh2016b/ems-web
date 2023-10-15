@@ -5,6 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
+    'Accept': 'application/json',
     'Content-Type': 'application/json'
   })
 };

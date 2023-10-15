@@ -9,12 +9,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,8 +27,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import com.ems.filters.JwtRequestFilter;
 import com.ems.service.MyUserDetailsService;
 
+@Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableMethodSecurity(prePostEnabled = true)
+public class WebSecurityConfig {
 
 	@Autowired
 	private MyUserDetailsService myUserDetailsService;
@@ -44,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		return NoOpPasswordEncoder.getInstance();
 	}
-
+/*
 	@Override
 	@Bean
 	public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -56,11 +59,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		httpSecurity.csrf().disable().authorizeRequests()
 			.antMatchers(HttpMethod.POST, "/apiservice/authenticate").permitAll()
-			.antMatchers(HttpMethod.POST, "/apiservice/employees/**/*").permitAll()
-			.antMatchers(HttpMethod.POST, "/apiservice/departments/**/*").permitAll()
-			.antMatchers(HttpMethod.POST, "/apiservice/salaries/**/*").permitAll()
-			.antMatchers(HttpMethod.POST, "/apiservice/login/**/*").permitAll()
-			.antMatchers(HttpMethod.POST, "/apiservice/logout/**/*").permitAll()
+			.antMatchers(HttpMethod.POST, "/apiservice/employees/ * * / *").permitAll()
+			.antMatchers(HttpMethod.POST, "/apiservice/departments/ * * / *").permitAll()
+			.antMatchers(HttpMethod.POST, "/apiservice/salaries/ * * / *").permitAll()
+			.antMatchers(HttpMethod.POST, "/apiservice/login/ * * / *").permitAll()
+			.antMatchers(HttpMethod.POST, "/apiservice/logout/ * * / * ").permitAll()
 			.antMatchers("/h2-console/**").permitAll()
 			.anyRequest().authenticated()
 			//.and()
@@ -73,7 +76,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 		httpSecurity.cors().configurationSource(corsConfigurationSource());
 	}
-
+*/
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
