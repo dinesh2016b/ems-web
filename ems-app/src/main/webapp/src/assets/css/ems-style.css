@@ -409,3 +409,9 @@ h4 {
     outline: 0;
     box-shadow: none;
 }
+
+.table test1 {
+    padding: 30px 15px;
+    vertical-align: top;
+    border-top: 1px solid #ccc;
+}
