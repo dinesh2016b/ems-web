@@ -34,11 +34,6 @@ public class JWTTokenAuthenticationController {
 	@Autowired
 	private MyUserDetailsService userDetailsService;
 
-	/*
-	 * @RequestMapping({ "/hello" }) public String firstPage() { return
-	 * "Hello World"; }
-	 */
-
 	@PostMapping(value = ApplicationConstants.ENDPOINT_AUTHENTICATE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest,
 			HttpServletRequest httpServletRequest) throws EMSException {
