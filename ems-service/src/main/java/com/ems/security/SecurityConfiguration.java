@@ -33,39 +33,13 @@ import com.ems.service.MyUserDetailsService;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig {
+public class SecurityConfiguration {
 
 	@Autowired
 	private MyUserDetailsService myUserDetailsService;
 
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
-
-	/*
-	 * @Bean public AuthenticationManager
-	 * authenticationManager(AuthenticationConfiguration
-	 * authenticationConfiguration) throws Exception { return
-	 * authenticationConfiguration.getAuthenticationManager(); }
-	 */
-
-	/*
-	 * @Bean AuthenticationManager
-	 * authenticationManager(AuthenticationManagerBuilder builder,
-	 * MyUserDetailsService myUserDetailsService, PasswordEncoder encoder) throws
-	 * Exception { return
-	 * builder.userDetailsService(myUserDetailsService).passwordEncoder(encoder).and
-	 * ().build(); }
-	 */
-
-	// adding our custom authentication providers
-	// authentication manager will call these custom provider's
-	// authenticate methods from now on.
-
-	/*
-	 * @Autowired void registerProvider(AuthenticationManagerBuilder auth,
-	 * PasswordEncoder encoder) throws Exception {
-	 * auth.userDetailsService(myUserDetailsService).passwordEncoder(encoder); }
-	 */
 
 	@Bean
 	public AuthenticationManager authenticationManager(HttpSecurity http, NoOpPasswordEncoder noOpPasswordEncoder)
@@ -83,17 +57,19 @@ public class WebSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		// AuthenticationManager authenticationManager = authBuilder.build();
 
 		httpSecurity.csrf(csrf -> csrf.disable())
-				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
 				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers(antMatcher("/apiservice/authenticate")).authenticated();
-					auth.requestMatchers(antMatcher("/apiservice/**")).permitAll();
+					auth.requestMatchers(antMatcher("/apiservice/login")).permitAll();
+					auth.requestMatchers(antMatcher("/apiservice/authenticate")).permitAll();
+					auth.requestMatchers(antMatcher("/apiservice/employees/**/*")).authenticated();
+					auth.requestMatchers(antMatcher("/apiservice/departments/**/*")).authenticated();
+					auth.requestMatchers(antMatcher("/apiservice/salaries/**/*")).authenticated();
 					auth.requestMatchers(antMatcher("/h2-console/**")).permitAll();
-					auth.anyRequest().authenticated();
-				}).addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class).cors()
-				.configurationSource(corsConfigurationSource());
+					//auth.anyRequest().authenticated();
+				}).addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
+				.cors().configurationSource(corsConfigurationSource());
 
 		return httpSecurity.build();
 	}
@@ -124,6 +100,7 @@ public class WebSecurityConfig {
 	 * UsernamePasswordAuthenticationFilter.class);
 	 * httpSecurity.cors().configurationSource(corsConfigurationSource()); }
 	 */
+	
 	// @Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
