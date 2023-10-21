@@ -42,7 +42,7 @@ public class SecurityConfiguration {
 	private JwtRequestFilter jwtRequestFilter;
 
 	@Bean
-	public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder noOpPasswordEncoder)
+	public AuthenticationManager authenticationManager(HttpSecurity http, NoOpPasswordEncoder noOpPasswordEncoder)
 			throws Exception {
 		AuthenticationManagerBuilder authenticationManagerBuilder = http
 				.getSharedObject(AuthenticationManagerBuilder.class);
@@ -52,7 +52,8 @@ public class SecurityConfiguration {
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		 return new BCryptPasswordEncoder();
+		// return new BCryptPasswordEncoder();
+		return NoOpPasswordEncoder.getInstance();
 	}
 
 	@Bean
