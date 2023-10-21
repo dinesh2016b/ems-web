@@ -27,7 +27,7 @@ public class UserDetails {
 	/**
 	 * @return the userId
 	 */
-	@Column(name = "user_id", nullable = false)
+	@Column(name = "userid", nullable = false)
 	public long getUserId() {
 		return userId;
 	}
@@ -42,7 +42,7 @@ public class UserDetails {
 	/**
 	 * @return the userName
 	 */
-	@Column(name = "user_name")
+	@Column(name = "username")
 	public String getUserName() {
 		return userName;
 	}

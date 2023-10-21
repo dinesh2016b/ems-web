@@ -14,5 +14,5 @@ import com.ems.entity.UserDetails;
 
 public interface UserDetailsRepository extends JpaRepository<UserDetails, Long> {
 	
-	UserDetails findUserByUserName(String userName);	
+	UserDetails findUserByUserName(String username);	
 }

@@ -1,12 +1,12 @@
 
 {
 	"ems_h2_db" :{
-		"url" : "jdbc:h2:mem:employees",
+		"url" : "jdbc:h2:mem:employees;DB_CLOSE_DELAY=-1",
 		"username":"admin",
 		"password":"admin",
 		"driverClassName":"org.h2.Driver",
-		"connectionPoolMaxSize":40,
-		"connectionPoolIdleSize":15,
+		"connectionPoolMaxSize":10,
+		"connectionPoolIdleSize":5,
 		"connectionAutoCommit":true,
 		"connectionPoolTimeoutMs":300000,
 		"connectionPoolMaxLisfetimeMs":300000,

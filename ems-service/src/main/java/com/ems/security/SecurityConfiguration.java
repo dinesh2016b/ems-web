@@ -14,11 +14,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -42,7 +42,7 @@ public class SecurityConfiguration {
 	private JwtRequestFilter jwtRequestFilter;
 
 	@Bean
-	public AuthenticationManager authenticationManager(HttpSecurity http, NoOpPasswordEncoder noOpPasswordEncoder)
+	public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder noOpPasswordEncoder)
 			throws Exception {
 		AuthenticationManagerBuilder authenticationManagerBuilder = http
 				.getSharedObject(AuthenticationManagerBuilder.class);
@@ -52,7 +52,7 @@ public class SecurityConfiguration {
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
+		 return new BCryptPasswordEncoder();
 	}
 
 	@Bean
@@ -63,44 +63,20 @@ public class SecurityConfiguration {
 				.authorizeHttpRequests(auth -> {
 					auth.requestMatchers(antMatcher("/apiservice/login")).permitAll();
 					auth.requestMatchers(antMatcher("/apiservice/authenticate")).permitAll();
-					auth.requestMatchers(antMatcher("/apiservice/employees/**/*")).authenticated();
-					auth.requestMatchers(antMatcher("/apiservice/departments/**/*")).authenticated();
-					auth.requestMatchers(antMatcher("/apiservice/salaries/**/*")).authenticated();
 					auth.requestMatchers(antMatcher("/h2-console/**")).permitAll();
-					//auth.anyRequest().authenticated();
-				}).addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-				.cors().configurationSource(corsConfigurationSource());
+					auth.anyRequest().authenticated();
+					// in case authenticate particular URL
+					// auth.requestMatchers(antMatcher("/apiservice/employees/**/*")).authenticated();
+					// auth.requestMatchers(antMatcher("/apiservice/departments/**/*")).authenticated();
+					// auth.requestMatchers(antMatcher("/apiservice/salaries/**/*")).authenticated();
+				}).addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class).cors()
+				.configurationSource(corsConfigurationSource());
+
+		httpSecurity.headers().frameOptions().sameOrigin();
 
 		return httpSecurity.build();
 	}
 
-	/*
-	 * @Override
-	 * 
-	 * @Bean public AuthenticationManager authenticationManagerBean() throws
-	 * Exception { return super.authenticationManagerBean(); }
-	 * 
-	 * @Override protected void configure(HttpSecurity httpSecurity) throws
-	 * Exception {
-	 * 
-	 * httpSecurity.csrf().disable().authorizeRequests()
-	 * .antMatchers(HttpMethod.POST, "/apiservice/authenticate").permitAll()
-	 * .antMatchers(HttpMethod.POST, "/apiservice/employees/ * * / *").permitAll()
-	 * .antMatchers(HttpMethod.POST, "/apiservice/departments/ * * / *").permitAll()
-	 * .antMatchers(HttpMethod.POST, "/apiservice/salaries/ * * / *").permitAll()
-	 * .antMatchers(HttpMethod.POST, "/apiservice/login/ * * / *").permitAll()
-	 * .antMatchers(HttpMethod.POST, "/apiservice/logout/ * * / * ").permitAll()
-	 * .antMatchers("/h2-console/**").permitAll() .anyRequest().authenticated()
-	 * //.and() //.formLogin().loginPage("/loginems").permitAll() .and()
-	 * .logout().permitAll()
-	 * .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.
-	 * STATELESS) .and().exceptionHandling();
-	 * 
-	 * httpSecurity.addFilterBefore(jwtRequestFilter,
-	 * UsernamePasswordAuthenticationFilter.class);
-	 * httpSecurity.cors().configurationSource(corsConfigurationSource()); }
-	 */
-	
 	// @Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();

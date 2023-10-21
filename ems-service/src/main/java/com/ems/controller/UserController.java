@@ -39,6 +39,7 @@ public class UserController {
 	@PostMapping("/login")
 	public ResponseEntity<UserDetails> loginUser(@RequestBody UserDetails userDetails) {
 		userDetails.setPassword(bCryptPasswordEncoder.encode(userDetails.getPassword()));
+		log.info(" Password -----> "+userDetails.getPassword());
 		boolean loginFlag = userDetailsService.loginUser(userDetails);
 
 		log.info("------------> loginUser : " + loginFlag);

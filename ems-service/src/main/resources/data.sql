@@ -1,7 +1,8 @@
 INSERT INTO `userdetails` VALUES 
 ('1001','admin','admin'),
 ('1002','dinesh','dinesh'),
-('1003','admin1','admin1');
+('1003','admin1','admin1'),
+('1004','admin12345','admin12345');
 
 INSERT INTO `departments` VALUES 
 ('1001','Marketing'),
