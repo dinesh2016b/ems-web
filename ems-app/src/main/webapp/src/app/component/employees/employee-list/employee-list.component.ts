@@ -21,10 +21,18 @@ export class EmployeeListComponent implements OnInit {
     }
 
     ngOnInit() {
-        //let jwtToken = window.sessionStorage.getItem(this.TOKEN_KEY);
+       //let jwtToken = window.sessionStorage.getItem(this.TOKEN_KEY);
+       let employeeRequest: Employee ={
+            "empNo": "0",
+            "firstName": "",
+            "lastName": "",
+            "birthDate": "",
+            "pageNo": "1",
+            "size": "20"        
+       }; 
         let jwtToken = this.tokenStorageService.getToken();
         if (jwtToken == null || jwtToken === '' || jwtToken != undefined) {
-            this.employeeService.findAll(jwtToken).subscribe(data => {
+            this.employeeService.findAll(jwtToken, employeeRequest).subscribe(data => {
                 this.employees = data;
                 sessionStorage.setItem("employees", JSON.stringify(this.employees));
             });

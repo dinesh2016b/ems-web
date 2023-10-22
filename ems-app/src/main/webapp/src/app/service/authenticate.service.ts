@@ -7,7 +7,7 @@ import { BackendApiService } from './backend-api.service';
 })
 export class AuthenticateService {
 
-  private authenticateUrl: string = '/authenticate';
+  private authenticateUrl: string = '/apiservice/auth/login';
 
   private jwtToken: any;
   private authenticateDataSubject: BehaviorSubject<any>;
