@@ -93,7 +93,7 @@ public class SecurityConfiguration {
 		httpSecurity.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
 				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers(antMatcher("/apiservice/login")).permitAll();
+					auth.requestMatchers(antMatcher("/apiservice/auth/login")).permitAll();
 					auth.requestMatchers(antMatcher("/apiservice/authenticate")).permitAll();
 					auth.requestMatchers(antMatcher("/h2-console/**")).permitAll();
 					auth.anyRequest().authenticated();

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, isDevMode } from '@angular/core';
 import { environment } from './../environments/environment';
 
 @Component({
@@ -7,10 +7,18 @@ import { environment } from './../environments/environment';
     styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
     title = 'Employee Management System';
 
     constructor() {
         console.log('-------> environment : ' + environment.production); // Logs false for default environment
     }
+
+    ngOnInit() {
+        if (isDevMode()) { // 👈🏻👈🏻👈🏻
+          console.log('Development!');
+        } else {
+          console.log('Production!');
+        }
+      }
 }

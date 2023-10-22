@@ -42,8 +42,8 @@ public class EmployeesController {
 
 		List<EmployeeResponse> employeeResponseList = new ArrayList<EmployeeResponse>();
 		try {
-			List<EmployeesBean> employeesBeans = employeeService.getEmployees(employeeRequest.getPageNo(),
-					employeeRequest.getSize());
+			List<EmployeesBean> employeesBeans = employeeService.getEmployees(1,
+					10);
 
 			employeesBeans.forEach(employeesBean -> {
 				EmployeeResponse employeeResponse = new EmployeeResponse();

@@ -21,14 +21,14 @@ export class EmployeeService {
         console.log('----> employeesId :' + employeesId);
         console.log(`${ GlobalConstants.ENDPOINT_EMPLOYEE_URL }/${employeesId}`);
 
-        return this.backendAPISerivce.sendGetAPIRequest(`${GlobalConstants.ENDPOINT_EMPLOYEE_URL}/${employeesId}`);
+        return this.backendAPISerivce.sendGetAPIRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL+'/id');
 
         //return this.http.get<Employee[]>(`${this.employeeUrl}/${employeesId}`);
         //return this.http.get<Employee[]>((`${this.employeeUrl}/${employeesId}`),{ headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});
     }
 
-    public findAll(jwtToken: String) {
-        return this.backendAPISerivce.sendPostRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL + '/pageNo/0/size/10', { jwtToken });
+    public findAll(jwtToken: String, employeeRequest: Employee) {
+        return this.backendAPISerivce.sendPostRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL+'/all', { jwtToken, employeeRequest});
 
         //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'));
         //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'), { headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});
