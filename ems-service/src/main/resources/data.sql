@@ -1,8 +1,19 @@
-INSERT INTO `userdetails` VALUES 
-('1001','admin','admin'),
-('1002','dinesh','dinesh'),
-('1003','admin1','admin1'),
-('1004','admin12345','admin12345');
+INSERT INTO `roles` VALUES
+('101','USER'),
+('102','ADMIN'),
+('103','ROLE_ADMIN');
+
+INSERT INTO `users` VALUES 
+('1001','admin','admin','admin@ems.com'),
+('1002','dinesh','dinesh','dinesh@ems.com'),
+('1003','admin1','admin1','admin1@ems.com'),
+('1004','admin123','admin123','admin123@ems.com');
+
+INSERT INTO `users_roles` VALUES
+('1001','102'),
+('1002','101'),
+('1003','103'),
+('1004','102');
 
 INSERT INTO `departments` VALUES 
 ('1001','Marketing'),

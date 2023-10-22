@@ -36,28 +36,27 @@ public class LoginServiceImpl implements LoginService {
 	private MyUserDetailsService userDetailsService;
 
 	@Override
-	public boolean authenticate(LoginRequest loginRequest, HttpServletRequest httpServletRequest)
-			throws EMSException {
-		Authentication authentication= null;
+	public boolean authenticate(LoginRequest loginRequest, HttpServletRequest httpServletRequest) throws EMSException {
+		Authentication authentication = null;
 		try {
-			authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-					loginRequest.getUserName(), loginRequest.getPassword()));
+			authentication = authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(loginRequest.getUserName(), loginRequest.getPassword()));
 			log.info("-----> Authenicated");
 			return authentication.isAuthenticated();
-		} /*
-			 * catch (BadCredentialsException e) { throw new
-			 * EMSException("Incorrect username or password", e); }
-			 */ catch (Exception e) {
-				 e.printStackTrace();
+		} catch (BadCredentialsException e) {
+			throw new EMSException("Incorrect username or password", e);
+		} catch (Exception e) {
+			e.printStackTrace();
 			throw new EMSException(e);
 		}
 	}
 
 	@Override
-	public String createAuthenticationToken(LoginRequest loginRequest, HttpServletRequest httpServletRequest) throws EMSException {
+	public String createAuthenticationToken(LoginRequest loginRequest, HttpServletRequest httpServletRequest)
+			throws EMSException {
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUserName());
 		final String jwt_access_token = jwtTokenUtil.generateToken(userDetails);
-		
+
 		return jwt_access_token;
 	}
 

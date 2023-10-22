@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,34 +29,63 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.ems.exception.AuthEntryPointJwt;
 import com.ems.filters.JwtRequestFilter;
 import com.ems.service.MyUserDetailsService;
+import com.ems.service.impl.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
 
+	/*
+	 * @Autowired private MyUserDetailsService myUserDetailsService;
+	 */
+
 	@Autowired
-	private MyUserDetailsService myUserDetailsService;
+	private UserDetailsServiceImpl userDetailsService;
+
+	@Autowired
+	private AuthEntryPointJwt unauthorizedHandler;
 
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
 
+	/*
+	 * public AuthenticationManager authenticationManager(HttpSecurity http,
+	 * NoOpPasswordEncoder noOpPasswordEncoder) throws Exception {
+	 * AuthenticationManagerBuilder authenticationManagerBuilder = http
+	 * .getSharedObject(AuthenticationManagerBuilder.class);
+	 * authenticationManagerBuilder.userDetailsService(myUserDetailsService).
+	 * passwordEncoder(noOpPasswordEncoder); return
+	 * authenticationManagerBuilder.build(); }
+	 */
+
 	@Bean
-	public AuthenticationManager authenticationManager(HttpSecurity http, NoOpPasswordEncoder noOpPasswordEncoder)
-			throws Exception {
-		AuthenticationManagerBuilder authenticationManagerBuilder = http
-				.getSharedObject(AuthenticationManagerBuilder.class);
-		authenticationManagerBuilder.userDetailsService(myUserDetailsService).passwordEncoder(noOpPasswordEncoder);
-		return authenticationManagerBuilder.build();
+	public DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+
+		authProvider.setUserDetailsService(userDetailsService);
+		authProvider.setPasswordEncoder(passwordEncoder());
+
+		return authProvider;
+	}
+
+	@Bean
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+		return authConfig.getAuthenticationManager();
 	}
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		// return new BCryptPasswordEncoder();
-		return NoOpPasswordEncoder.getInstance();
+		return NoOpPasswordEncoder.getInstance(); 
 	}
+
+	/*
+	 * @Bean public PasswordEncoder passwordEncoder() { // return new
+	 * BCryptPasswordEncoder(); return NoOpPasswordEncoder.getInstance(); }
+	 */
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -70,10 +101,17 @@ public class SecurityConfiguration {
 					// auth.requestMatchers(antMatcher("/apiservice/employees/**/*")).authenticated();
 					// auth.requestMatchers(antMatcher("/apiservice/departments/**/*")).authenticated();
 					// auth.requestMatchers(antMatcher("/apiservice/salaries/**/*")).authenticated();
-				}).addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class).cors()
-				.configurationSource(corsConfigurationSource());
+				}).cors().configurationSource(corsConfigurationSource());
 
-		httpSecurity.headers().frameOptions().sameOrigin();
+		httpSecurity.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler));
+
+		// fix H2 database console: Refused to display ' in a frame because it set
+		// 'X-Frame-Options' to 'deny'
+		httpSecurity.headers(headers -> headers.frameOptions(frameOption -> frameOption.sameOrigin()));
+		
+		httpSecurity.authenticationProvider(authenticationProvider());
+
+		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
 		return httpSecurity.build();
 	}

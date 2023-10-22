@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ems.entity.UserDetails;
+import com.ems.entity.User;
 import com.ems.service.EMSUserDetailsService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,8 +37,8 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<UserDetails> loginUser(@RequestBody UserDetails userDetails) {
-		userDetails.setPassword(bCryptPasswordEncoder.encode(userDetails.getPassword()));
+	public ResponseEntity<User> loginUser(@RequestBody User userDetails) {
+		//userDetails.setPassword(bCryptPasswordEncoder.encode(userDetails.getPassword()));
 		log.info(" Password -----> "+userDetails.getPassword());
 		boolean loginFlag = userDetailsService.loginUser(userDetails);
 
@@ -52,7 +52,7 @@ public class UserController {
 	}
 
 	@PostMapping("/saveUser")
-	public void saveUser(@RequestBody UserDetails userDetails) {
+	public void saveUser(@RequestBody User userDetails) {
 		userDetails.setPassword(bCryptPasswordEncoder.encode(userDetails.getPassword()));
 		userDetailsService.saveUser(userDetails);
 	}

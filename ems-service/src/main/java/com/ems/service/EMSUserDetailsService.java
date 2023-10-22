@@ -3,7 +3,7 @@
  */
 package com.ems.service;
 
-import com.ems.entity.UserDetails;
+import com.ems.entity.User;
 
 /**
  * @author dinesh
@@ -11,7 +11,7 @@ import com.ems.entity.UserDetails;
  */
 public interface EMSUserDetailsService {
 	
-	boolean loginUser(UserDetails userDetails);
+	boolean loginUser(User userDetails);
 
-	void saveUser(UserDetails userDetails);
+	void saveUser(User userDetails);
 }

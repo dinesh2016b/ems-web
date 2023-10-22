@@ -1,17 +1,32 @@
 
-DROP TABLE IF EXISTS userdetails,
+DROP TABLE IF EXISTS user_roles,
+					 users,
 					 dept_emp,
                      dept_manager,
                      titles,
                      salaries, 
                      employees, 
                      departments;
+                     
+CREATE TABLE roles (
+  id BIGINT AUTO_INCREMENT NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+);
 
-CREATE TABLE userdetails(
-	userid	INT AUTO_INCREMENT NOT NULL,
-	username VARCHAR(20) NOT NULL,
-	password VARCHAR(20) NOT NULL,
-	PRIMARY KEY (userid)
+CREATE TABLE users(
+	id BIGINT AUTO_INCREMENT NOT NULL,
+	username VARCHAR(255) NOT NULL,
+	password VARCHAR(255) NOT NULL,	
+	email VARCHAR(255) NOT NULL,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE users_roles (
+  	user_id BIGINT NOT NULL,
+	role_id BIGINT NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES users(id),
+	FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
 CREATE TABLE employees (

@@ -14,12 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ems.bean.LoginRequest;
 import com.ems.bean.LoginResponse;
 import com.ems.exception.EMSException;
-import com.ems.security.model.AuthenticationResponse;
 import com.ems.service.LoginService;
 import com.ems.util.ApplicationConstants;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 

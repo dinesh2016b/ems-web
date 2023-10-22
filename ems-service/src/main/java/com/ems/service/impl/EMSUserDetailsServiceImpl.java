@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ems.entity.UserDetails;
-import com.ems.repositories.UserDetailsRepository;
+import com.ems.entity.User;
+import com.ems.repositories.UserRepository;
 import com.ems.service.EMSUserDetailsService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,20 +26,19 @@ import lombok.extern.slf4j.Slf4j;
 public class EMSUserDetailsServiceImpl implements EMSUserDetailsService {
 
 	@Autowired
-	private UserDetailsRepository userDetailsRepositoryDAO;
+	private UserRepository userRepository;
 
 	@Override
-	public boolean loginUser(UserDetails userDetails) {
+	public boolean loginUser(User userDetails) {
 
-		UserDetails userDetailsDB = userDetailsRepositoryDAO.findUserByUserName(userDetails.getUserName());
+		User userDetailsDB = userRepository.findByUsername(userDetails.getUsername());
 
-        return userDetailsDB != null && userDetailsDB.getPassword().equals(userDetails.getPassword());
-    }
+		return userDetailsDB != null && userDetailsDB.getPassword().equals(userDetails.getPassword());
+	}
 
 	@Override
-	public void saveUser(UserDetails userDetails) {
-
-		userDetailsRepositoryDAO.save(userDetails);
+	public void saveUser(User userDetails) {
+		userRepository.save(userDetails);
 	}
 
 }
