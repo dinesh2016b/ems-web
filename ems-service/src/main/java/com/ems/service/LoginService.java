@@ -3,9 +3,9 @@
  */
 package com.ems.service;
 
-import com.ems.bean.LoginRequest;
-import com.ems.bean.LoginResponse;
 import com.ems.exception.EMSException;
+import com.ems.model.LoginRequest;
+import com.ems.model.LoginResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

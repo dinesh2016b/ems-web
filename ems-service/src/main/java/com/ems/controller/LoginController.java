@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ems.bean.LoginRequest;
-import com.ems.bean.LoginResponse;
 import com.ems.exception.EMSException;
+import com.ems.model.LoginRequest;
+import com.ems.model.LoginResponse;
 import com.ems.service.LoginService;
 import com.ems.util.ApplicationConstants;
 

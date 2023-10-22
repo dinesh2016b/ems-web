@@ -1,4 +1,4 @@
-package com.ems.bean;
+package com.ems.model;
 
 public class LoginResponse {
 

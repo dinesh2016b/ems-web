@@ -11,9 +11,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.ems.bean.LoginRequest;
-import com.ems.bean.LoginResponse;
 import com.ems.exception.EMSException;
+import com.ems.model.LoginRequest;
+import com.ems.model.LoginResponse;
 import com.ems.security.util.JwtUtil;
 import com.ems.service.LoginService;
 import com.ems.service.MyUserDetailsService;

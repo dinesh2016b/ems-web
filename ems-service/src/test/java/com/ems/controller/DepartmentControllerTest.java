@@ -44,7 +44,7 @@ class DepartmentControllerTest {
 	@DisplayName("Test testFindDepartmentById()")
 	@Test
 	public void testFindDepartmentById() throws Exception {
-		DepartmentsBean departmentsBean = new DepartmentsBean("1000", "Department1");
+		DepartmentsBean departmentsBean = new DepartmentsBean("1000", "Department1", null, null, null, null);
 
 		Mockito.when(departmentService.getDepartmentsById("1000")).thenReturn(departmentsBean);
 
@@ -55,11 +55,11 @@ class DepartmentControllerTest {
 	@Test
 	public void testFindAllDepartments() throws Exception {
 		List<DepartmentsBean> departments = new ArrayList<DepartmentsBean>();
-		departments.add(new DepartmentsBean("1000", "Department1"));
-		departments.add(new DepartmentsBean("1001", "Department2"));
-		departments.add(new DepartmentsBean("1002", "Department3"));
-		departments.add(new DepartmentsBean("1003", "Department4"));
-		departments.add(new DepartmentsBean("1004", "Department5"));
+		departments.add(new DepartmentsBean("1000", "Department1", null, null, null, null));
+		departments.add(new DepartmentsBean("1001", "Department2", null, null, null, null));
+		departments.add(new DepartmentsBean("1002", "Department3", null, null, null, null));
+		departments.add(new DepartmentsBean("1003", "Department4", null, null, null, null));
+		departments.add(new DepartmentsBean("1004", "Department5", null, null, null, null));
 
 		Mockito.when(departmentService.getAllDepartments(0, 5)).thenReturn(departments);
 		mockMvc.perform(get("/departments/pageNo/0/size/5")).andExpect(status().isForbidden());
