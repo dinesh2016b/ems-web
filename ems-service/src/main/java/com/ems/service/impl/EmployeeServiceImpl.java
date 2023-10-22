@@ -18,6 +18,7 @@ import com.ems.entity.Employees;
 import com.ems.exception.EMSException;
 import com.ems.exception.ResourceNotFoundException;
 import com.ems.service.DepartmentService;
+import com.ems.service.EmployeeService;
 import com.ems.service.SalariesService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true, timeout = 20)
-public class EmployeeServiceImpl {
+public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
 	private DepartmentService departmentService;
@@ -48,6 +49,10 @@ public class EmployeeServiceImpl {
 			employeesBean.setFirstName(employees.getFirstName());
 			employeesBean.setLastName(employees.getLastName());
 			employeesBean.setBirthDate(employees.getBirthDate());
+			employeesBean.setCreatedDate(employees.getCreatedDate());
+			employeesBean.setCreatedBy(employees.getCreatedBy());
+			employeesBean.setUpdatedDate(employees.getUpdatedDate());
+			employeesBean.setUpdatedBy(employees.getUpdatedBy());
 			
 			String departmentId = "1001";
 			DepartmentsBean departmentsBean = departmentService.getDepartmentsById(departmentId);
@@ -79,6 +84,10 @@ public class EmployeeServiceImpl {
 			employeesBean.setFirstName(employees.getFirstName());
 			employeesBean.setLastName(employees.getLastName());
 			employeesBean.setBirthDate(employees.getBirthDate());
+			employeesBean.setCreatedDate(employees.getCreatedDate());
+			employeesBean.setCreatedBy(employees.getCreatedBy());
+			employeesBean.setUpdatedDate(employees.getUpdatedDate());
+			employeesBean.setUpdatedBy(employees.getUpdatedBy());
 		}
 		
 		String departmentId = "1001";
@@ -95,6 +104,7 @@ public class EmployeeServiceImpl {
 		return employeesBean;
 	}
 
+	@Transactional(readOnly = false, timeout = 20)
 	public void addEmployee(EmployeesBean employeesBean) throws EMSException {
 
 		log.debug("------------> getEmployeesById() : " + employeesBean.toString());
@@ -106,5 +116,30 @@ public class EmployeeServiceImpl {
 		employees.setBirthDate(employeesBean.getBirthDate());
 
 		employeeDAO.addEmployee(employees);
+	}
+
+	@Override
+	@Transactional(readOnly = false, timeout = 20)
+	public void updateEmployee(EmployeesBean employeesBean) throws EMSException {
+		Employees employees = new Employees();
+		employees.setEmpNo(employeesBean.getEmpNo());
+		employees.setFirstName(employeesBean.getFirstName());
+		employees.setLastName(employeesBean.getLastName());
+		employees.setBirthDate(employeesBean.getBirthDate());
+
+		employeeDAO.updateEmployee(employees);
+	}
+
+	@Override
+	@Transactional(readOnly = false, timeout = 20)
+	public void deleteEmployee(EmployeesBean employeesBean) throws EMSException {
+		Employees employees = new Employees();
+		employees.setEmpNo(employeesBean.getEmpNo());
+		employees.setFirstName(employeesBean.getFirstName());
+		employees.setLastName(employeesBean.getLastName());
+		employees.setBirthDate(employeesBean.getBirthDate());
+
+		employeeDAO.deleteEmployee(employees);
+
 	}
 }

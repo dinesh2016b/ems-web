@@ -17,8 +17,8 @@ public class ApplicationConstants {
 	public static final String ENDPOINT_GET_EMPLOYEES = "/apiservice/employees/all";
 	public static final String ENDPOINT_GET_EMPLOYEE_BY_ID = "/apiservice/employees/id";
 	public static final String ENDPOINT_CREATE_EMPLOYEE = "/apiservice/employees/create";
-	public static final String ENDPOINT_UPDATE_EMPLOYEE = "/apiservice/employees/update/{" + URI_PARAM_ID + "}";
-	public static final String ENDPOINT_DELETE_EMPLOYEE = "/apiservice/employees/delete/{" + URI_PARAM_ID + "}";
+	public static final String ENDPOINT_UPDATE_EMPLOYEE = "/apiservice/employees/update";
+	public static final String ENDPOINT_DELETE_EMPLOYEE = "/apiservice/employees/delete";
 	// Department API
 	public static final String ENDPOINT_GET_DEPARTMENTS = "/apiservice/departments/pageNo/{" + URI_PARAM_PAGE_NUMBER + "}/size/{"+ URI_PARAM_PAGE_SIZE + "}";
 	public static final String ENDPOINT_GET_DEPARTMENT_BY_ID = "/apiservice/departments/{" + URI_PARAM_ID + "}";

@@ -10,9 +10,13 @@ DROP TABLE IF EXISTS users,
                      departments;
                      
 CREATE TABLE roles (
-  id BIGINT AUTO_INCREMENT NOT NULL,
-  name VARCHAR(50) NOT NULL,
-  PRIMARY KEY (id)
+	id BIGINT AUTO_INCREMENT NOT NULL,
+  	name VARCHAR(50) NOT NULL,
+    created_date DATE default null,
+    created_by  VARCHAR(20)default null,
+    updated_date DATE default null,
+	updated_by VARCHAR(20) default null,
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE users(
@@ -20,6 +24,10 @@ CREATE TABLE users(
 	username VARCHAR(255) NOT NULL,
 	password VARCHAR(255) NOT NULL,	
 	email VARCHAR(255) NOT NULL,
+    created_date DATE default null,
+    created_by  VARCHAR(20)default null,
+    updated_date DATE default null,
+	updated_by VARCHAR(20) default null,
 	PRIMARY KEY (id)
 );
 
@@ -37,20 +45,20 @@ CREATE TABLE employees (
     last_name   VARCHAR(20)     NOT NULL,
     gender      ENUM ('M','F')  NOT NULL,    
     hire_date   DATE            NOT NULL,
-    created_date DATE,
-    created_by  VARCHAR(20),
-    updateded_date DATE,
-	updateded_by VARCHAR(20),
+    created_date DATE default null,
+    created_by  VARCHAR(20)default null,
+    updated_date DATE default null,
+	updated_by VARCHAR(20) default null,
     PRIMARY KEY (emp_no)
 );
 
 CREATE TABLE departments (
     dept_no     CHAR(4)         NOT NULL,
     dept_name   VARCHAR(40)     NOT NULL,
-    created_date DATE,
-    created_by  VARCHAR(20),
-    updateded_date DATE,
-	updateded_by VARCHAR(20),
+    created_date DATE default null,
+    created_by  VARCHAR(20)default null,
+    updated_date DATE default null,
+	updated_by VARCHAR(20) default null,
     PRIMARY KEY (dept_no)
     -- ,UNIQUE  KEY (dept_name)
 );
@@ -80,6 +88,10 @@ CREATE TABLE titles (
     title       VARCHAR(50)     NOT NULL,
     from_date   DATE            NOT NULL,
     to_date     DATE,
+    created_date DATE default null,
+    created_by  VARCHAR(20)default null,
+    updated_date DATE default null,
+	updated_by VARCHAR(20) default null,
     FOREIGN KEY (emp_no) REFERENCES employees (emp_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no,title, from_date)
 ) 
@@ -90,6 +102,10 @@ CREATE TABLE salaries (
     salary      INT             NOT NULL,
     from_date   DATE            NOT NULL,
     to_date     DATE            NOT NULL,
+    created_date DATE default null,
+    created_by  VARCHAR(20)default null,
+    updated_date DATE default null,
+	updated_by VARCHAR(20) default null,
     FOREIGN KEY (emp_no) REFERENCES employees (emp_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no, from_date)
 ) 

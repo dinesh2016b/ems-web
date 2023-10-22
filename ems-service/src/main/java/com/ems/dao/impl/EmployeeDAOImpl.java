@@ -40,4 +40,13 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		employeeRepository.save(employees);
 	}
 
+	@Override
+	public void updateEmployee(Employees employees) throws EMSException {
+		employeeRepository.save(employees);
+	}
+
+	@Override
+	public void deleteEmployee(Employees employees) throws EMSException {
+		employeeRepository.deleteById(employees.getEmpNo());
+	}
 }

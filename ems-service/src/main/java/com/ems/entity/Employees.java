@@ -1,5 +1,7 @@
 package com.ems.entity;
 
+import java.sql.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +17,10 @@ public class Employees {
 	private String firstName;
 	private String lastName;
 	private String birthDate;
+	private Date createdDate;
+	private String createdBy;
+	private Date updatedDate;
+	private String updatedBy;
 
 	public Employees() {
 
@@ -64,10 +70,45 @@ public class Employees {
 		this.birthDate = birthDate;
 	}
 
+	@Column(name = "created_by", nullable = false)
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	@Column(name = "created_date", nullable = false)
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	@Column(name = "updated_date", nullable = false)
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+	@Column(name = "updated_by", nullable = false)
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee [empNo=" + empNo + ", firstName=" + firstName + ", lastName=" + lastName + ", birthDate="
 				+ birthDate + "]";
 	}
-
 }

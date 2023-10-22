@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,6 +53,10 @@ public class EmployeesController {
 				employeeResponse.setBirthDate(employeesBean.getBirthDate());
 				employeeResponse.setDepartmentsBean(employeesBean.getDepartmentsBean());
 				employeeResponse.setSalariesBean(employeesBean.getSalariesBean());
+				employeeResponse.setCreatedBy(employeesBean.getCreatedBy());
+				employeeResponse.setCreatedDate(employeesBean.getCreatedDate());
+				employeeResponse.setUpdatedBy(employeesBean.getUpdatedBy());
+				employeeResponse.setUpdatedDate(employeesBean.getUpdatedDate());
 				employeeResponseList.add(employeeResponse);
 			});
 		} catch (EMSException e) {
@@ -78,6 +81,10 @@ public class EmployeesController {
 				employeeResponse.setBirthDate(employeesBean.getBirthDate());
 				employeeResponse.setDepartmentsBean(employeesBean.getDepartmentsBean());
 				employeeResponse.setSalariesBean(employeesBean.getSalariesBean());
+				employeeResponse.setCreatedBy(employeesBean.getCreatedBy());
+				employeeResponse.setCreatedDate(employeesBean.getCreatedDate());
+				employeeResponse.setUpdatedBy(employeesBean.getUpdatedBy());
+				employeeResponse.setUpdatedDate(employeesBean.getUpdatedDate());
 			}
 		} catch (ResourceNotFoundException e) {
 			log.error(e.getMessage());
@@ -107,6 +114,7 @@ public class EmployeesController {
 				employeesBean.setSalariesBean(employeeRequest.getSalariesBean());
 				employeesBean.setCreatedDate(new Date(System.currentTimeMillis()));
 				employeesBean.setCreatedBy("System");
+
 				employeeService.addEmployee(employeesBean);
 			}
 		} catch (EMSException e) {
@@ -122,12 +130,23 @@ public class EmployeesController {
 	}
 
 	@PostMapping(path = ApplicationConstants.ENDPOINT_UPDATE_EMPLOYEE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<EmployeesBean> updateEmployee(@RequestBody EmployeesBean employeesBean) throws EMSException {
+	public ResponseEntity<EmployeesBean> updateEmployee(@RequestBody EmployeeRequest employeeRequest) throws EMSException {
 
-		log.debug("--------> updateEmployee() :" + employeesBean.toString());
-
+		log.debug("--------> updateEmployee()");
+		EmployeesBean employeesBean = new EmployeesBean();
 		try {
-			employeeService.addEmployee(employeesBean);
+			if (employeeRequest != null) {
+				employeesBean.setEmpNo(employeeRequest.getEmpNo());
+				employeesBean.setFirstName(employeeRequest.getFirstName());
+				employeesBean.setLastName(employeeRequest.getLastName());
+				employeesBean.setBirthDate(employeeRequest.getBirthDate());
+				employeesBean.setDepartmentsBean(employeeRequest.getDepartmentsBean());
+				employeesBean.setSalariesBean(employeeRequest.getSalariesBean());
+				employeesBean.setUpdatedDate(new Date(System.currentTimeMillis()));
+				employeesBean.setUpdatedBy("System");
+				
+				employeeService.updateEmployee(employeesBean);
+			}
 		} catch (EMSException e) {
 			e.printStackTrace();
 			log.error(e.getMessage());
@@ -141,12 +160,21 @@ public class EmployeesController {
 	}
 
 	@PostMapping(path = ApplicationConstants.ENDPOINT_DELETE_EMPLOYEE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<EmployeesBean> deleteEmployee(@RequestBody EmployeesBean employeesBean) throws EMSException {
+	public ResponseEntity<EmployeesBean> deleteEmployee(@RequestBody EmployeeRequest employeeRequest) throws EMSException {
 
-		log.debug("--------> updateEmployee() :" + employeesBean.toString());
-
+		log.debug("--------> deleteEmployee()");
+		EmployeesBean employeesBean = new EmployeesBean();
 		try {
-			employeeService.addEmployee(employeesBean);
+			if (employeeRequest != null) {
+				employeesBean.setEmpNo(employeeRequest.getEmpNo());
+				employeesBean.setFirstName(employeeRequest.getFirstName());
+				employeesBean.setLastName(employeeRequest.getLastName());
+				employeesBean.setBirthDate(employeeRequest.getBirthDate());
+				employeesBean.setDepartmentsBean(employeeRequest.getDepartmentsBean());
+				employeesBean.setSalariesBean(employeeRequest.getSalariesBean());
+
+				employeeService.deleteEmployee(employeesBean);
+			}
 		} catch (EMSException e) {
 			e.printStackTrace();
 			log.error(e.getMessage());
