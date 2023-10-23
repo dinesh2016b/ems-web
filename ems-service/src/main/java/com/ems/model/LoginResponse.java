@@ -1,11 +1,15 @@
 package com.ems.model;
 
+import com.ems.bean.User;
+
 public class LoginResponse {
 
 	private boolean isLogin;
 	private final String jwt_access_token;
+	private User user;	
 
-    public LoginResponse(String jwt_access_token) {
+    public LoginResponse(User user, String jwt_access_token) {
+    	this.user = user;
         this.jwt_access_token = jwt_access_token;
     }
     
@@ -20,4 +24,12 @@ public class LoginResponse {
     public String getJwt() {
         return jwt_access_token;
     }
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }

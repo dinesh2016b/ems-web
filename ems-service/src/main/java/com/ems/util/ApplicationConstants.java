@@ -8,9 +8,14 @@ public class ApplicationConstants {
 	public static final String URI_PARAM_PAGE_NUMBER = "pageNo";
 	public static final String URI_PARAM_PAGE_SIZE = "size";
 	//Login 
-	public static final String ENDPOINT_LOGIN = "/apiservice/auth/login";	
-	//Logout 
-	public static final String ENDPOINT_LOGOUT = "/apiservice/auth/logout";
+	public static final String ENDPOINT_SIGNIN = "/apiservice/auth/signin";	
+	public static final String ENDPOINT_SIGNOUT = "/apiservice/auth/signout";
+	public static final String ENDPOINT_SIGNUP = "/apiservice/auth/signup";
+	
+	//User Profile 
+	public static final String ENDPOINT_GET_USER_PROFILE = "/apiservice/users/getUserProfile";
+	public static final String ENDPOINT_SAVE_USER_PROFILE = "/apiservice/users/saveUserProfile";	
+	
 	//Authenticate
 	public static final String ENDPOINT_AUTHENTICATE = "/apiservice/authenticate";
 	// Employee API

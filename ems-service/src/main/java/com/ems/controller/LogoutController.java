@@ -22,12 +22,12 @@ public class LogoutController {
 	@Autowired
 	private LoginService loginService;
 	
-	@PostMapping(path = ApplicationConstants.ENDPOINT_LOGOUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = ApplicationConstants.ENDPOINT_SIGNOUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
 		try {
 			log.info("----> logout ");			
 
-			loginService.processLogout(httpServletRequest, httpServletResponse);
+			loginService.processLogout(httpServletRequest);
 			
 			return ResponseEntity.ok().body("Bye");
 		} catch (Exception e) {

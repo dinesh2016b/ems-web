@@ -27,8 +27,8 @@ export class EmployeeService {
         //return this.http.get<Employee[]>((`${this.employeeUrl}/${employeesId}`),{ headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});
     }
 
-    public findAll(jwtToken: String, employeeRequest: Employee) {
-        return this.backendAPISerivce.sendPostRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL+'/all', { jwtToken, employeeRequest});
+    public findAll(jwtToken: String, employee: Employee) {
+        return this.backendAPISerivce.sendPostRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL+'/all', { jwtToken,employee });
 
         //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'));
         //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'), { headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});

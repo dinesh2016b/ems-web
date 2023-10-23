@@ -14,7 +14,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Dinesh
@@ -22,7 +21,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 @Service
-@Slf4j
 public class JwtUtil {
 
 	private final String SECRET_KEY = "671491AE98362741F722202EED3288E8FF2508B35315ADBF75EEB3195A926B40";
@@ -48,9 +46,9 @@ public class JwtUtil {
 		return extractExpiration(token).before(new Date());
 	}
 
-	public String generateToken(UserDetails userDetails) {
+	public String generateToken(String username) {
 		Map<String, Object> claims = new HashMap<>();
-		return createToken(claims, userDetails.getUsername());
+		return createToken(claims, username);
 	}
 
 	private String createToken(Map<String, Object> claims, String subject) {

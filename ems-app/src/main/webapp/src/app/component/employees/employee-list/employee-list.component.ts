@@ -30,7 +30,8 @@ export class EmployeeListComponent implements OnInit {
             "pageNo": "1",
             "size": "20"        
        }; 
-        let jwtToken = this.tokenStorageService.getToken();
+        //let jwtToken = this.tokenStorageService.getToken();
+        let jwtToken = localStorage.getItem(this.TOKEN_KEY);
         if (jwtToken == null || jwtToken === '' || jwtToken != undefined) {
             this.employeeService.findAll(jwtToken, employeeRequest).subscribe(data => {
                 this.employees = data;

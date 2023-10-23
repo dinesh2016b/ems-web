@@ -48,7 +48,7 @@ public class JWTTokenAuthenticationController {
 		}
 
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-		final String jwt_access_token = jwtTokenUtil.generateToken(userDetails);
+		final String jwt_access_token = jwtTokenUtil.generateToken(userDetails.getUsername());
 
 		httpServletRequest.getSession().setAttribute("jwt_access_token", jwt_access_token);
 		

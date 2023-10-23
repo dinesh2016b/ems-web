@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ems.bean.User;
 import com.ems.exception.EMSException;
 import com.ems.model.LoginRequest;
 import com.ems.model.LoginResponse;
@@ -29,7 +30,7 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
-	@PostMapping(path = ApplicationConstants.ENDPOINT_LOGIN, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = ApplicationConstants.ENDPOINT_SIGNIN, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest,
 			@RequestHeader Map<String, String> headers, HttpServletRequest httpServletRequest) throws EMSException {
 
@@ -39,20 +40,24 @@ public class LoginController {
 		headers.forEach((key, value) -> {
 			log.info(key + " : " + value);
 		});
-
+		
+		LoginResponse loginResponse = null;
 		HttpSession session = httpServletRequest.getSession();
-		boolean isAuthenticated = loginService.authenticate(loginRequest, httpServletRequest);
+		boolean isAuthenticated = loginService.authenticate(loginRequest);
 
 		if (isAuthenticated) {
-
-			jwt_access_token = loginService.createAuthenticationToken(loginRequest, httpServletRequest);
-
-			session.setAttribute("jwt_access_token", jwt_access_token);
-			session.setAttribute("cookies", jwt_access_token);
-			log.info("---> jwt_access_token : " + session.getAttribute("jwt_access_token"));
-			log.info("---> Cookies : " + session.getAttribute("cookies"));
+			User user = loginService.loadUserByUsername(loginRequest.getUserName());
+			if (user != null) {
+				jwt_access_token = loginService.createAuthenticationToken(user);
+				session.setAttribute("jwt_access_token", jwt_access_token);
+				session.setAttribute("cookies", jwt_access_token);
+				session.setAttribute("user", user);
+				log.info("---> jwt_access_token : " + session.getAttribute("jwt_access_token"));
+				log.info("---> Cookies : " + session.getAttribute("cookies"));
+				loginResponse = new LoginResponse(user, jwt_access_token);
+			}
 		}
 
-		return ResponseEntity.ok(new LoginResponse(jwt_access_token));
+		return ResponseEntity.ok(loginResponse);
 	}
 }

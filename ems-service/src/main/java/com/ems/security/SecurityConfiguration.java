@@ -39,10 +39,6 @@ import com.ems.service.impl.UserDetailsServiceImpl;
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
 
-	/*
-	 * @Autowired private MyUserDetailsService myUserDetailsService;
-	 */
-
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
 
@@ -51,16 +47,6 @@ public class SecurityConfiguration {
 
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
-
-	/*
-	 * public AuthenticationManager authenticationManager(HttpSecurity http,
-	 * NoOpPasswordEncoder noOpPasswordEncoder) throws Exception {
-	 * AuthenticationManagerBuilder authenticationManagerBuilder = http
-	 * .getSharedObject(AuthenticationManagerBuilder.class);
-	 * authenticationManagerBuilder.userDetailsService(myUserDetailsService).
-	 * passwordEncoder(noOpPasswordEncoder); return
-	 * authenticationManagerBuilder.build(); }
-	 */
 
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
@@ -93,7 +79,7 @@ public class SecurityConfiguration {
 		httpSecurity.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
 				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers(antMatcher("/apiservice/auth/login")).permitAll();
+					auth.requestMatchers(antMatcher("/apiservice/auth/signin")).permitAll();
 					auth.requestMatchers(antMatcher("/apiservice/authenticate")).permitAll();
 					auth.requestMatchers(antMatcher("/h2-console/**")).permitAll();
 					auth.anyRequest().authenticated();
