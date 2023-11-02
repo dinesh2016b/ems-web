@@ -22,6 +22,10 @@ server:
   error:
     include-stacktrace: never
   port: 8080
+#  ssl:
+#    key-store: ems.p12
+#    key-store-password: root123
+#    keyStoreType: PKCS12 
 spring:
   application:
     name: EMS

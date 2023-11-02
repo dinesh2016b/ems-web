@@ -70,7 +70,7 @@ public class Employees {
 		this.birthDate = birthDate;
 	}
 
-	@Column(name = "created_by", nullable = false)
+	@Column(name = "created_by")
 	public String getCreatedBy() {
 		return createdBy;
 	}
@@ -79,7 +79,7 @@ public class Employees {
 		this.createdBy = createdBy;
 	}
 
-	@Column(name = "created_date", nullable = false)
+	@Column(name = "created_date")
 	public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -88,7 +88,7 @@ public class Employees {
 		this.createdDate = createdDate;
 	}
 
-	@Column(name = "updated_date", nullable = false)
+	@Column(name = "updated_date")
 	public Date getUpdatedDate() {
 		return updatedDate;
 	}
@@ -97,7 +97,7 @@ public class Employees {
 		this.updatedDate = updatedDate;
 	}
 
-	@Column(name = "updated_by", nullable = false)
+	@Column(name = "updated_by")
 	public String getUpdatedBy() {
 		return updatedBy;
 	}

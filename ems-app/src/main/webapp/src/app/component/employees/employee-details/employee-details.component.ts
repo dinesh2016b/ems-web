@@ -10,7 +10,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class EmployeeDetailsComponent implements OnInit {
-
+  TOKEN_KEY = 'auth-token';
   @Input() public employee: Employee;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
 
@@ -23,12 +23,15 @@ export class EmployeeDetailsComponent implements OnInit {
   public updateEmployee() {
 
     this.passEntry.emit(this.employee);
-    this.employeeService.save(this.employee).subscribe(res => {
-      console.log('-------> employee.empNo      ----> ' + this.employee.empNo);
-      console.log('-------> employee.firstName  ----> ' + this.employee.firstName);
-      console.log('-------> employee.lastName   ----> ' + this.employee.lastName);
-      console.log('-------> employee.bithdate   ----> ' + this.employee.birthDate);
-    });
+    let jwtToken = localStorage.getItem(this.TOKEN_KEY);
+    if (jwtToken == null || jwtToken === '' || jwtToken != undefined) {
+      this.employeeService.save(jwtToken, this.employee).subscribe(res => {
+        console.log('-------> employee.empNo      ----> ' + this.employee.empNo);
+        console.log('-------> employee.firstName  ----> ' + this.employee.firstName);
+        console.log('-------> employee.lastName   ----> ' + this.employee.lastName);
+        console.log('-------> employee.bithdate   ----> ' + this.employee.birthDate);
+      });
+    }
     this.activeModal.close(this.employee);
   }
 

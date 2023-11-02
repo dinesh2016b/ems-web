@@ -79,14 +79,14 @@ public class SecurityConfiguration {
 		httpSecurity.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
 				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers(antMatcher("/apiservice/auth/signin")).permitAll();
-					auth.requestMatchers(antMatcher("/apiservice/authenticate")).permitAll();
+					auth.requestMatchers(antMatcher("/services/auth/signin")).permitAll();
+					auth.requestMatchers(antMatcher("/services/v1/authenticate")).permitAll();
 					auth.requestMatchers(antMatcher("/h2-console/**")).permitAll();
 					auth.anyRequest().authenticated();
 					// in case authenticate particular URL
-					// auth.requestMatchers(antMatcher("/apiservice/employees/**/*")).authenticated();
-					// auth.requestMatchers(antMatcher("/apiservice/departments/**/*")).authenticated();
-					// auth.requestMatchers(antMatcher("/apiservice/salaries/**/*")).authenticated();
+					// auth.requestMatchers(antMatcher("/services/v1/employees/**/*")).authenticated();
+					// auth.requestMatchers(antMatcher("/services/v1/departments/**/*")).authenticated();
+					// auth.requestMatchers(antMatcher("/services/v1/salaries/**/*")).authenticated();
 				}).cors().configurationSource(corsConfigurationSource());
 
 		httpSecurity.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler));

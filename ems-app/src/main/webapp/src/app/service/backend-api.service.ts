@@ -19,8 +19,16 @@ export class BackendApiService {
   }
 
   //GET request
-  public sendGetAPIRequest(url: string) {
-    return this.http.get<any>(this.hostNameEndPointURL + url, httpOptions)
+  public sendGetAPIRequest(url: string, tokenStr: String) {
+    const httpOptions1 = {
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + tokenStr
+      })
+    };
+
+    return this.http.get<any>(this.hostNameEndPointURL + url, httpOptions1)
       .pipe(
         map((data: any) => data || {}),
         catchError(this.handleError)
@@ -36,6 +44,23 @@ export class BackendApiService {
       );
   }
 
+  //PUT request
+  sendPutRequest(url: string, data: any) {
+    return this.http.put(this.hostNameEndPointURL + url, data, httpOptions)
+      .pipe(
+        map((data: any) => data || {}),
+        catchError(this.handleError)
+      );
+  }
+
+  //DELETE request
+  sendDeleteRequest(url: string, data: any) {
+    return this.http.delete(this.hostNameEndPointURL + url, data)
+      .pipe(
+        map((data: any) => data || {}),
+        catchError(this.handleError)
+      );
+  }
   //GET request
   sendGetAPIRequestWithParameter(url: string, inputParams: HttpParams) {
     const httpOptions = {

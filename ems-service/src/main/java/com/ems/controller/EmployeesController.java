@@ -11,7 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -34,7 +37,7 @@ public class EmployeesController {
 	@Autowired
 	private EmployeeServiceImpl employeeService;
 
-	@PostMapping(path = ApplicationConstants.ENDPOINT_GET_EMPLOYEES, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = ApplicationConstants.ENDPOINT_GET_EMPLOYEES, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<EmployeeResponse>> getEmployees(@RequestBody EmployeeRequest employeeRequest)
 			throws EMSException, ResourceNotFoundException {
 
@@ -66,7 +69,7 @@ public class EmployeesController {
 		return new ResponseEntity<List<EmployeeResponse>>(employeeResponseList, new HttpHeaders(), HttpStatus.OK);
 	}
 
-	@PostMapping(path = ApplicationConstants.ENDPOINT_GET_EMPLOYEE_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = ApplicationConstants.ENDPOINT_GET_EMPLOYEE_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EmployeeResponse> getEmployeeById(@RequestBody EmployeeRequest employeeRequest)
 			throws EMSException, ResourceNotFoundException {
 
@@ -112,8 +115,8 @@ public class EmployeesController {
 				employeesBean.setBirthDate(employeeRequest.getBirthDate());
 				employeesBean.setDepartmentsBean(employeeRequest.getDepartmentsBean());
 				employeesBean.setSalariesBean(employeeRequest.getSalariesBean());
-				employeesBean.setCreatedDate(new Date(System.currentTimeMillis()));
-				employeesBean.setCreatedBy("System");
+				employeesBean.setCreatedBy(employeeRequest.getCreatedBy());
+				employeesBean.setCreatedDate(employeeRequest.getCreatedDate());
 
 				employeeService.addEmployee(employeesBean);
 			}
@@ -129,7 +132,7 @@ public class EmployeesController {
 		return ResponseEntity.created(location).build();
 	}
 
-	@PostMapping(path = ApplicationConstants.ENDPOINT_UPDATE_EMPLOYEE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(path = ApplicationConstants.ENDPOINT_UPDATE_EMPLOYEE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EmployeesBean> updateEmployee(@RequestBody EmployeeRequest employeeRequest) throws EMSException {
 
 		log.debug("--------> updateEmployee()");
@@ -159,7 +162,7 @@ public class EmployeesController {
 		return ResponseEntity.created(location).build();
 	}
 
-	@PostMapping(path = ApplicationConstants.ENDPOINT_DELETE_EMPLOYEE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@DeleteMapping(path = ApplicationConstants.ENDPOINT_DELETE_EMPLOYEE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EmployeesBean> deleteEmployee(@RequestBody EmployeeRequest employeeRequest) throws EMSException {
 
 		log.debug("--------> deleteEmployee()");

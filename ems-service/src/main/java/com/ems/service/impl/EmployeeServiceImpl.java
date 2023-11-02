@@ -113,7 +113,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employees.setEmpNo(employeesBean.getEmpNo());
 		employees.setFirstName(employeesBean.getFirstName());
 		employees.setLastName(employeesBean.getLastName());
-		employees.setBirthDate(employeesBean.getBirthDate());
+		employees.setBirthDate(employeesBean.getBirthDate());		
+		employees.setCreatedDate(employees.getCreatedDate());
+		employees.setCreatedBy(employees.getCreatedBy());
 
 		employeeDAO.addEmployee(employees);
 	}

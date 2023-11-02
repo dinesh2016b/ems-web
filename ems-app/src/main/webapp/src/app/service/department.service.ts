@@ -20,9 +20,9 @@ export class DepartmentService {
         this.employeeData = this.employeeDataSubject.asObservable();
     }
 
-    public findById(departmentsId) {
+    public findById(jwtToken: string, departmentsId: string) {
         console.log(`${ GlobalConstants.ENDPOINT_DEPARTMENT_URL + 'departments'}/${departmentsId}`);
-        return this.backendAPISerivce.sendGetAPIRequest(`${ GlobalConstants.ENDPOINT_DEPARTMENT_URL }/${departmentsId}`);
+        return this.backendAPISerivce.sendGetAPIRequest(`${ GlobalConstants.ENDPOINT_DEPARTMENT_URL }/${departmentsId}`,jwtToken);
         //return this.http.get<Departments>((`${this.departmentUrl }/${departmentsId}`));
         // return this.http.get<Departments>((`${this.departmentUrl }/${departmentsId}`),{ headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});
     }
