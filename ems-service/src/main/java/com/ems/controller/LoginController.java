@@ -37,27 +37,31 @@ public class LoginController {
 		String jwt_access_token = null;
 		log.info("----> login EMS..");
 
-		headers.forEach((key, value) -> {
-			log.info(key + " : " + value);
-		});
-		
 		LoginResponse loginResponse = null;
 		HttpSession session = httpServletRequest.getSession();
-		boolean isAuthenticated = loginService.authenticate(loginRequest);
 
-		if (isAuthenticated) {
-			User user = loginService.loadUserByUsername(loginRequest.getUserName());
-			if (user != null) {
-				jwt_access_token = loginService.createAuthenticationToken(user);
-				session.setAttribute("jwt_access_token", jwt_access_token);
-				session.setAttribute("cookies", jwt_access_token);
-				session.setAttribute("user", user);
-				log.info("---> jwt_access_token : " + session.getAttribute("jwt_access_token"));
-				log.info("---> Cookies : " + session.getAttribute("cookies"));
-				loginResponse = new LoginResponse(user, jwt_access_token);
+		try {
+			boolean isAuthenticated = loginService.authenticate(loginRequest);
+			if (isAuthenticated) {
+				User user = loginService.loadUserByUsername(loginRequest.getUserName());
+				if (user != null) {
+					jwt_access_token = loginService.createAuthenticationToken(user);
+					session.setAttribute("jwt_access_token", jwt_access_token);
+					session.setAttribute("cookies", jwt_access_token);
+					session.setAttribute("user", user);
+					log.info("---> jwt_access_token : " + session.getAttribute("jwt_access_token"));
+					log.info("---> Cookies : " + session.getAttribute("cookies"));
+					headers.forEach((key, value) -> {
+						log.info(key + " : " + value);
+					});
+					loginResponse = new LoginResponse(user, jwt_access_token, true);
+				}
 			}
+		} catch (EMSException e) {
+			e.printStackTrace();
+			loginResponse = new LoginResponse(null, null, false);
+			// throw e;
 		}
-
 		return ResponseEntity.ok(loginResponse);
 	}
 }
