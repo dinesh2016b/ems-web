@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.12</version>
+		<version>3.1.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -21,8 +21,8 @@
 	</properties>
 
 	<modules>
-		<module>ems-web-service</module>
-		<module>ems-web-app</module>
+		<module>ems-service</module>
+		<module>ems-app</module>
 	</modules>
 
 	<build>

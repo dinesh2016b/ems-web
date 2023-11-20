@@ -17,30 +17,42 @@ export class EmployeeService {
         this.employeeData = this.employeeDataSubject.asObservable();
     }
 
-    public findById(employeesId) {
+    public findById(jwtToken: string, employeesId) {
         console.log('----> employeesId :' + employeesId);
         console.log(`${ GlobalConstants.ENDPOINT_EMPLOYEE_URL }/${employeesId}`);
 
-        return this.backendAPISerivce.sendGetAPIRequest(`${GlobalConstants.ENDPOINT_EMPLOYEE_URL}/${employeesId}`);
+        return this.backendAPISerivce.sendGetAPIRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL+'/id',jwtToken);
 
         //return this.http.get<Employee[]>(`${this.employeeUrl}/${employeesId}`);
         //return this.http.get<Employee[]>((`${this.employeeUrl}/${employeesId}`),{ headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});
     }
 
-    public findAll(jwtToken: String) {
-        return this.backendAPISerivce.sendPostRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL + '/pageNo/0/size/10', { jwtToken });
+    public findAll(jwtToken: string, employee: Employee) {
+        return this.backendAPISerivce.sendGetAPIRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL+'/all',jwtToken);
 
         //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'));
         //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'), { headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});
     }
 
-    public save(employee: Employee) {
-        return this.backendAPISerivce.sendPostRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL, employee);
+    public save(jwtToken: string, employee: Employee) {
+        return this.backendAPISerivce.sendPostRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL, { jwtToken,employee });
 
         //return this.http.post<Employee>(this.employeeUrl, employee);
     }
 
-    createBasicAuthToken(username: String, password: String) {
+    public update(jwtToken: string, employee: Employee) {
+        return this.backendAPISerivce.sendPutRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL, { jwtToken,employee });
+
+        //return this.http.post<Employee>(this.employeeUrl, employee);
+    }
+
+    public delete(jwtToken: string, employee: Employee) {
+        return this.backendAPISerivce.sendDeleteRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL, { jwtToken,employee });
+
+        //return this.http.post<Employee>(this.employeeUrl, employee);
+    }
+
+    createBasicAuthToken(username: string, password: string) {
         return 'Basic ' + window.btoa(username + ":" + password)
     }
 }

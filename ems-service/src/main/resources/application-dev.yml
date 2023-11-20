@@ -22,13 +22,17 @@ server:
   error:
     include-stacktrace: never
   port: 8080
+#  ssl:
+#    key-store: ems.p12
+#    key-store-password: root123
+#    keyStoreType: PKCS12 
 spring:
   application:
     name: EMS
   datasource:
     driverClassName: org.h2.Driver
     password: admin
-    url: jdbc:h2:mem:employees
+    url: jdbc:h2:mem:employees;DB_CLOSE_DELAY=-1
     username: admin
   h2:
     console:
@@ -36,12 +40,14 @@ spring:
       path: /h2-console
       settings:
         trace: false
-        web-allow-others: false
+        web-allow-others: true
   jpa:
     generate-ddl: false
     hibernate:
       ddl-auto: none
       use-new-id-generator-mappings: false
+    show-sql: true
+    hibernate.ddl-auto: create
   main:
     allow-bean-definition-overriding: true
   output:

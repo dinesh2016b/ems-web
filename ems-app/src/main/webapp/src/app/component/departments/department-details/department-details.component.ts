@@ -9,7 +9,7 @@ import { Departments } from '../../../model/departments';
   styleUrls: ['./department-details.component.css']
 })
 export class DepartmentDetailsComponent implements OnInit {
-
+  TOKEN_KEY = 'auth-token';
   @Input() departments: Departments;
   @Output() departmentsEntry: EventEmitter<any> = new EventEmitter();
 
@@ -27,13 +27,14 @@ export class DepartmentDetailsComponent implements OnInit {
     //this.departments = new Departments(this.route.snapshot.paramMap.get('id'), '');
 
     this.departmentsEntry.emit(this.departments);
-    this.departmentService.findById(this.route.snapshot.paramMap.get('id'))
+    let jwtToken = localStorage.getItem(this.TOKEN_KEY);
+    if (jwtToken == null || jwtToken === '' || jwtToken != undefined) {
+    this.departmentService.findById(jwtToken, this.route.snapshot.paramMap.get('id'))
     .subscribe(
       departments => {
         this.departments = this.departments
-      }
-    );
-
+      });
+    }
     console.log('-------> departments.deptNo      ----> ' + this.departments.deptNo);
     console.log('-------> departments.deptName  ----> ' + this.departments.deptName);
 

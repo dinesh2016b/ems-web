@@ -24,7 +24,6 @@ import com.zaxxer.hikari.HikariDataSource;
 @EnableJpaRepositories(entityManagerFactoryRef = "emsEntityManager", transactionManagerRef = "emsTransactionManager", basePackages = {
 		"com.ems" })
 public class EMSDBConfig {
-
 	public static final String EMS_DATA_SOURCE = "ems_data_source";
 	public static final String EMS_ENTITY_MANAGER = "emsEntityManager";
 	public static final String EMS_DB_TRANSACTION_MANAGER = "emsTransactionManager";

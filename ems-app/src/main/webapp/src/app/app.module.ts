@@ -27,7 +27,7 @@ import { SignupComponent } from './component/signup/signup.component';
 import { HomeComponent } from './component/home/home.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { ProfileComponent } from './component/profile/profile.component';
-//import { httpInterceptorProviders } from './service/httpRequestInterceptor';
+import { httpInterceptorProviders } from './service/httpRequestInterceptor';
 
 @NgModule({
     declarations: [
@@ -62,8 +62,8 @@ import { ProfileComponent } from './component/profile/profile.component';
         FormsModule,
         NgbModule
     ],
-    providers: [],
-    //providers: [httpInterceptorProviders],
+    //providers: [],
+    providers: [httpInterceptorProviders],
     bootstrap: [AppComponent]
 })
 

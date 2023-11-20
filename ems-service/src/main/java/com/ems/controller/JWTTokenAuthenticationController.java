@@ -1,7 +1,5 @@
 package com.ems.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +18,8 @@ import com.ems.security.util.JwtUtil;
 import com.ems.service.MyUserDetailsService;
 import com.ems.util.ApplicationConstants;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -35,15 +35,10 @@ public class JWTTokenAuthenticationController {
 	@Autowired
 	private MyUserDetailsService userDetailsService;
 
-	/*
-	 * @RequestMapping({ "/hello" }) public String firstPage() { return
-	 * "Hello World"; }
-	 */
-
 	@PostMapping(value = ApplicationConstants.ENDPOINT_AUTHENTICATE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest,
-			HttpServletRequest httpServletRequest) throws EMSException {
-
+			HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws EMSException {
+		log.info("-----> createAuthenticationToken");
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
 					authenticationRequest.getUsername(), authenticationRequest.getPassword()));
@@ -53,9 +48,19 @@ public class JWTTokenAuthenticationController {
 		}
 
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-		final String jwt_access_token = jwtTokenUtil.generateToken(userDetails);
+		final String jwt_access_token = jwtTokenUtil.generateToken(userDetails.getUsername());
 
 		httpServletRequest.getSession().setAttribute("jwt_access_token", jwt_access_token);
+		
+		/*Cookie jwtTokenCookie = new Cookie("jwt_access_token", jwt_access_token);
+
+		jwtTokenCookie.setMaxAge(86400);
+		jwtTokenCookie.setSecure(true);
+		jwtTokenCookie.setHttpOnly(true);
+		jwtTokenCookie.setPath("/apiservice/");
+		jwtTokenCookie.setDomain("apiservice.com");
+
+		httpServletResponse.addCookie(jwtTokenCookie);*/
 
 		return ResponseEntity.ok(new AuthenticationResponse(jwt_access_token));
 	}

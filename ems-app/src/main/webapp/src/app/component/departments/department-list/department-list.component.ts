@@ -15,7 +15,8 @@ export class DepartmentListComponent implements OnInit {
   constructor(private departmentService: DepartmentService) { }
 
   ngOnInit() {
-    let jwtToken = window.sessionStorage.getItem(this.TOKEN_KEY);
+    //let jwtToken = window.sessionStorage.getItem(this.TOKEN_KEY);
+    let jwtToken = localStorage.getItem(this.TOKEN_KEY);
     if (jwtToken == null || jwtToken === '' || jwtToken != undefined) {
       this.departmentService.findAll(jwtToken).subscribe(data => {
         this.departments = data;

@@ -31,9 +31,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
 	public Employees getEmployeeById(Long employeeId) throws EMSException, ResourceNotFoundException {
-		Employees employees = employeeRepository.findById(employeeId).orElseThrow(
-				() -> new ResourceNotFoundException("Employees not found for this empNo :: " + employeeId));
-
+		Employees employees = ((Employees) employeeRepository.findById(employeeId));
 		return employees;
 	}
 
@@ -42,4 +40,13 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		employeeRepository.save(employees);
 	}
 
+	@Override
+	public void updateEmployee(Employees employees) throws EMSException {
+		employeeRepository.save(employees);
+	}
+
+	@Override
+	public void deleteEmployee(Employees employees) throws EMSException {
+		employeeRepository.deleteById(employees.getEmpNo());
+	}
 }

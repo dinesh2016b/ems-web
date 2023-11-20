@@ -13,4 +13,9 @@ public interface EmployeeDAO {
 	Employees getEmployeeById(Long employeeId) throws EMSException, ResourceNotFoundException;
 
 	void addEmployee(Employees employees) throws EMSException;
+
+	void updateEmployee(Employees employees) throws EMSException;
+
+	void deleteEmployee(Employees employees) throws EMSException;
+
 }
