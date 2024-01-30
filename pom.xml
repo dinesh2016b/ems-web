@@ -17,7 +17,6 @@
 	<description>ems web</description>
 
 	<properties>
-		<java.version>11</java.version>
 	</properties>
 
 	<modules>

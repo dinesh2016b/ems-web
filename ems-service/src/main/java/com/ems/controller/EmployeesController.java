@@ -37,7 +37,7 @@ public class EmployeesController {
 	@Autowired
 	private EmployeeServiceImpl employeeService;
 
-	@GetMapping(path = ApplicationConstants.ENDPOINT_GET_EMPLOYEES, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = ApplicationConstants.ENDPOINT_GET_EMPLOYEES, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<EmployeeResponse>> getEmployees(@RequestBody EmployeeRequest employeeRequest)
 			throws EMSException, ResourceNotFoundException {
 

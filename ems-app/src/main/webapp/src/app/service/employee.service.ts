@@ -28,20 +28,20 @@ export class EmployeeService {
     }
 
     public findAll(jwtToken: string, employee: Employee) {
-        return this.backendAPISerivce.sendGetAPIRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL+'/all',jwtToken);
+        return this.backendAPISerivce.sendPostRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL+'/all', { jwtToken, employee });
 
         //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'));
         //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'), { headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});
     }
 
     public save(jwtToken: string, employee: Employee) {
-        return this.backendAPISerivce.sendPostRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL, { jwtToken,employee });
+        return this.backendAPISerivce.sendPostRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL, { jwtToken, employee });
 
         //return this.http.post<Employee>(this.employeeUrl, employee);
     }
 
     public update(jwtToken: string, employee: Employee) {
-        return this.backendAPISerivce.sendPutRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL, { jwtToken,employee });
+        return this.backendAPISerivce.sendPutRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL, { jwtToken, employee });
 
         //return this.http.post<Employee>(this.employeeUrl, employee);
     }
