@@ -20,6 +20,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.converter.RsaKeyConverters;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -77,6 +78,7 @@ public class SecurityConfiguration {
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
 		httpSecurity.csrf(csrf -> csrf.disable())
+				//.x509(x509 -> x509.subjectPrincipalRegex("CN=(.*?)(?:,|$)"))
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
 				.authorizeHttpRequests(auth -> {
 					auth.requestMatchers(antMatcher("/services/auth/signin")).permitAll();
@@ -87,7 +89,8 @@ public class SecurityConfiguration {
 					// auth.requestMatchers(antMatcher("/services/v1/employees/**/*")).authenticated();
 					// auth.requestMatchers(antMatcher("/services/v1/departments/**/*")).authenticated();
 					// auth.requestMatchers(antMatcher("/services/v1/salaries/**/*")).authenticated();
-				}).cors().configurationSource(corsConfigurationSource());
+				})
+				.cors().configurationSource(corsConfigurationSource());
 
 		httpSecurity.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler));
 

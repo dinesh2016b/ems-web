@@ -21,11 +21,25 @@ logging:
 server:
   error:
     include-stacktrace: never
-  port: 8080
-#  ssl:
-#    key-store: ems.p12
-#    key-store-password: root123
-#    keyStoreType: PKCS12 
+  port: 8443
+  ssl:
+    enabled: true
+    enabled-protocols: TLSv1.3
+    bundle:
+      jks:
+      web-server:
+        key:
+          alias: "server"
+          password: password
+        keystore: classpath:servertruststore.jks
+        password: password
+    key-store: classpath:serverkeystore.p12
+    key-store-password: password
+    #keyStoreType: PKCS12
+    trust-store: classpath:servertruststore.jks
+    trust-store-password: password
+    client-auth: need
+
 spring:
   application:
     name: EMS
