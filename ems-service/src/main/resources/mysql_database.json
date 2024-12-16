@@ -1,12 +1,12 @@
 
 {
 	"ems_h2_db" :{
-		"url" : "jdbc:h2:mem:employees;DB_CLOSE_DELAY=-1",
+		"url" : "jdbc:h2:mem:employees",
 		"username":"admin",
 		"password":"admin",
 		"driverClassName":"org.h2.Driver",
-		"connectionPoolMaxSize":10,
-		"connectionPoolIdleSize":5,
+		"connectionPoolMaxSize":40,
+		"connectionPoolIdleSize":15,
 		"connectionAutoCommit":true,
 		"connectionPoolTimeoutMs":300000,
 		"connectionPoolMaxLisfetimeMs":300000,
@@ -14,9 +14,9 @@
 	},
 	
 	"ems_mysql_db" :{
-		"url" : "jdbc:mysql://employee-mysqldb:3306/employees",
-		"username":"root",
-		"password":"Dinesh@123",
+		"url" : "jdbc:mysql://192.168.86.245:3306/emsdb?allowPublicKeyRetrieval=true&useSSL=false",
+		"username":"emsusertest",
+		"password":"Emsweb@123",
 		"driverClassName":"com.mysql.jdbc.Driver",
 		"connectionPoolMaxSize":40,
 		"connectionPoolIdleSize":15,

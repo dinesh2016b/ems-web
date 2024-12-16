@@ -6,14 +6,17 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jndi.JndiTemplate;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 import com.ems.util.AppConfig;
@@ -25,6 +28,7 @@ import com.zaxxer.hikari.HikariDataSource;
 		"com.ems" })
 public class EMSDBConfig {
 	public static final String EMS_DATA_SOURCE = "ems_data_source";
+	public static final String EMS_JNDI_NAME = "java:/datasources/jdbc/emsdb";
 	public static final String EMS_ENTITY_MANAGER = "emsEntityManager";
 	public static final String EMS_DB_TRANSACTION_MANAGER = "emsTransactionManager";
 
@@ -32,9 +36,9 @@ public class EMSDBConfig {
 	public DataSource emsDatasource() {
 		// DataSourceBuilder<DataSource> DataSourceBuilder = DataSourceBuilder.create();
 		try {
-			Map<String, Object> emsDBConfig = AppConfig.getInstance().getJsonMapConfigNoCached("mysql_database.json");
+			/*Map<String, Object> emsDBConfig = AppConfig.getInstance().getJsonMapConfigNoCached("file://main//resource//mysql_database.json");
 
-			Map<String, Object> emsConfig = (Map<String, Object>) emsDBConfig.get("ems_h2_db");
+			Map<String, Object> emsConfig = (Map<String, Object>) emsDBConfig.get("ems_mysql_db");
 
 			HikariConfig config = new HikariConfig();
 			config.setJdbcUrl(emsConfig.get("url").toString());
@@ -49,11 +53,16 @@ public class EMSDBConfig {
 			config.setLeakDetectionThreshold(
 					Integer.parseInt(emsConfig.get("connectionLeakedDetectionThreasholdMs").toString()));
 
-			return new HikariDataSource(config);
-		} catch (IOException e) {
+			return new HikariDataSource(config);*/
+			
+			return (DataSource) new JndiTemplate().lookup(EMS_JNDI_NAME);
+		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} /*
+			 * catch (IOException e) { // TODO Auto-generated catch block
+			 * e.printStackTrace(); }
+			 */
 		return null;
 	}
 
@@ -71,7 +80,7 @@ public class EMSDBConfig {
 	public LocalContainerEntityManagerFactoryBean emsEntityManagerFactory(final EntityManagerFactoryBuilder builder,
 			final @Qualifier(EMS_DATA_SOURCE) DataSource datasource) {
 
-		return builder.dataSource(datasource).packages("com.ems").persistenceUnit("ems_h2_db")
+		return builder.dataSource(datasource).packages("com.ems").persistenceUnit("ems_mysql_db")
 				.properties(singletonMap("hibernate.naming.physical-strategy",
 						"org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl"))
 				.build();

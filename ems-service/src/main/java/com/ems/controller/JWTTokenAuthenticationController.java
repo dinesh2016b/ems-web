@@ -1,5 +1,6 @@
 package com.ems.controller;
 
+import jakarta.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +25,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600, allowCredentials = "true")
 @Slf4j
 public class JWTTokenAuthenticationController {
 
@@ -57,10 +60,11 @@ public class JWTTokenAuthenticationController {
 		jwtTokenCookie.setMaxAge(86400);
 		jwtTokenCookie.setSecure(true);
 		jwtTokenCookie.setHttpOnly(true);
-		jwtTokenCookie.setPath("/apiservice/");
-		jwtTokenCookie.setDomain("apiservice.com");
+		jwtTokenCookie.setPath("/services/");
+		jwtTokenCookie.setDomain("services.com");
 
-		httpServletResponse.addCookie(jwtTokenCookie);*/
+		httpServletResponse.addCookie(jwtTokenCookie);
+		*/
 
 		return ResponseEntity.ok(new AuthenticationResponse(jwt_access_token));
 	}

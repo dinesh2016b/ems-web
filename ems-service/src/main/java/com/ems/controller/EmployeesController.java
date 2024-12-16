@@ -30,7 +30,8 @@ import com.ems.util.ApplicationConstants;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@CrossOrigin(origins = "https://localhost:8080", maxAge = 3600, allowCredentials = "true")
+@CrossOrigin(origins = "https://localhost:8080", maxAge = 3600, allowCredentials = "true",
+		allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token"})
 @Slf4j
 public class EmployeesController {
 
