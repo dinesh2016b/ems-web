@@ -77,3 +77,8 @@ spring:
   security:
     user:
       password: admin
+
+#activemq:
+#  broker-url: tcp://localhost:61616
+#  user: admin
+#  password: admin

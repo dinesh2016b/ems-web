@@ -46,11 +46,10 @@ public class SalariesId implements java.io.Serializable {
 			return true;
 		if ((other == null))
 			return false;
-		if (!(other instanceof SalariesId))
+		if (!(other instanceof SalariesId castOther))
 			return false;
-		SalariesId castOther = (SalariesId) other;
 
-		return (this.getEmpNo() == castOther.getEmpNo())
+        return (this.getEmpNo() == castOther.getEmpNo())
 				&& ((this.getFromDate() == castOther.getFromDate()) || (this.getFromDate() != null
 						&& castOther.getFromDate() != null && this.getFromDate().equals(castOther.getFromDate())));
 	}

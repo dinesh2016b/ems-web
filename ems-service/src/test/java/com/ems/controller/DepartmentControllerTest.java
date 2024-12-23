@@ -8,12 +8,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.ems.bean.DepartmentsBean;
@@ -22,7 +20,6 @@ import com.ems.security.util.JwtUtil;
 import com.ems.service.MyUserDetailsService;
 import com.ems.service.impl.DepartmentServiceImpl;
 
-@ExtendWith(SpringExtension.class)
 @WebMvcTest(DepartmentController.class)
 class DepartmentControllerTest {
 

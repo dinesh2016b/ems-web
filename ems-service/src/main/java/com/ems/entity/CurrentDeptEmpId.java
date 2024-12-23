@@ -73,11 +73,10 @@ public class CurrentDeptEmpId implements java.io.Serializable {
 			return true;
 		if ((other == null))
 			return false;
-		if (!(other instanceof CurrentDeptEmpId))
+		if (!(other instanceof CurrentDeptEmpId castOther))
 			return false;
-		CurrentDeptEmpId castOther = (CurrentDeptEmpId) other;
 
-		return (this.getEmpNo() == castOther.getEmpNo())
+        return (this.getEmpNo() == castOther.getEmpNo())
 				&& ((this.getDeptNo() == castOther.getDeptNo()) || (this.getDeptNo() != null
 						&& castOther.getDeptNo() != null && this.getDeptNo().equals(castOther.getDeptNo())))
 				&& ((this.getFromDate() == castOther.getFromDate()) || (this.getFromDate() != null

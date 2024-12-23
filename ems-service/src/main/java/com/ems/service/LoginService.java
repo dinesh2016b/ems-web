@@ -15,8 +15,8 @@ import jakarta.servlet.http.HttpServletRequest;
  *
  */
 public interface LoginService {
-	public boolean authenticate(LoginRequest loginRequest) throws EMSException;
-	public String createAuthenticationToken(User user) throws EMSException;
-	public User loadUserByUsername(String username) throws EMSException;
-	public LoginResponse processLogout(HttpServletRequest httpServletRequest) throws EMSException;
+	boolean authenticate(LoginRequest loginRequest) throws EMSException;
+	String createAuthenticationToken(User user) throws EMSException;
+	User loadUserByUsername(String username) throws EMSException;
+	LoginResponse processLogout(HttpServletRequest httpServletRequest) throws EMSException;
 }

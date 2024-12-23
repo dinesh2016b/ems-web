@@ -10,6 +10,6 @@ public interface SalariesService {
 
 	// @GetMapping(path = "/salaries/{id}")
 	@GetMapping(path = "/backend-salaries-service/salaries/{id}")
-    SalariesBean getSalariesByEmployeeId(@PathVariable(value = "id") long id) throws EMSException;
+    SalariesBean getSalariesByEmployeeId(@PathVariable long id) throws EMSException;
 
 }

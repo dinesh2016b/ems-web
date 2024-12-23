@@ -45,7 +45,7 @@ public class SalariesController {
 	}
 	
 	@GetMapping("/salaries/{id}")
-	public SalariesBean getSalariesByEmployeeId(@PathVariable(value = "id") long id) throws EMSException {
+	public SalariesBean getSalariesByEmployeeId(@PathVariable long id) throws EMSException {
 		try {
 
 			log.info("----> employeeId - " + id);

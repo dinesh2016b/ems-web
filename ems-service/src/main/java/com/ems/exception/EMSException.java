@@ -2,9 +2,12 @@ package com.ems.exception;
 
 import org.springframework.security.authentication.BadCredentialsException;
 
+import java.io.Serial;
+
 public class EMSException extends Exception {
 
-	private static final long serialVersionUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 	private ErrorStatus errorStatus;
 
 	public EMSException(Throwable throwable) {

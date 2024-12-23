@@ -31,7 +31,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
 	public Employees getEmployeeById(Long employeeId) throws EMSException, ResourceNotFoundException {
-		Employees employees = ((Employees) employeeRepository.findById(employeeId));
+		Employees employees = employeeRepository.findById(employeeId);
 		return employees;
 	}
 

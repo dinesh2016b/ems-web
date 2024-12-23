@@ -57,11 +57,10 @@ public class TitlesId implements java.io.Serializable {
 			return true;
 		if ((other == null))
 			return false;
-		if (!(other instanceof TitlesId))
+		if (!(other instanceof TitlesId castOther))
 			return false;
-		TitlesId castOther = (TitlesId) other;
 
-		return (this.getEmpNo() == castOther.getEmpNo())
+        return (this.getEmpNo() == castOther.getEmpNo())
 				&& ((this.getTitle() == castOther.getTitle()) || (this.getTitle() != null
 						&& castOther.getTitle() != null && this.getTitle().equals(castOther.getTitle())))
 				&& ((this.getFromDate() == castOther.getFromDate()) || (this.getFromDate() != null

@@ -49,8 +49,8 @@ public class SecurityConfiguration {
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
 
-	@Bean
-	public DaoAuthenticationProvider authenticationProvider() {
+    @Bean
+    DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
 		authProvider.setUserDetailsService(userDetailsService);
@@ -59,38 +59,38 @@ public class SecurityConfiguration {
 		return authProvider;
 	}
 
-	@Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+    @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
 		return authConfig.getAuthenticationManager();
 	}
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
+    @Bean
+    PasswordEncoder passwordEncoder() {
 		return NoOpPasswordEncoder.getInstance(); 
 	}
 
-	/*
-	 * @Bean public PasswordEncoder passwordEncoder() { // return new
-	 * BCryptPasswordEncoder(); return NoOpPasswordEncoder.getInstance(); }
-	 */
+    /*
+     * @Bean public PasswordEncoder passwordEncoder() { // return new
+     * BCryptPasswordEncoder(); return NoOpPasswordEncoder.getInstance(); }
+     */
 
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-		httpSecurity.csrf(csrf -> csrf.disable())
-				//.x509(x509 -> x509.subjectPrincipalRegex("CN=(.*?)(?:,|$)"))
-				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
-				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers(antMatcher("/services/auth/signin")).permitAll();
-					auth.requestMatchers(antMatcher("/services/v1/authenticate")).permitAll();
-					auth.requestMatchers(antMatcher("/h2-console/**")).permitAll();
-					auth.anyRequest().authenticated();
-					// in case authenticate particular URL
-					// auth.requestMatchers(antMatcher("/services/v1/employees/**/*")).authenticated();
-					// auth.requestMatchers(antMatcher("/services/v1/departments/**/*")).authenticated();
-					// auth.requestMatchers(antMatcher("/services/v1/salaries/**/*")).authenticated();
-				})
-				.cors().configurationSource(corsConfigurationSource());
+        httpSecurity.csrf(csrf -> csrf.disable())
+                //.x509(x509 -> x509.subjectPrincipalRegex("CN=(.*?)(?:,|$)"))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                .authorizeHttpRequests(auth -> {
+                    auth.requestMatchers(antMatcher("/services/auth/signin")).permitAll();
+                    auth.requestMatchers(antMatcher("/services/v1/authenticate")).permitAll();
+                    auth.requestMatchers(antMatcher("/h2-console/**")).permitAll();
+                    auth.anyRequest().authenticated();
+                    // in case authenticate particular URL
+                    // auth.requestMatchers(antMatcher("/services/v1/employees/**/*")).authenticated();
+                    // auth.requestMatchers(antMatcher("/services/v1/departments/**/*")).authenticated();
+                    // auth.requestMatchers(antMatcher("/services/v1/salaries/**/*")).authenticated();
+                })
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
 		httpSecurity.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler));
 

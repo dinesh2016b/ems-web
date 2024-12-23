@@ -35,8 +35,8 @@ public class DepartmentController {
 	private DepartmentRepository departmentRepository;
 
 	@PostMapping(path = ApplicationConstants.ENDPOINT_GET_DEPARTMENTS, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<DepartmentsBean>> getAllDepartments(@PathVariable(value = "pageNo") String pageNo,
-			@PathVariable(value = "size") String size) throws Exception {
+	public ResponseEntity<List<DepartmentsBean>> getAllDepartments(@PathVariable String pageNo,
+			@PathVariable String size) throws Exception {
 		try {
 			log.info("----> department list ");
 

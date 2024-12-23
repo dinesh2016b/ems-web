@@ -10,7 +10,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
+import org.springframework.boot.sql.init.dependency.DependsOnDatabaseInitialization;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -28,17 +30,20 @@ import com.zaxxer.hikari.HikariDataSource;
 		"com.ems" })
 public class EMSDBConfig {
 	public static final String EMS_DATA_SOURCE = "ems_data_source";
-	public static final String EMS_JNDI_NAME = "java:/datasources/jdbc/emsdb";
+	public static final String EMS_JNDI_NAME_MYSQL = "java:/datasources/jdbc/emsdb";
+	public static final String EMS_JNDI_NAME_H2 = "java:/datasources/jdbc/emsdb_h2";
 	public static final String EMS_ENTITY_MANAGER = "emsEntityManager";
 	public static final String EMS_DB_TRANSACTION_MANAGER = "emsTransactionManager";
 
-	@Bean(name = EMS_DATA_SOURCE)
-	public DataSource emsDatasource() {
-		// DataSourceBuilder<DataSource> DataSourceBuilder = DataSourceBuilder.create();
+    @Bean(name = EMS_DATA_SOURCE)
+    DataSource emsDatasource() {
+		//DataSourceBuilder<DataSource> DataSourceBuilder = DataSourceBuilder.create();
 		try {
-			/*Map<String, Object> emsDBConfig = AppConfig.getInstance().getJsonMapConfigNoCached("file://main//resource//mysql_database.json");
-
-			Map<String, Object> emsConfig = (Map<String, Object>) emsDBConfig.get("ems_mysql_db");
+			
+			/*
+			Map<String, Object> emsDBConfig = AppConfig.getInstance().getJsonMapConfigNoCached("mysql_database.json");
+			//Map<String, Object> emsConfig = (Map<String, Object>) emsDBConfig.get("ems_mysql_db");			
+			Map<String, Object> emsConfig = (Map<String, Object>) emsDBConfig.get("ems_h2_db");
 
 			HikariConfig config = new HikariConfig();
 			config.setJdbcUrl(emsConfig.get("url").toString());
@@ -53,16 +58,12 @@ public class EMSDBConfig {
 			config.setLeakDetectionThreshold(
 					Integer.parseInt(emsConfig.get("connectionLeakedDetectionThreasholdMs").toString()));
 
-			return new HikariDataSource(config);*/
-			
-			return (DataSource) new JndiTemplate().lookup(EMS_JNDI_NAME);
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} /*
-			 * catch (IOException e) { // TODO Auto-generated catch block
-			 * e.printStackTrace(); }
-			 */
+			return new HikariDataSource(config);
+			*/
+			return (DataSource) new JndiTemplate().lookup(EMS_JNDI_NAME_H2);
+		} catch (NamingException e) { e.printStackTrace(); }
+		//catch (IOException e) {e.printStackTrace();	}
+		
 		return null;
 	}
 
@@ -76,18 +77,19 @@ public class EMSDBConfig {
 		return map;
 	}
 
-	@Bean(name = EMS_ENTITY_MANAGER)
-	public LocalContainerEntityManagerFactoryBean emsEntityManagerFactory(final EntityManagerFactoryBuilder builder,
-			final @Qualifier(EMS_DATA_SOURCE) DataSource datasource) {
+    @Bean(name = EMS_ENTITY_MANAGER)
+    LocalContainerEntityManagerFactoryBean emsEntityManagerFactory(final EntityManagerFactoryBuilder builder,
+                                                           final @Qualifier(EMS_DATA_SOURCE) DataSource datasource) {
 
-		return builder.dataSource(datasource).packages("com.ems").persistenceUnit("ems_mysql_db")
+    	return builder.dataSource(datasource).packages("com.ems").persistenceUnit("ems_h2_db")
 				.properties(singletonMap("hibernate.naming.physical-strategy",
 						"org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl"))
 				.build();
 	}
 
-	@Bean(name = EMS_DB_TRANSACTION_MANAGER)
-	public DataSourceTransactionManager transactionManager(@Qualifier(EMS_DATA_SOURCE) DataSource datasource) {
+    @Bean(name = EMS_DB_TRANSACTION_MANAGER)
+    @DependsOnDatabaseInitialization
+    DataSourceTransactionManager transactionManager(@Qualifier(EMS_DATA_SOURCE) DataSource datasource) {
 		DataSourceTransactionManager emsTransactionManager = new DataSourceTransactionManager(datasource);
 		return emsTransactionManager;
 	}

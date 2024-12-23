@@ -32,4 +32,7 @@ public class ApplicationConstants {
 	public static final String ENDPOINT_DELETE_DEPARTMENT = "/services/v1/departments/delete/{" + URI_PARAM_ID + "}";
 	// Salary API
 	public static final String ENDPOINT_GET_SALARY_EMPLOYEE_BY_ID = "/services/v1/salaries/id/{" + URI_PARAM_ID + "}";
+
+	// Operation API
+	public static final String ENDPOINT_SEND_DEPARTMENT_CHANGE_REQUEST = "/services/v1/ops/sendDepartmentChangeRequest";
 }

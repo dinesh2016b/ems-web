@@ -61,11 +61,10 @@ public class DeptEmpLatestDateId implements java.io.Serializable {
 			return true;
 		if ((other == null))
 			return false;
-		if (!(other instanceof DeptEmpLatestDateId))
+		if (!(other instanceof DeptEmpLatestDateId castOther))
 			return false;
-		DeptEmpLatestDateId castOther = (DeptEmpLatestDateId) other;
 
-		return (this.getEmpNo() == castOther.getEmpNo())
+        return (this.getEmpNo() == castOther.getEmpNo())
 				&& ((this.getFromDate() == castOther.getFromDate()) || (this.getFromDate() != null
 						&& castOther.getFromDate() != null && this.getFromDate().equals(castOther.getFromDate())))
 				&& ((this.getToDate() == castOther.getToDate()) || (this.getToDate() != null

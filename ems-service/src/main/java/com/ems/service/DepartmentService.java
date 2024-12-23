@@ -18,8 +18,8 @@ public interface DepartmentService {
 
 	// @GetMapping(path = "/departments/pageNo/{pageNo}/size/{size}")
 	@GetMapping(path = "/backend-department-service/departments/pageNo/{pageNo}/size/{size}")
-    List<DepartmentsBean> getAllDepartments(@PathVariable(value = "pageNo") int pageNo,
-                                            @PathVariable(value = "size") int size) throws EMSException;
+    List<DepartmentsBean> getAllDepartments(@PathVariable int pageNo,
+                                            @PathVariable int size) throws EMSException;
 
 	// @GetMapping(path = "/departments/{id}")
 	@GetMapping(path = "/backend-department-service/departments/{id}")
