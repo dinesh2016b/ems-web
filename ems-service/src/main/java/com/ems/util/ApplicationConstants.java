@@ -34,5 +34,5 @@ public class ApplicationConstants {
 	public static final String ENDPOINT_GET_SALARY_EMPLOYEE_BY_ID = "/services/v1/salaries/id/{" + URI_PARAM_ID + "}";
 
 	// Operation API
-	public static final String ENDPOINT_SEND_DEPARTMENT_CHANGE_REQUEST = "/services/v1/ops/sendDepartmentChangeRequest";
+	public static final String ENDPOINT_SEND_DEPARTMENT_CHANGE_REQUEST = "/services/v1/sendDepartmentChangeRequest";
 }
