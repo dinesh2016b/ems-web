@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -29,11 +30,11 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true, timeout = 20)
 public class DepartmentServiceImpl implements DepartmentService {
 
-	@Autowired
-	private DepartmentDAO departmentDAO;
+	private final DepartmentDAO departmentDAO;
 
 	@Override
 	public List<DepartmentsBean> getAllDepartments(int pageNo, int size) throws EMSException {
@@ -80,5 +81,4 @@ public class DepartmentServiceImpl implements DepartmentService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

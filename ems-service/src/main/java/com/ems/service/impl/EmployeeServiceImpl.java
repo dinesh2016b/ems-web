@@ -3,6 +3,7 @@ package com.ems.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -25,123 +26,121 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true, timeout = 20)
 public class EmployeeServiceImpl implements EmployeeService {
 
-	@Autowired
-	private DepartmentService departmentService;
-	
-	@Autowired
-	private SalariesService salariesService;
+    private final DepartmentService departmentService;
 
-	@Autowired
-	private EmployeeDAO employeeDAO;
+    private final SalariesService salariesService;
 
-	public List<EmployeesBean> getEmployees(int firstRecord, int size) throws EMSException, ResourceNotFoundException {
+    private final EmployeeDAO employeeDAO;
 
-		Page<Employees> employeeList = employeeDAO.getEmployees(firstRecord, size);
+    public List<EmployeesBean> getEmployees(int firstRecord, int size) throws EMSException, ResourceNotFoundException {
 
-		List<EmployeesBean> employeesBeans = new ArrayList<EmployeesBean>();
-		EmployeesBean employeesBean = null;
-		for (Employees employees : employeeList) {
-			employeesBean = new EmployeesBean();
-			employeesBean.setEmpNo(employees.getEmpNo());
-			employeesBean.setFirstName(employees.getFirstName());
-			employeesBean.setLastName(employees.getLastName());
-			employeesBean.setBirthDate(employees.getBirthDate());
-			employeesBean.setCreatedDate(employees.getCreatedDate());
-			employeesBean.setCreatedBy(employees.getCreatedBy());
-			employeesBean.setUpdatedDate(employees.getUpdatedDate());
-			employeesBean.setUpdatedBy(employees.getUpdatedBy());
-			
-			String departmentId = "1001";
-			DepartmentsBean departmentsBean = departmentService.getDepartmentsById(departmentId);
-			log.debug("---------> Departments :" + departmentsBean);
-			
-			employeesBean.setDepartmentsBean(departmentsBean);
+        Page<Employees> employeeList = employeeDAO.getEmployees(firstRecord, size);
 
-			SalariesBean salariesBean = salariesService.getSalariesByEmployeeId(employees.getEmpNo());
-			employeesBean.setSalariesBean(salariesBean);
+        List<EmployeesBean> employeesBeans = new ArrayList<EmployeesBean>();
+        EmployeesBean employeesBean = null;
+        for (Employees employees : employeeList) {
+            employeesBean = new EmployeesBean();
+            employeesBean.setEmpNo(employees.getEmpNo());
+            employeesBean.setFirstName(employees.getFirstName());
+            employeesBean.setLastName(employees.getLastName());
+            employeesBean.setBirthDate(employees.getBirthDate());
+            employeesBean.setCreatedDate(employees.getCreatedDate());
+            employeesBean.setCreatedBy(employees.getCreatedBy());
+            employeesBean.setUpdatedDate(employees.getUpdatedDate());
+            employeesBean.setUpdatedBy(employees.getUpdatedBy());
 
-			log.debug("------------> getEmployeesById() : " + employeesBean);
+            String departmentId = "1001";
+            DepartmentsBean departmentsBean = departmentService.getDepartmentsById(departmentId);
+            log.debug("---------> Departments :" + departmentsBean);
 
-			employeesBeans.add(employeesBean);
-		}
+            employeesBean.setDepartmentsBean(departmentsBean);
 
-		log.debug("------------> getEmployees() : " + employeeList);
+            SalariesBean salariesBean = salariesService.getSalariesByEmployeeId(employees.getEmpNo());
+            employeesBean.setSalariesBean(salariesBean);
 
-		return employeesBeans;
-	}
+            log.debug("------------> getEmployeesById() : " + employeesBean);
 
-	public EmployeesBean getEmployeesById(Long employeeId) throws EMSException, ResourceNotFoundException {
+            employeesBeans.add(employeesBean);
+        }
 
-		EmployeesBean employeesBean = null;
-		Employees employees = employeeDAO.getEmployeeById(employeeId);
-		
-		if (employees != null) {
-			employeesBean = new EmployeesBean();
-			employeesBean.setEmpNo(employees.getEmpNo());
-			employeesBean.setFirstName(employees.getFirstName());
-			employeesBean.setLastName(employees.getLastName());
-			employeesBean.setBirthDate(employees.getBirthDate());
-			employeesBean.setCreatedDate(employees.getCreatedDate());
-			employeesBean.setCreatedBy(employees.getCreatedBy());
-			employeesBean.setUpdatedDate(employees.getUpdatedDate());
-			employeesBean.setUpdatedBy(employees.getUpdatedBy());
-		}
-		
-		String departmentId = "1001";
-		DepartmentsBean departmentsBean = departmentService.getDepartmentsById(departmentId);
-		log.debug("---------> Departments :" + departmentsBean);
-		
-		employeesBean.setDepartmentsBean(departmentsBean);
+        log.debug("------------> getEmployees() : " + employeeList);
 
-		SalariesBean salariesBean = salariesService.getSalariesByEmployeeId(employees.getEmpNo());
-		employeesBean.setSalariesBean(salariesBean);
+        return employeesBeans;
+    }
 
-		log.debug("------------> getEmployeesById() : " + employeesBean);
+    public EmployeesBean getEmployeesById(Long employeeId) throws EMSException, ResourceNotFoundException {
 
-		return employeesBean;
-	}
+        EmployeesBean employeesBean = null;
+        Employees employees = employeeDAO.getEmployeeById(employeeId);
 
-	@Transactional(readOnly = false, timeout = 20)
-	public void addEmployee(EmployeesBean employeesBean) throws EMSException {
+        if (employees != null) {
+            employeesBean = new EmployeesBean();
+            employeesBean.setEmpNo(employees.getEmpNo());
+            employeesBean.setFirstName(employees.getFirstName());
+            employeesBean.setLastName(employees.getLastName());
+            employeesBean.setBirthDate(employees.getBirthDate());
+            employeesBean.setCreatedDate(employees.getCreatedDate());
+            employeesBean.setCreatedBy(employees.getCreatedBy());
+            employeesBean.setUpdatedDate(employees.getUpdatedDate());
+            employeesBean.setUpdatedBy(employees.getUpdatedBy());
+        }
 
-		log.debug("------------> getEmployeesById() : " + employeesBean.toString());
-		
-		Employees employees = new Employees();
-		employees.setEmpNo(employeesBean.getEmpNo());
-		employees.setFirstName(employeesBean.getFirstName());
-		employees.setLastName(employeesBean.getLastName());
-		employees.setBirthDate(employeesBean.getBirthDate());		
-		employees.setCreatedDate(employees.getCreatedDate());
-		employees.setCreatedBy(employees.getCreatedBy());
+        String departmentId = "1001";
+        DepartmentsBean departmentsBean = departmentService.getDepartmentsById(departmentId);
+        log.debug("---------> Departments :" + departmentsBean);
 
-		employeeDAO.addEmployee(employees);
-	}
+        employeesBean.setDepartmentsBean(departmentsBean);
 
-	@Override
-	@Transactional(readOnly = false, timeout = 20)
-	public void updateEmployee(EmployeesBean employeesBean) throws EMSException {
-		Employees employees = new Employees();
-		employees.setEmpNo(employeesBean.getEmpNo());
-		employees.setFirstName(employeesBean.getFirstName());
-		employees.setLastName(employeesBean.getLastName());
-		employees.setBirthDate(employeesBean.getBirthDate());
+        SalariesBean salariesBean = salariesService.getSalariesByEmployeeId(employees.getEmpNo());
+        employeesBean.setSalariesBean(salariesBean);
 
-		employeeDAO.updateEmployee(employees);
-	}
+        log.debug("------------> getEmployeesById() : " + employeesBean);
 
-	@Override
-	@Transactional(readOnly = false, timeout = 20)
-	public void deleteEmployee(EmployeesBean employeesBean) throws EMSException {
-		Employees employees = new Employees();
-		employees.setEmpNo(employeesBean.getEmpNo());
-		employees.setFirstName(employeesBean.getFirstName());
-		employees.setLastName(employeesBean.getLastName());
-		employees.setBirthDate(employeesBean.getBirthDate());
+        return employeesBean;
+    }
 
-		employeeDAO.deleteEmployee(employees);
+    @Transactional(readOnly = false, timeout = 20)
+    public void addEmployee(EmployeesBean employeesBean) throws EMSException {
 
-	}
+        log.debug("------------> getEmployeesById() : " + employeesBean.toString());
+
+        Employees employees = new Employees();
+        employees.setEmpNo(employeesBean.getEmpNo());
+        employees.setFirstName(employeesBean.getFirstName());
+        employees.setLastName(employeesBean.getLastName());
+        employees.setBirthDate(employeesBean.getBirthDate());
+        employees.setCreatedDate(employees.getCreatedDate());
+        employees.setCreatedBy(employees.getCreatedBy());
+
+        employeeDAO.addEmployee(employees);
+    }
+
+    @Override
+    @Transactional(readOnly = false, timeout = 20)
+    public void updateEmployee(EmployeesBean employeesBean) throws EMSException {
+        Employees employees = new Employees();
+        employees.setEmpNo(employeesBean.getEmpNo());
+        employees.setFirstName(employeesBean.getFirstName());
+        employees.setLastName(employeesBean.getLastName());
+        employees.setBirthDate(employeesBean.getBirthDate());
+
+        employeeDAO.updateEmployee(employees);
+    }
+
+    @Override
+    @Transactional(readOnly = false, timeout = 20)
+    public void deleteEmployee(EmployeesBean employeesBean) throws EMSException {
+        Employees employees = new Employees();
+        employees.setEmpNo(employeesBean.getEmpNo());
+        employees.setFirstName(employeesBean.getFirstName());
+        employees.setLastName(employeesBean.getLastName());
+        employees.setBirthDate(employeesBean.getBirthDate());
+
+        employeeDAO.deleteEmployee(employees);
+
+    }
 }

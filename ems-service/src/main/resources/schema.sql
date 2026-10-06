@@ -1,13 +1,15 @@
 
-DROP TABLE IF EXISTS users,
-					 roles,
-					 user_roles,
-					 dept_emp,
-                     dept_manager,
-                     titles,
-                     salaries, 
-                     employees, 
-                     departments;
+DROP VIEW IF EXISTS current_dept_emp;
+DROP VIEW IF EXISTS dept_emp_latest_date;
+DROP TABLE IF EXISTS users_roles;
+DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS dept_emp;
+DROP TABLE IF EXISTS dept_manager;
+DROP TABLE IF EXISTS titles;
+DROP TABLE IF EXISTS salaries;
+DROP TABLE IF EXISTS employees;
+DROP TABLE IF EXISTS departments;
                      
 CREATE TABLE roles (
 	id BIGINT AUTO_INCREMENT NOT NULL,

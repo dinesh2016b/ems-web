@@ -15,7 +15,7 @@ export class BackendApiService {
   hostNameEndPointURL: String;
 
   constructor(private http: HttpClient) {
-    this.hostNameEndPointURL = 'http://localhost:8080';
+    this.hostNameEndPointURL = 'http://localhost:8080/ems-web-service';
   }
 
   //GET request
@@ -74,6 +74,28 @@ export class BackendApiService {
         map((data: any) => data || {}),
         catchError(this.handleError)
       );
+  }
+
+  //Preflight/OPTIONS request used for CORS checks before authenticated calls.
+  public sendOptionsRequest(url: string, data?: any) {
+    const httpOptions = {
+      body: data,
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }),
+      withCredentials: true
+    };
+
+    return this.http.request('OPTIONS', this.hostNameEndPointURL + url, httpOptions)
+      .pipe(
+        map((response: any) => response || {}),
+        catchError(this.handleError)
+      );
+  }
+
+  public sendPreflightRequest(url: string, data?: any) {
+    return this.sendOptionsRequest(url, data);
   }
 
   //Error Handler

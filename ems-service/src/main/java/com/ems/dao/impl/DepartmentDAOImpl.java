@@ -1,24 +1,23 @@
 package com.ems.dao.impl;
 
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Repository;
-
 import com.ems.dao.DepartmentDAO;
 import com.ems.entity.Departments;
 import com.ems.exception.EMSException;
 import com.ems.exception.ResourceNotFoundException;
 import com.ems.repositories.DepartmentRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Repository;
 
+import java.util.Map;
+
+@RequiredArgsConstructor
 @Repository
 public class DepartmentDAOImpl implements DepartmentDAO {
 
-	@Autowired
-	private DepartmentRepository departmentRepository;
+	private final DepartmentRepository departmentRepository;
 
 	@Override
 	public Page<Departments> getAllDepartments(int pageNo, int size) throws EMSException {

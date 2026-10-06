@@ -1,6 +1,5 @@
 package com.ems.util;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Map;
 
@@ -29,7 +28,7 @@ public class AppConfig {
 		Map<String, Object> jsonMap = null;
 		try {
 			ObjectMapper objectMapper = new ObjectMapper();
-			jsonMap = objectMapper.readValue(new FileInputStream(fileName), new TypeReference<Map<String, Object>>() {
+			jsonMap = objectMapper.readValue(AppConfig.class.getClassLoader().getResourceAsStream(fileName), new TypeReference<Map<String, Object>>() {
 			});
 			for (Map.Entry<?, ?> entry : jsonMap.entrySet()) {
 				log.info("----------> " + entry.getKey() + "=" + entry.getValue());

@@ -118,6 +118,7 @@ body,
 }
 
 .ems-background {
+    background-image: url(../images/background-blue.png);
     background-repeat: repeat;
     background-size: contain;
     background-position: left;

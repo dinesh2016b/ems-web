@@ -1,117 +1,242 @@
-<div class="container">
-	<div class="row mt-40 mb-10">
-		<div class="col-12 panel-heading heading-text d-flex justify-content-between">
-			<h1><span class="lead">User Profile</span></h1>
-		</div>
-	</div>
-</div>
+<div class="profile-container">
+  <!-- Header Section -->
+  <div class="profile-header">
+    <div class="header-content">
+      <div class="header-left">
+        <i class="fas fa-user-circle header-icon"></i>
+        <div>
+          <h1 class="page-title">User Profile</h1>
+          <p class="page-subtitle">Manage your account and personal information</p>
+        </div>
+      </div>
+      <button class="btn-edit" (click)="onEditProfile()" *ngIf="!isEdit">
+        <i class="fas fa-edit"></i>
+        Edit Profile
+      </button>
+      <button class="btn-edit" *ngIf="isEdit" (click)="onCancel()">
+        <i class="fas fa-times"></i>
+        Cancel Edit
+      </button>
+    </div>
+  </div>
 
-<div class="container">
-	<div class="ems_table row">
-		<div class="col-6 mt-15 mb-15">
-			<p class="m-0"><strong>User Profile</strong></p>
-		</div>
-		<div class="col-6 mt-15 mb-15 d-flex align-items-end justify-content-end">
-			<span class="ml-5">Update profile</span>
-		</div>
-	</div>
+  <!-- Profile Card -->
+  <div class="profile-card">
+    <!-- Profile Picture Section -->
+    <div class="profile-picture-section">
+      <div class="profile-picture">
+        <i class="fas fa-user"></i>
+      </div>
+      <button class="btn-change-photo" (click)="onChangePhoto()">
+        <i class="fas fa-camera"></i>
+        Change Photo
+      </button>
+    </div>
 
-	<div class="tab-content">
-		<div class="row tab-pane fade show active">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-30">
-				<div class="ems_table">
-					<div class="row">
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							User 
-						</div>
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							TBD
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							First Name
-						</div>
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							TBD
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							Last Name
-						</div>
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							TBD
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							Birth Date
-						</div>
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							TBD
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							First Name
-						</div>
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							TBD
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <!-- Profile Content -->
+    <div class="profile-content">
+      <!-- Personal Information Section -->
+      <div class="section">
+        <div class="section-header">
+          <i class="fas fa-id-card"></i>
+          <h2 class="section-title">Personal Information</h2>
+        </div>
+        
+        <div class="info-grid">
+          <div class="info-item">
+            <label class="info-label">Full Name</label>
+            <div *ngIf="!isEdit" class="info-value">{{ user.fullName }}</div>
+            <input *ngIf="isEdit" [(ngModel)]="user.fullName" name="fullName" class="form-control" />
+          </div>
+          <div class="info-item">
+            <label class="info-label">Email Address</label>
+            <div *ngIf="!isEdit" class="info-value">{{ user.email }}</div>
+            <input *ngIf="isEdit" [(ngModel)]="user.email" name="email" class="form-control" />
+          </div>
+          <div class="info-item">
+            <label class="info-label">Phone Number</label>
+            <div *ngIf="!isEdit" class="info-value">{{ user.phone }}</div>
+            <input *ngIf="isEdit" [(ngModel)]="user.phone" name="phone" class="form-control" />
+          </div>
+          <div class="info-item">
+            <label class="info-label">Date of Birth</label>
+            <div *ngIf="!isEdit" class="info-value">{{ user.dob | date:'MMMM d, yyyy' }}</div>
+            <input *ngIf="isEdit" [(ngModel)]="user.dob" name="dob" type="date" class="form-control" />
+          </div>
+          <div class="info-item">
+            <label class="info-label">Address</label>
+            <div *ngIf="!isEdit" class="info-value">{{ user.address }}</div>
+            <textarea *ngIf="isEdit" [(ngModel)]="user.address" name="address" class="form-control"></textarea>
+          </div>
+          <div class="info-item">
+            <label class="info-label">Gender</label>
+            <div *ngIf="!isEdit" class="info-value">{{ user.gender }}</div>
+            <select *ngIf="isEdit" [(ngModel)]="user.gender" name="gender" class="form-control">
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
 
-	<div class="col">
-		<div class="panel-heading heading-text">
-			<span class="lead">User Details</span>
-		</div>
-		<div class="accordion" id="accordionExample">
-			<div class="accordion-item">
-				<h2 class="accordion-header" id="headingOne">
-					<button class="accordion-button" type="button"
-						data-bs-toggle="collapse" data-bs-target="#collapseOne"
-						aria-expanded="true" aria-controls="collapseOne">
-						TBD #1</button>
-				</h2>
-				<div id="collapseOne" class="accordion-collapse collapse show"
-					aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-					<div class="accordion-body">
-						<strong>TBD</strong>
-					</div>
-				</div>
-			</div>
-			<div class="accordion-item">
-				<h2 class="accordion-header" id="headingTwo">
-					<button class="accordion-button collapsed" type="button"
-						data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-						aria-expanded="false" aria-controls="collapseTwo">
-						TBD #2</button>
-				</h2>
-				<div id="collapseTwo" class="accordion-collapse collapse"
-					aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-					<div class="accordion-body">
-						<strong>TBD</strong>
-					</div>
-				</div>
-			</div>
-			<div class="accordion-item">
-				<h2 class="accordion-header" id="headingThree">
-					<button class="accordion-button collapsed" type="button"
-						data-bs-toggle="collapse" data-bs-target="#collapseThree"
-						aria-expanded="false" aria-controls="collapseThree">
-						TBD #3</button>
-				</h2>
-				<div id="collapseThree" class="accordion-collapse collapse"
-					aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-					<div class="accordion-body">
-						<strong>TBD</strong>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+      <div class="divider"></div>
+
+      <!-- Employment Information Section -->
+      <div class="section">
+        <div class="section-header">
+          <i class="fas fa-briefcase"></i>
+          <h2 class="section-title">Employment Information</h2>
+        </div>
+        
+        <div class="info-grid">
+          <div class="info-item">
+            <label class="info-label">Employee ID</label>
+            <div class="info-value">{{ user.employeeId }}</div>
+          </div>
+          <div class="info-item">
+            <label class="info-label">Department</label>
+            <div *ngIf="!isEdit" class="info-value">{{ user.department }}</div>
+            <input *ngIf="isEdit" [(ngModel)]="user.department" name="department" class="form-control" />
+          </div>
+          <div class="info-item">
+            <label class="info-label">Position</label>
+            <div *ngIf="!isEdit" class="info-value">{{ user.position }}</div>
+            <input *ngIf="isEdit" [(ngModel)]="user.position" name="position" class="form-control" />
+          </div>
+          <div class="info-item">
+            <label class="info-label">Manager</label>
+            <div *ngIf="!isEdit" class="info-value">{{ user.manager }}</div>
+            <input *ngIf="isEdit" [(ngModel)]="user.manager" name="manager" class="form-control" />
+          </div>
+          <div class="info-item">
+            <label class="info-label">Join Date</label>
+            <div *ngIf="!isEdit" class="info-value">{{ user.joinDate | date:'MMMM d, yyyy' }}</div>
+            <input *ngIf="isEdit" [(ngModel)]="user.joinDate" name="joinDate" type="date" class="form-control" />
+          </div>
+          <div class="info-item">
+            <label class="info-label">Employment Status</label>
+            <div *ngIf="!isEdit" class="info-value">{{ user.status }}</div>
+            <select *ngIf="isEdit" [(ngModel)]="user.status" name="status" class="form-control">
+              <option>Active</option>
+              <option>Inactive</option>
+              <option>On Leave</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Contact Preferences Section -->
+      <div class="section">
+        <div class="section-header">
+          <i class="fas fa-bell"></i>
+          <h2 class="section-title">Contact Preferences</h2>
+        </div>
+        
+        <div class="preferences-list">
+          <div class="preference-item" *ngFor="let pref of ['emailNotifications','smsNotifications','pushNotifications','newsletter']; let i = index">
+            <div class="preference-info">
+              <label class="preference-label">{{ pref === 'emailNotifications' ? 'Email Notifications' : pref === 'smsNotifications' ? 'SMS Notifications' : pref === 'pushNotifications' ? 'Push Notifications' : 'Newsletter' }}</label>
+              <p class="preference-desc">{{ pref === 'emailNotifications' ? 'Receive updates about payroll and HR announcements' : pref === 'smsNotifications' ? 'Receive important alerts via text message' : pref === 'pushNotifications' ? 'Get real-time notifications on your devices' : 'Subscribe to company updates and news' }}</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" [(ngModel)]="user.preferences[pref]" [name]="pref" [checked]="user.preferences[pref]" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Account Security Section -->
+      <div class="section">
+        <div class="section-header">
+          <i class="fas fa-shield-alt"></i>
+          <h2 class="section-title">Account Security</h2>
+        </div>
+        
+        <div class="security-items">
+          <button class="security-item" (click)="onChangePassword()">
+            <div class="security-icon">
+              <i class="fas fa-key"></i>
+            </div>
+            <div class="security-content">
+              <h4 class="security-title">Change Password</h4>
+              <p class="security-desc">Update your password regularly to keep your account secure</p>
+            </div>
+            <i class="fas fa-chevron-right security-arrow"></i>
+          </button>
+
+          <button class="security-item" (click)="onEnable2FA()">
+            <div class="security-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <div class="security-content">
+              <h4 class="security-title">Two-Factor Authentication</h4>
+              <p class="security-desc">Add an extra layer of security to your account</p>
+            </div>
+            <i class="fas fa-chevron-right security-arrow"></i>
+          </button>
+
+          <button class="security-item" (click)="onViewSessions()">
+            <div class="security-icon">
+              <i class="fas fa-desktop"></i>
+            </div>
+            <div class="security-content">
+              <h4 class="security-title">Active Sessions</h4>
+              <p class="security-desc">View and manage your active login sessions</p>
+            </div>
+            <i class="fas fa-chevron-right security-arrow"></i>
+          </button>
+
+          <button class="security-item" (click)="onViewLoginHistory()">
+            <div class="security-icon">
+              <i class="fas fa-history"></i>
+            </div>
+            <div class="security-content">
+              <h4 class="security-title">Login History</h4>
+              <p class="security-desc">Check when your account was accessed</p>
+            </div>
+            <i class="fas fa-chevron-right security-arrow"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Danger Zone Section -->
+      <div class="section danger-section">
+        <div class="section-header">
+          <i class="fas fa-exclamation-triangle"></i>
+          <h2 class="section-title">Danger Zone</h2>
+        </div>
+        
+        <div class="danger-items">
+          <button class="danger-btn" (click)="onDeactivateAccount()">
+            <i class="fas fa-pause-circle"></i>
+            Deactivate Account
+          </button>
+          <button class="danger-btn delete-btn" (click)="onDeleteAccount()">
+            <i class="fas fa-trash-alt"></i>
+            Delete Account
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="profile-actions" *ngIf="isEdit">
+    <button class="btn-save" (click)="onSaveProfile()">
+      <i class="fas fa-save"></i>
+      Save Changes
+    </button>
+    <button class="btn-cancel" (click)="onCancel()">
+      <i class="fas fa-times"></i>
+      Cancel
+    </button>
+  </div>
 </div>

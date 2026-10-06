@@ -1,7 +1,6 @@
 package com.ems.controller;
 
-import jakarta.servlet.http.Cookie;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,7 +16,7 @@ import com.ems.exception.EMSException;
 import com.ems.security.model.AuthenticationRequest;
 import com.ems.security.model.AuthenticationResponse;
 import com.ems.security.util.JwtUtil;
-import com.ems.service.MyUserDetailsService;
+import com.ems.service.impl.MyUserDetailsService;
 import com.ems.util.ApplicationConstants;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,17 +25,16 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600, allowCredentials = "true")
+
 @Slf4j
+@RequiredArgsConstructor
 public class JWTTokenAuthenticationController {
 
-	@Autowired
-	private AuthenticationManager authenticationManager;
+	private final AuthenticationManager authenticationManager;
 
-	@Autowired
-	private JwtUtil jwtTokenUtil;
+	private final JwtUtil jwtTokenUtil;
 
-	@Autowired
-	private MyUserDetailsService userDetailsService;
+	private final MyUserDetailsService userDetailsService;
 
 	@PostMapping(value = ApplicationConstants.ENDPOINT_AUTHENTICATE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest,

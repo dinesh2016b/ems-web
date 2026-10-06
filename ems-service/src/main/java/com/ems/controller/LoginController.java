@@ -2,6 +2,7 @@ package com.ems.controller;
 
 import java.util.Map;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +25,12 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600, allowCredentials = "true")
+
 @Slf4j
+@RequiredArgsConstructor
 public class LoginController {
 
-	@Autowired
-	private LoginService loginService;
+	private final LoginService loginService;
 
 	@PostMapping(path = ApplicationConstants.ENDPOINT_SIGNIN, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest,

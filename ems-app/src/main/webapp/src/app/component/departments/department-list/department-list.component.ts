@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Departments } from '../../../model/departments';
 import { DepartmentService } from '../../../service/department.service';
 
@@ -12,10 +13,9 @@ export class DepartmentListComponent implements OnInit {
   TOKEN_KEY = 'auth-token';
   departments: Departments[];
 
-  constructor(private departmentService: DepartmentService) { }
+  constructor(private departmentService: DepartmentService, private router: Router) { }
 
   ngOnInit() {
-    //let jwtToken = window.sessionStorage.getItem(this.TOKEN_KEY);
     let jwtToken = localStorage.getItem(this.TOKEN_KEY);
     if (jwtToken == null || jwtToken === '' || jwtToken != undefined) {
       this.departmentService.findAll(jwtToken).subscribe(data => {
@@ -25,11 +25,21 @@ export class DepartmentListComponent implements OnInit {
     }
   }
 
-  editDepartment(event) {
-    console.log('edit department details');
+  onAddDepartment() {
+    this.router.navigate(['/departments/add']);
   }
 
-  removeDepartment(event) {
-    console.log(event);
+  editDepartment(department: Departments) {
+    console.log('Edit department: ' + department.deptNo);
+  }
+
+  removeDepartment(department: Departments) {
+    if (confirm(`Are you sure you want to delete ${department.deptName}?`)) {
+      console.log('Delete department: ' + department.deptNo);
+    }
+  }
+
+  viewDepartmentDetails(department: Departments) {
+    console.log('View department details: ' + department.deptNo);
   }
 }

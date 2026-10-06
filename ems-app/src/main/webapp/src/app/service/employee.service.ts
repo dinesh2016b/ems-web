@@ -28,7 +28,16 @@ export class EmployeeService {
     }
 
     public findAll(jwtToken: string, employee: Employee) {
+        console.log('----> employees');
         return this.backendAPISerivce.sendPostRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL+'/all', { jwtToken, employee });
+
+        //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'));
+        //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'), { headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});
+    }
+
+    public findAllEmployee(jwtToken: string) {
+        console.log('----> employees');
+        return this.backendAPISerivce.sendPostRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL+'/all', { jwtToken });
 
         //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'));
         //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'), { headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});

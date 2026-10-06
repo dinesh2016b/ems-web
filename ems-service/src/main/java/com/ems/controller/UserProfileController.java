@@ -3,6 +3,7 @@
  */
 package com.ems.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,15 +28,15 @@ import lombok.extern.slf4j.Slf4j;
 
 @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600, allowCredentials = "true",
 		allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token"})
+
 @RestController
 @Slf4j
+@RequiredArgsConstructor
 public class UserProfileController {
 
-	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
-	
-	@Autowired
-	EMSUserDetailsService emsUserDetailsService;
+
+	private EMSUserDetailsService emsUserDetailsService;
 
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 

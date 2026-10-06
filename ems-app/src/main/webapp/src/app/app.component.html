@@ -1,11 +1,76 @@
 <div>
-	<app-header></app-header>
+  <app-header></app-header>
 </div>
+
+
+<div class="current-user-account-dropdown-separator"></div>
+<li>
+  <a id="current-user-dropdown" class="" data-toggle="display" href="#current-user-account-menu" role="button"
+     aria-expanded="false" aria-controls="current-user-account-menu">
+    <i class="hidden-xs fa fa-user-circle current-user-nav-profile-placeholder " aria-hidden="true"></i>
+    <span>Home</span>
+    <span class="caret"></span>
+  </a>
+</li>
+<div id="current-user-account-menu" style="display:none;">
+  <div class="card card-body">
+    <div class="fa-stack" id="current-user-menu-profile-pic-stack">
+      <i class="fa fa-circle fa-stack-1x fa-2xl"></i>
+      <i class="fa fa-user fa-stack-1x fa-xl"></i>
+    </div>
+    <br>
+    <span class="current-user-name-display">Dinesh B</span><br>
+    <span class="current-user-role-display">
+        Sr. Manager
+      </span><br>
+    <a class="btn btn-gray" id="account-menu-manage-account-btn" href="/schools/22824/users/26127383">Manage account</a><br>
+    <div class="switch-accounts-main-nav-menu-item">
+      <div class="switch-accounts-header">Switch Account</div>
+      <div class="switch-accounts-list-container">
+        <a class="account-switch-list-item account-switch-list-user-item" data-toggle="collapse"
+           href="#current-user-account-menu">
+          <div class="account-switch-list-user-display">
+            <div class="fa-stack current-user-menu-switch-user-profile-pic-stack hidden-xs">
+              <i class="fa fa-circle fa-stack-2x fa-2xl"></i>
+              <i class="fa fa-user fa-stack-1x fa-xl"></i>
+            </div>
+            <div class="account-to-switch-to-info">
+              <div class="account-to-switch-to-name ">Dinesh B</div>
+              <div class="account-to-switch-to-role ">Sr Manager</div>
+
+            </div>
+          </div>
+          <i class="fas fa-check current-user-no-switch-check-mark"></i>
+        </a>
+        <div class="collapse" id="more-switch-user-dropdown">
+        </div>
+      </div>
+      <a class="account-switch-list-item" id="add-another-account-link" href="/signin?switch_account=true">
+        <div class="fa-stack current-user-menu-add-new-account-plus-stack">
+          <i class="fa fa-circle fa-stack-2x fa-2xl"></i>
+          <i class="fa fa-plus fa-stack-1x fa-xl"></i>
+        </div>
+        <div class="add-account-cta-text">Add another account</div>
+      </a></div>
+
+    <a class="btn" id="current-user-menu-sign-out-btn" href="/signout">
+      <div class="fa-stack current-user-menu-sign-out-all-stack">
+        <i class="fa fa-circle fa-stack-2x fa-2xl"></i>
+        <i class="fa fa-regular fa-right-from-bracket fa-stack-1x fa-xl"></i>
+      </div>
+      <div class="sign-out-all-cta-text">
+        Sign Out
+      </div>
+    </a></div>
+</div>
+
+
 <div class="maincontainer ems-background">
-	<div class="container-body">
-		<router-outlet></router-outlet>
-	</div>
+
+  <div class="container-body">
+    <router-outlet></router-outlet>
+  </div>
 </div>
 <div>
-	<app-footer></app-footer>
+  <app-footer></app-footer>
 </div>

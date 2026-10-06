@@ -9,7 +9,7 @@ logging:
         web:
           filter:
             CommonsRequestLoggingFilter: DEBUG
-    root: ERROR
+    root: INFO
   logback:
     rollingpolicy:
       file-name-pattern: ${LOG_FILE}.%d{MMddyyyy}.%i.log.gz
@@ -21,7 +21,9 @@ logging:
 server:
   error:
     include-stacktrace: never
-  port: 8080  
+  port: 8080
+  servlet:
+    context-path: /ems-web-service
 spring:
   application:
     name: EMS
@@ -31,12 +33,12 @@ spring:
     url: jdbc:h2:mem:employees
     username: admin
     hikari:
-        connection-timeout: 30000
-        maximum-pool-size: 10
-        minimum-idle: 5
-        idle-timeout: 600000
-        max-lifetime: 1800000
-        pool-name: emsdb
+      connection-timeout: 30000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      pool-name: emsdb
   h2:
     console:
       enabled: true
@@ -44,8 +46,12 @@ spring:
       settings:
         trace: false
         web-allow-others: true
+  sql:
+    init:
+      mode: always
   jpa:
     generate-ddl: false
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: none
       use-new-id-generator-mappings: false
@@ -54,6 +60,9 @@ spring:
   output:
     ansi:
       enabled: DETECT
+  jackson:
+    deserialization:
+      fail-on-null-for-primitives: false
   security:
     user:
       password: admin

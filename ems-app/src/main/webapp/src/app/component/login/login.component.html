@@ -1,47 +1,125 @@
-<div class="generic-container">
-    <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading heading-text">
-            <span class="lead">&nbsp;</span>
+<div class="auth-container">
+  <!-- Background Design -->
+  <div class="auth-bg">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+
+  <div class="auth-wrapper">
+    <!-- Logo/Brand Section -->
+    <div class="auth-brand">
+      <div class="brand-icon">
+        <i class="fas fa-lock"></i>
+      </div>
+      <h1 class="brand-name">Employee Management System</h1>
+    </div>
+
+    <!-- Login Card -->
+    <div class="auth-card">
+      <div class="card-header">
+        <h2>Welcome Back</h2>
+        <p>Sign in to your account to continue</p>
+      </div>
+
+      <form class="auth-form">
+        <!-- Username/Email Field -->
+        <div class="form-group">
+          <label for="username" class="form-label">
+            <i class="fas fa-user"></i>
+            Username or Email
+          </label>
+          <div class="input-wrapper">
+            <input 
+              type="email" 
+              id="username"
+              class="form-input"
+              placeholder="Enter your username or email"
+              #username
+              required>
+            <i class="fas fa-envelope input-icon"></i>
+          </div>
+          <small class="form-hint">Use your registered email or username</small>
         </div>
-        <div class="card" style="width: 25rem;">
-            <div class="card-header">
-                <h5 class="card-title">Welcome to EMS</h5>
-            </div>
-            <div class="card-body">
-                <div class="tablecontainer">
-                    <form>
-                        <div class="form-group pt-15 pb-15">
-                            <label for="username"><h6>Username</h6></label> 
-                            <input type="email" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter username">
-                        </div>
-                        <div class="form-group pt-15 pb-15">
-                            <label for="password"><h6>Password</h6></label> 
-                            <input type="password" class="form-control" id="password" placeholder="Password">
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="card-footer">
-                <div align="right">
-                    <button type="button" class="btn btn-primary btn-sm" (click)="onSubmit()">Login</button>
-                    <button type="button" class="btn btn-secondary btn-sm">
-                        Reset</button>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label" for="checkbox1">Forgot
-                        Username/Password > </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label" for="checkbox1"><a routerLink='/ems-signup'><h6>Singup></h6></a></label>
-                </div>
-            </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+          <label for="password" class="form-label">
+            <i class="fas fa-lock"></i>
+            Password
+          </label>
+          <div class="input-wrapper">
+            <input 
+              type="password" 
+              id="password"
+              class="form-input"
+              placeholder="Enter your password"
+              #password
+              required>
+            <i class="fas fa-key input-icon"></i>
+          </div>
+          <small class="form-hint">Must be at least 6 characters</small>
         </div>
+
+        <!-- Remember & Forgot -->
+        <div class="form-options">
+          <div class="checkbox">
+            <input type="checkbox" id="remember" class="checkbox-input">
+            <label for="remember" class="checkbox-label">Remember me</label>
+          </div>
+          <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <!-- Submit Button -->
+        <button 
+          type="button" 
+          class="btn-submit"
+          (click)="onSubmit()">
+          <i class="fas fa-sign-in-alt"></i>
+          Sign In
+        </button>
+      </form>
+
+      <!-- Divider -->
+      <div class="form-divider">
+        <span>Or continue with</span>
+      </div>
+
+      <!-- Social Login -->
+      <div class="social-login">
+        <button class="social-btn google" type="button">
+          <i class="fab fa-google"></i>
+        </button>
+        <button class="social-btn microsoft" type="button">
+          <i class="fab fa-microsoft"></i>
+        </button>
+        <button class="social-btn github" type="button">
+          <i class="fab fa-github"></i>
+        </button>
+      </div>
+
+      <!-- Signup Link -->
+      <div class="auth-footer">
+        <p>Don't have an account? 
+          <a routerLink="/ems-signup" class="signup-link">Create one now</a>
+        </p>
+      </div>
     </div>
-    <div class="panel-heading heading-text">
-        <span class="lead">&nbsp;</span>
+
+    <!-- Security Features -->
+    <div class="security-features">
+      <div class="feature">
+        <i class="fas fa-shield-alt"></i>
+        <span>Secure Login</span>
+      </div>
+      <div class="feature">
+        <i class="fas fa-lock"></i>
+        <span>SSL Encrypted</span>
+      </div>
+      <div class="feature">
+        <i class="fas fa-user-check"></i>
+        <span>2FA Available</span>
+      </div>
     </div>
-    <div class="panel-heading heading-text">
-        <span class="lead">&nbsp;</span>
-    </div>
+  </div>
 </div>

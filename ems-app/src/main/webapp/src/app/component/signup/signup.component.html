@@ -1,48 +1,191 @@
-<div class="generic-container">
-    <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading heading-text">
-            <span class="lead">&nbsp;</span>
+<div class="auth-container">
+  <!-- Background Design -->
+  <div class="auth-bg">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+
+  <div class="auth-wrapper">
+    <!-- Logo/Brand Section -->
+    <div class="auth-brand">
+      <div class="brand-icon">
+        <i class="fas fa-user-plus"></i>
+      </div>
+      <h1 class="brand-name">Create Account</h1>
+    </div>
+
+    <!-- Signup Card -->
+    <div class="auth-card signup-card">
+      <div class="card-header">
+        <h2>Join Our System</h2>
+        <p>Create your account in just a few steps</p>
+      </div>
+
+      <form class="auth-form">
+        <!-- Name Field -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName" class="form-label">
+              <i class="fas fa-user"></i>
+              First Name
+            </label>
+            <div class="input-wrapper">
+              <input 
+                type="text" 
+                id="firstName"
+                class="form-input"
+                placeholder="John"
+                required>
+              <i class="fas fa-user input-icon"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="lastName" class="form-label">
+              <i class="fas fa-user"></i>
+              Last Name
+            </label>
+            <div class="input-wrapper">
+              <input 
+                type="text" 
+                id="lastName"
+                class="form-input"
+                placeholder="Doe"
+                required>
+              <i class="fas fa-user input-icon"></i>
+            </div>
+          </div>
         </div>
 
-        <div class="card" style="width: 25rem;">
-            <div class="card-header">
-                <h5 class="card-title">Sign Up/Registration Form</h5>
-            </div>
-            <div class="card-body">
-                <div class="tablecontainer">
-                    <form>
-                        <div class="form-group">
-                            <label for="username">Username</label> <input type="email" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter username"> <small id="emailHelp" class="form-text text-muted">Username details</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label> <input type="password" class="form-control" id="password" placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <label for="username">Phone</label> <input type="email" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter username"> <small id="emailHelp" class="form-text text-muted">Username details</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="username">Email Id</label> <input type="email" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter username"> <small id="emailHelp" class="form-text text-muted">Username details</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Address</label> <input type="password" class="form-control" id="password" placeholder="Password">
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="card-footer">
-                <div align="right">
-                    <button type="button" class="btn btn-primary btn-sm">Submit</button>
-                    <button type="button" class="btn btn-secondary btn-sm">
-						Reset</button>
-                </div>
-            </div>
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="email" class="form-label">
+            <i class="fas fa-envelope"></i>
+            Email Address
+          </label>
+          <div class="input-wrapper">
+            <input 
+              type="email" 
+              id="email"
+              class="form-input"
+              placeholder="john.doe@example.com"
+              required>
+            <i class="fas fa-envelope input-icon"></i>
+          </div>
+          <small class="form-hint">We'll use this to verify your account</small>
         </div>
+
+        <!-- Phone Field -->
+        <div class="form-group">
+          <label for="phone" class="form-label">
+            <i class="fas fa-phone"></i>
+            Phone Number
+          </label>
+          <div class="input-wrapper">
+            <input 
+              type="tel" 
+              id="phone"
+              class="form-input"
+              placeholder="+1 (555) 123-4567"
+              required>
+            <i class="fas fa-phone input-icon"></i>
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+          <label for="password" class="form-label">
+            <i class="fas fa-lock"></i>
+            Password
+          </label>
+          <div class="input-wrapper">
+            <input 
+              type="password" 
+              id="password"
+              class="form-input"
+              placeholder="••••••••"
+              required>
+            <i class="fas fa-key input-icon"></i>
+          </div>
+          <small class="form-hint">At least 8 characters with uppercase, lowercase, and numbers</small>
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="form-group">
+          <label for="confirmPassword" class="form-label">
+            <i class="fas fa-lock"></i>
+            Confirm Password
+          </label>
+          <div class="input-wrapper">
+            <input 
+              type="password" 
+              id="confirmPassword"
+              class="form-input"
+              placeholder="••••••••"
+              required>
+            <i class="fas fa-key input-icon"></i>
+          </div>
+        </div>
+
+        <!-- Address Field -->
+        <div class="form-group">
+          <label for="address" class="form-label">
+            <i class="fas fa-map-marker-alt"></i>
+            Address
+          </label>
+          <div class="input-wrapper">
+            <input 
+              type="text" 
+              id="address"
+              class="form-input"
+              placeholder="123 Main Street, City, State"
+              required>
+            <i class="fas fa-map-marker-alt input-icon"></i>
+          </div>
+        </div>
+
+        <!-- Terms Checkbox -->
+        <div class="form-group">
+          <div class="checkbox">
+            <input type="checkbox" id="terms" class="checkbox-input" required>
+            <label for="terms" class="checkbox-label">
+              I agree to the 
+              <a href="#" class="link">Terms of Service</a> and 
+              <a href="#" class="link">Privacy Policy</a>
+            </label>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-submit" (click)="onSubmit()">
+          <i class="fas fa-user-check"></i>
+          Create Account
+        </button>
+      </form>
+
+      <!-- Sign In Link -->
+      <div class="auth-footer">
+        <p>Already have an account? 
+          <a routerLink="/ems-login" class="signup-link">Sign In Here</a>
+        </p>
+      </div>
     </div>
-    <div class="panel-heading heading-text">
-        <span class="lead">&nbsp;</span>
+
+    <!-- Security Features -->
+    <div class="security-features">
+      <div class="feature">
+        <i class="fas fa-shield-alt"></i>
+        <span>Secure Registration</span>
+      </div>
+      <div class="feature">
+        <i class="fas fa-lock"></i>
+        <span>SSL Encrypted</span>
+      </div>
+      <div class="feature">
+        <i class="fas fa-check-circle"></i>
+        <span>Email Verified</span>
+      </div>
     </div>
-    <div class="panel-heading heading-text">
-        <span class="lead">&nbsp;</span>
-    </div>
+  </div>
 </div>

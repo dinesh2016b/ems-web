@@ -1,5 +1,6 @@
 package com.ems.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,13 +24,13 @@ import lombok.extern.slf4j.Slf4j;
 @CrossOrigin(origins = "https://localhost:8080", maxAge = 3600, allowCredentials = "true",
         allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token"})
 @Slf4j
+@RequiredArgsConstructor
 public class OperationController {
 
    // @Value("${activemq.destination}")
    // private String destination;
 
-    @Autowired
-    private JmsUtils jmsUtils;
+    private final JmsUtils jmsUtils;
 
     @PostMapping(path = ApplicationConstants.ENDPOINT_SEND_DEPARTMENT_CHANGE_REQUEST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> sendDepartmentChangeRequest(@RequestBody EmployeeRequest employeeRequest)

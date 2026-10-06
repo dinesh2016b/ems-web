@@ -1,117 +1,104 @@
-<div class="container">
-	<div class="row mt-40 mb-10">
-		<div class="col-12 panel-heading heading-text  d-flex justify-content-between">
-			<h1><span class="lead">Employees</span></h1>
-		</div>
-	</div>
-</div>
+<div class="page-container">
+  <!-- Header Section -->
+  <div class="page-header">
+    <div class="header-content">
+      <div class="header-left">
+        <i class="fas fa-briefcase header-icon"></i>
+        <div>
+          <h1 class="page-title">Employee Management</h1>
+          <p class="page-subtitle">Manage and view all employee records</p>
+        </div>
+      </div>
+      <button class="btn-add-new" (click)="onAddEmployee()">
+        <i class="fas fa-plus"></i>
+        Add Employee
+      </button>
+    </div>
+  </div>
 
-<div class="container">
-	<div class=" ems_table row ">
-		<div class="col-6 mt-15 mb-15">
-			<p class="m-0"><strong>Employees</strong></p>
-		</div>
-		<div class="col-6 mt-15 mb-15 d-flex align-items-end justify-content-end">
-			<span class="ml-5">Add Employee</span>
-		</div>
-	</div>
+  <!-- Search & Filter Section -->
+  <div class="filter-section">
+    <div class="search-box">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" placeholder="Search by name or employee ID..." class="search-input">
+    </div>
+    <div class="filter-controls">
+      <select class="filter-select">
+        <option>All Departments</option>
+        <option>Sales</option>
+        <option>Engineering</option>
+        <option>HR</option>
+      </select>
+      <select class="filter-select">
+        <option>All Status</option>
+        <option>Active</option>
+        <option>Inactive</option>
+      </select>
+    </div>
+  </div>
 
-	<div class="tab-content">
-		<div class="row tab-pane fade show active">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-30">
-				<div class="ems_table">
-					<div class="row ems_head_table ">
-						<div class="col-2 col-sm-2 col-md-2 col-lg-2">
-							Emp. ID
-						</div>
-						<div class="col-3 col-sm-3 col-md-3 col-lg-3">
-							First Name
-						</div>
-						<div class="col-3 col-sm-3 col-md-3 col-lg-3">
-							Last Name
-						</div>
-						<div class="col-2 col-sm-2 col-md-2 col-lg-2">
-							Birth Date
-						</div>
-						<div class="col-2 col-sm-2 col-md-2 col-lg-2">
-							Department
-						</div>
-					</div>
+  <div class="summary-row" *ngIf="employees.length > 0">
+    <div class="summary-item">
+      <span class="summary-label">Total Employees</span>
+      <strong>{{ employees.length }}</strong>
+    </div>
+    <div class="summary-item">
+      <span class="summary-label">Active</span>
+      <strong>{{ employees.length }}</strong>
+    </div>
+    <div class="summary-item">
+      <span class="summary-label">New This Month</span>
+      <strong>0</strong>
+    </div>
+  </div>
 
-					<div class="" *ngFor="let employee of employees">
-						<div class="row" (click)="redirectToEmployeeDetailsPage(employee)">
-							<div class="col-auto col-sm-auto col-md-auto col-lg-auto ">
+  <!-- Employee Cards Grid -->
+  <div class="employees-grid">
+    <div class="employee-card" *ngFor="let employee of employees || []">
+      <div class="card-header">
+        <div class="employee-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="card-actions">
+          <button class="action-btn" (click)="editEmployee(employee)" title="Edit">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="action-btn delete" (click)="removeEmployee(employee)" title="Delete">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3 class="employee-name">{{ employee.firstName }} {{ employee.lastName }}</h3>
+        <div class="employee-info">
+          <div class="info-row">
+            <span class="info-label">Employee ID:</span>
+            <span class="info-value">{{ employee.empNo }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Birth Date:</span>
+            <span class="info-value">{{ employee.birthDate | date:"MMM d, yyyy" }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Status:</span>
+            <span class="badge badge-active">Active</span>
+          </div>
+        </div>
+        <button class="btn-view-details" (click)="redirectToEmployeeDetailsPage(employee)">
+          View Details
+        </button>
+      </div>
+    </div>
+  </div>
 
-							</div>
-							<div class="col-2 col-sm-2 col-md-2 col-lg-2">
-								{{ employee.empNo }}
-							</div>
-							<div class="col-3 col-sm-3 col-md-3 col-lg-3">
-								{{ employee.firstName }}
-							</div>
-							<div class="col-3 col-sm-3 col-md-3 col-lg-3">
-								{{ employee.lastName }}
-							</div>
-							<div class="col-2 col-sm-2 col-md-2 col-lg-2">
-								{{ employee.birthDate | date:"MMM d, y"}}
-							</div>
-							<div class="col-2 col-sm-2 col-md-2 col-lg-2">
-								Department
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="col">
-		<div class="panel-heading heading-text">
-			<span class="lead">Department Details</span>
-		</div>
-		<div class="accordion" id="accordionExample">
-			<div class="accordion-item">
-				<h2 class="accordion-header" id="headingOne">
-					<button class="accordion-button" type="button"
-						data-bs-toggle="collapse" data-bs-target="#collapseOne"
-						aria-expanded="true" aria-controls="collapseOne">
-						Department Details #1</button>
-				</h2>
-				<div id="collapseOne" class="accordion-collapse collapse show"
-					aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-					<div class="accordion-body">
-						<strong>TBD</strong>
-					</div>
-				</div>
-			</div>
-			<div class="accordion-item">
-				<h2 class="accordion-header" id="headingTwo">
-					<button class="accordion-button collapsed" type="button"
-						data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-						aria-expanded="false" aria-controls="collapseTwo">
-						Department Details #2</button>
-				</h2>
-				<div id="collapseTwo" class="accordion-collapse collapse"
-					aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-					<div class="accordion-body">
-						<strong>TBD</strong>
-					</div>
-				</div>
-			</div>
-			<div class="accordion-item">
-				<h2 class="accordion-header" id="headingThree">
-					<button class="accordion-button collapsed" type="button"
-						data-bs-toggle="collapse" data-bs-target="#collapseThree"
-						aria-expanded="false" aria-controls="collapseThree">
-						Department Details #3</button>
-				</h2>
-				<div id="collapseThree" class="accordion-collapse collapse"
-					aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-					<div class="accordion-body">
-						<strong>TBD</strong>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!employees || employees.length === 0">
+    <i class="fas fa-inbox"></i>
+    <h3>No Employees Found</h3>
+    <p>Start by adding a new employee to your system</p>
+    <button class="btn-add-new" (click)="onAddEmployee()">
+      <i class="fas fa-plus"></i>
+      Add First Employee
+    </button>
+  </div>
 </div>

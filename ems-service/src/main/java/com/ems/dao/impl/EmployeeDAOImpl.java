@@ -3,23 +3,22 @@
  */
 package com.ems.dao.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Repository;
-
 import com.ems.dao.EmployeeDAO;
 import com.ems.entity.Employees;
 import com.ems.exception.EMSException;
 import com.ems.exception.ResourceNotFoundException;
 import com.ems.repositories.EmployeeRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Repository;
 
+@RequiredArgsConstructor
 @Repository
 public class EmployeeDAOImpl implements EmployeeDAO {
 
-	@Autowired
-	private EmployeeRepository employeeRepository;
+	private final EmployeeRepository employeeRepository;
 
 	@Override
 	public Page<Employees> getEmployees(int firstRecord, int size) throws EMSException {

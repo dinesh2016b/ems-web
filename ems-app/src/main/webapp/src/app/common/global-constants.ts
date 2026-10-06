@@ -3,4 +3,5 @@ export class GlobalConstants {
     static readonly ENDPOINT_EMPLOYEE_URL: string = "/services/v1/employees";
     static readonly ENDPOINT_DEPARTMENT_URL: string = "/services/v1/departments";
     static readonly ENDPOINT_SALARIES_URL: string = "/services/v1/ems-salaries";
+    static readonly ENDPOINT_PROFILE_URL: string = "/services/v1/profile";
 }

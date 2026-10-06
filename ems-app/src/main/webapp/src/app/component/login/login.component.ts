@@ -35,8 +35,9 @@ export class LoginComponent implements OnInit {
     let jwtToken = localStorage.getItem(this.TOKEN_KEY);
     if (jwtToken == null || jwtToken === '' || jwtToken != undefined) {
       this.authenticateService.authenticate().subscribe(data => {
-        if(data.jwt != null){
-          jwtToken = "Bearer " + data.jwt;
+        console.log('JWT Token : ' + data);
+        if(data.jwt_access_token != null){
+          jwtToken = "Bearer " + data.jwt_access_token;
           window.sessionStorage.setItem(this.TOKEN_KEY, jwtToken);
           localStorage.setItem(this.TOKEN_KEY, jwtToken);
           window.sessionStorage.setItem(this.USER_KEY, JSON.stringify(data.user));

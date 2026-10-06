@@ -1,5 +1,6 @@
 package com.ems.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +18,12 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600, allowCredentials="true",
 		allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token"})
+
 @Slf4j
+@RequiredArgsConstructor
 public class LogoutController {
 
-	@Autowired
-	private LoginService loginService;
+	private final LoginService loginService;
 	
 	@PostMapping(path = ApplicationConstants.ENDPOINT_SIGNOUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {

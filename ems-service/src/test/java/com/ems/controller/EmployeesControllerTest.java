@@ -10,28 +10,28 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.ems.bean.EmployeesBean;
 import com.ems.security.util.JwtUtil;
-import com.ems.service.MyUserDetailsService;
+import com.ems.service.impl.MyUserDetailsService;
 import com.ems.service.impl.EmployeeServiceImpl;
 
 @WebMvcTest(EmployeesController.class)
 class EmployeesControllerTest {
 
-	@MockBean
+	@MockitoBean
 	private EmployeeServiceImpl employeeService;
 
 	@Autowired
 	private MockMvc mockMvc;
 	
-	@MockBean 
+	@MockitoBean 
 	private MyUserDetailsService myUserDetailsService;
 	
-	@MockBean
+	@MockitoBean
 	private JwtUtil jwtUtil;
 
 	@DisplayName("Test testFindEmployeeById()")

@@ -13,12 +13,25 @@ export class SalariesComponent implements OnInit {
   salaries: Salaries[];
 
   constructor(private salariesService: SalariesService) { 
-
   }
 
   ngOnInit() {
     this.salariesService.findAll().subscribe(data => {
       this.salaries = data;
     });
+  }
+
+  onAddSalary() {
+    console.log('Add new salary record');
+  }
+
+  editSalary(salary: Salaries) {
+    console.log('Edit salary: ' + salary.emp_no);
+  }
+
+  removeSalary(salary: Salaries) {
+    if (confirm(`Are you sure you want to delete this salary record?`)) {
+      console.log('Delete salary: ' + salary.emp_no);
+    }
   }
 }

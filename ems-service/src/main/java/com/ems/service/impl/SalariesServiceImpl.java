@@ -3,6 +3,7 @@
  */
 package com.ems.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -24,11 +25,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true, timeout = 20)
 public class SalariesServiceImpl implements SalariesService {
 
-	@Autowired 
-	private SalariesDAO salariesDAO;
+	private final SalariesDAO salariesDAO;
 	
 	@Override
 	public SalariesBean getSalariesByEmployeeId(long employeesId) throws EMSException {

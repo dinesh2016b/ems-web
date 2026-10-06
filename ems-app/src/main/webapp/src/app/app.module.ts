@@ -6,8 +6,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-//import { NgbdModalBasic } from './modal-basic';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule, RoutingComponent } from './app-routing.module';
@@ -16,7 +14,9 @@ import { AppRoutingModule, RoutingComponent } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmployeeDetailsComponent } from './component/employees/employee-details/employee-details.component';
 import { EmployeeListComponent } from './component/employees/employee-list/employee-list.component';
+import { AddEmployeeComponent } from './component/employees/add-employee/add-employee.component';
 import { DepartmentDetailsComponent } from './component/departments/department-details/department-details.component';
+import { AddDepartmentComponent } from './component/departments/add-department/add-department.component';
 import { SalariesComponent } from './component/salaries/salaries.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { LoginComponent } from './component/login/login.component';
@@ -33,9 +33,11 @@ import { httpInterceptorProviders } from './service/httpRequestInterceptor';
     declarations: [
         AppComponent,
         EmployeeDetailsComponent,
+        AddEmployeeComponent,
         RoutingComponent,
         PageNotFoundComponent,
         DepartmentDetailsComponent,
+        AddDepartmentComponent,
         EmployeeListComponent,
         SalariesComponent,
         EmployeeDetailsComponent,
@@ -45,8 +47,7 @@ import { httpInterceptorProviders } from './service/httpRequestInterceptor';
         SignupComponent,
         HomeComponent,
         FooterComponent,
-        ProfileComponent,
-        //NgbdModalBasic,
+        ProfileComponent
     ],
     imports: [
         BrowserModule,
@@ -58,7 +59,6 @@ import { httpInterceptorProviders } from './service/httpRequestInterceptor';
         MatButtonModule,
         MatCardModule,
         MatFormFieldModule,
-        //NgbModule,
         FormsModule,
         NgbModule
     ],

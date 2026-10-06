@@ -14,12 +14,14 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Dinesh
  *
  */
 
+@Slf4j
 @Service
 public class JwtUtil {
 
@@ -39,6 +41,9 @@ public class JwtUtil {
 	}
 
 	private Claims extractAllClaims(String token) {
+		if (token == null || token.trim().isEmpty()) {
+			throw new IllegalArgumentException("JWT token cannot be null or empty");
+		}
 		return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
 	}
 
@@ -67,7 +72,15 @@ public class JwtUtil {
 	}
 
 	public Boolean validateToken(String token, UserDetails userDetails) {
-		final String username = extractUsername(token);
-		return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+		if (token == null || token.trim().isEmpty()) {
+			return false;
+		}
+		try {
+			final String username = extractUsername(token);
+			return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+		} catch (Exception e) {
+			log.error("Token validation failed: {}", e.getMessage());
+			return false;
+		}
 	}
 }

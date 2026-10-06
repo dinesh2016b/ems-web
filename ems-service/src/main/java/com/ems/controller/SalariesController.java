@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,10 +30,10 @@ import lombok.extern.slf4j.Slf4j;
 @CrossOrigin(origins = "https://localhost:8080", maxAge = 3600, allowCredentials="true",
 		allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token"})
 @Slf4j
+@RequiredArgsConstructor
 public class SalariesController {
 
-	@Autowired
-	private SalariesRepository salariesRepositoryDAO;
+	private final SalariesRepository salariesRepositoryDAO;
 
 	@GetMapping("/salaries")
 	public ResponseEntity<List<Salaries>> getAllSalaries() throws EMSException {

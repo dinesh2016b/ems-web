@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -32,11 +33,12 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @CrossOrigin(origins = "https://localhost:8080", maxAge = 3600, allowCredentials = "true",
 		allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token"})
+
 @Slf4j
+@RequiredArgsConstructor
 public class EmployeesController {
 
-	@Autowired
-	private EmployeeServiceImpl employeeService;
+	private final EmployeeServiceImpl employeeService;
 
 	@PostMapping(path = ApplicationConstants.ENDPOINT_GET_EMPLOYEES, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<EmployeeResponse>> getEmployees(@RequestBody EmployeeRequest employeeRequest)
@@ -106,7 +108,7 @@ public class EmployeesController {
 	@PostMapping(path = ApplicationConstants.ENDPOINT_CREATE_EMPLOYEE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EmployeesBean> addEmployee(@RequestBody EmployeeRequest employeeRequest) throws EMSException {
 		EmployeesBean employeesBean = new EmployeesBean();
-		log.debug("--------> addEmployee() :" + employeesBean.toString());
+		log.debug("--------> addEmployee() :" + employeesBean);
 
 		try {
 			if (employeeRequest != null) {
