@@ -7,7 +7,8 @@ const httpOptions = {
   headers: new HttpHeaders({
     'Accept': 'application/json',
     'Content-Type': 'application/json'
-  })
+  }),
+  withCredentials: true
 };
 
 @Injectable({ providedIn: 'root' })
@@ -25,7 +26,8 @@ export class BackendApiService {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + tokenStr
-      })
+      }),
+      withCredentials: true
     };
 
     return this.http.get<any>(this.hostNameEndPointURL + url, httpOptions1)
@@ -36,7 +38,7 @@ export class BackendApiService {
   }
 
   //POST request
-  sendPostRequest(url: string, data: any) {
+  sendPostRequest(url: string, data: any ) {
     return this.http.post(this.hostNameEndPointURL + url, data, httpOptions)
       .pipe(
         map((data: any) => data || {}),
@@ -61,6 +63,7 @@ export class BackendApiService {
         catchError(this.handleError)
       );
   }
+
   //GET request
   sendGetAPIRequestWithParameter(url: string, inputParams: HttpParams) {
     const httpOptions = {

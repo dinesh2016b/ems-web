@@ -14,7 +14,7 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { HomeComponent } from './component/home/home.component';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent, pathMatch: 'full' },
+    { path: '', component: LoginComponent, pathMatch: 'full' },
     { path: 'ems-login', component: LoginComponent },
     { path: 'ems-signup', component: SignupComponent },
     { path: 'ems-home', component: HomeComponent },

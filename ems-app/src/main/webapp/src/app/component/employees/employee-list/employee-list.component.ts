@@ -22,7 +22,6 @@ export class EmployeeListComponent implements OnInit {
         private tokenStorageService: TokenStorageService, private router: Router) {
     }
 
-    /*
     ngOnInit() {
        console.log('Employee -->> ngOnInit()');
        let employeeRequest: Employee ={
@@ -45,8 +44,7 @@ export class EmployeeListComponent implements OnInit {
             });
         }
     }
-*/
-
+/*
    ngOnInit() {
        console.log('Employee -->> ngOnInit()');
       
@@ -61,6 +59,8 @@ export class EmployeeListComponent implements OnInit {
             });
         }
     }
+*/
+
     onAddEmployee() {
         // Navigate to Add Employee page
         this.router.navigate(['/employees/add']);

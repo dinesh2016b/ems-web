@@ -32,29 +32,37 @@ public class CustomCorsFilter implements Filter {
 
         String origin = request.getHeader("Origin");
 
-        if (isAllowedOrigin(origin)) {
-            response.setHeader("Access-Control-Allow-Origin", origin);
-            response.setHeader("Access-Control-Allow-Methods",
-                    "GET, POST, PUT, DELETE, OPTIONS");
-            response.setHeader("Access-Control-Allow-Headers",
-                    "Authorization, Content-Type, X-Requested-With, Origin, Accept");
-            response.setHeader("Access-Control-Allow-Credentials", "true");
-            response.setHeader("Access-Control-Max-Age", "3600");
-            response.setHeader("Access-Control-Expose-Headers", "Authorization");
-
-            String jwtToken = request.getHeader("Authorization");
-            if (jwtToken != null && jwtToken.startsWith("Bearer ")) {
-                String token = jwtToken.substring(7);
-                // You can add logic here to validate the token if needed
-                log.info("JWT Token received: " + token);
-            }
-        }
-
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
-            response.setHeader("Access-Control-Allow-Credentials", "true");
-            response.setHeader("Access-Control-Max-Age", "3600");
-            response.setStatus(HttpServletResponse.SC_OK);
-            return;
+            log.info("doFilter method called for OPTIONS request: {}", request.getMethod());
+            if (isAllowedOrigin(origin)) {
+                response.setHeader("Access-Control-Allow-Origin", origin);
+                response.setHeader("Access-Control-Allow-Headers",
+                        "Authorization, Content-Type, X-Requested-With, Origin, Accept");
+                response.setHeader("Access-Control-Allow-Credentials", "true");
+                response.setHeader("Access-Control-Max-Age", "3600");
+                response.setHeader("Access-Control-Expose-Headers", "Authorization");
+                response.setStatus(HttpServletResponse.SC_OK);
+                return;
+            }
+        } else {
+            log.info("doFilter method called for request: {}", request.getMethod());
+            if (isAllowedOrigin(origin)) {
+                response.setHeader("Access-Control-Allow-Origin", origin);
+                response.setHeader("Access-Control-Allow-Methods",
+                        "GET, POST, PUT, DELETE, OPTIONS");
+                response.setHeader("Access-Control-Allow-Headers",
+                        "Authorization, Content-Type, X-Requested-With, Origin, Accept");
+                response.setHeader("Access-Control-Allow-Credentials", "true");
+                response.setHeader("Access-Control-Max-Age", "3600");
+                response.setHeader("Access-Control-Expose-Headers", "Authorization");
+
+                String jwtToken = request.getHeader("Authorization");
+                if (jwtToken != null && jwtToken.startsWith("Bearer ")) {
+                    String token = jwtToken.substring(7);
+                    // You can add logic here to validate the token if needed
+                    log.info("JWT Token received: " + token);
+                }
+            }
         }
 
         chain.doFilter(req, res);
