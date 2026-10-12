@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ems.model.Employee;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -30,12 +31,9 @@ import com.ems.util.ApplicationConstants;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RestController
-@CrossOrigin(origins = "https://localhost:8080", maxAge = 3600, allowCredentials = "true",
-		allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token"})
-
 @Slf4j
 @RequiredArgsConstructor
+@RestController
 public class EmployeesController {
 
 	private final EmployeeServiceImpl employeeService;
@@ -72,21 +70,21 @@ public class EmployeesController {
 		return new ResponseEntity<List<EmployeeResponse>>(employeeResponseList, new HttpHeaders(), HttpStatus.OK);
 	}
 
-	@GetMapping(path = ApplicationConstants.ENDPOINT_GET_EMPLOYEE_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<EmployeeResponse> getEmployeeById(@RequestBody EmployeeRequest employeeRequest)
+	@PostMapping(path = ApplicationConstants.ENDPOINT_GET_EMPLOYEE_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<EmployeeResponse> getEmployeeById(@RequestBody Employee employee)
 			throws EMSException, ResourceNotFoundException {
-
+		log.info("Employee.EmpNo = " + employee.getEmpNo());
 		EmployeeResponse employeeResponse = new EmployeeResponse();
 		try {
-			EmployeesBean employeesBean = employeeService.getEmployeesById(employeeRequest.getEmpNo());
+			EmployeesBean employeesBean = employeeService.getEmployeesById(employee.getEmpNo());
 
 			if (employeesBean != null) {
 				employeeResponse.setEmpNo(employeesBean.getEmpNo());
 				employeeResponse.setFirstName(employeesBean.getFirstName());
 				employeeResponse.setLastName(employeesBean.getLastName());
 				employeeResponse.setBirthDate(employeesBean.getBirthDate());
-				employeeResponse.setDepartmentsBean(employeesBean.getDepartmentsBean());
-				employeeResponse.setSalariesBean(employeesBean.getSalariesBean());
+				/*employeeResponse.setDepartmentsBean(employeesBean.getDepartmentsBean());
+				employeeResponse.setSalariesBean(employeesBean.getSalariesBean());*/
 				employeeResponse.setCreatedBy(employeesBean.getCreatedBy());
 				employeeResponse.setCreatedDate(employeesBean.getCreatedDate());
 				employeeResponse.setUpdatedBy(employeesBean.getUpdatedBy());

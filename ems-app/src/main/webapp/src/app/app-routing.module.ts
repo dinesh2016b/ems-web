@@ -12,25 +12,33 @@ import { PageNotFoundComponent } from './component/page-not-found/page-not-found
 import { SignupComponent } from './component/signup/signup.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { HomeComponent } from './component/home/home.component';
+import { AuthGuard } from './service/auth.guard';
 
 const routes: Routes = [
     { path: '', component: LoginComponent, pathMatch: 'full' },
     { path: 'ems-login', component: LoginComponent },
     { path: 'ems-signup', component: SignupComponent },
-    { path: 'ems-home', component: HomeComponent },
-    { path: 'employees', component: EmployeeListComponent },
-    { path: 'employees/add', component: AddEmployeeComponent },
-    { path: 'ems-employees', component: EmployeeListComponent },
-    { path: 'ems-employees/:id', component: EmployeeDetailsComponent },
-    { path: 'departments', component: DepartmentListComponent },
-    { path: 'departments/add', component: AddDepartmentComponent },
-    { path: 'ems-departments', component: DepartmentListComponent },
-    { path: 'ems-departments/:id', component: DepartmentDetailsComponent },
-    { path: 'salaries', component: SalariesComponent },
-    { path: 'ems-salaries', component: SalariesComponent },
-    { path: 'profile', component: ProfileComponent },
-    { path: 'ems-profile', component: ProfileComponent },
-    { path: '**', component: PageNotFoundComponent }
+    {
+        path: '',
+        canActivate: [AuthGuard],
+        children: [
+            { path: 'ems-home', component: HomeComponent },
+            { path: 'employees', component: EmployeeListComponent },
+            { path: 'employees/add', component: AddEmployeeComponent },
+            { path: 'ems-employees', component: EmployeeListComponent },
+            { path: 'ems-employees/:id', component: EmployeeDetailsComponent },
+            { path: 'ems-employeeDetails', component: EmployeeDetailsComponent },
+            { path: 'departments', component: DepartmentListComponent },
+            { path: 'departments/add', component: AddDepartmentComponent },
+            { path: 'ems-departments', component: DepartmentListComponent },
+            { path: 'ems-departments/:id', component: DepartmentDetailsComponent },
+            { path: 'salaries', component: SalariesComponent },
+            { path: 'ems-salaries', component: SalariesComponent },
+            { path: 'profile', component: ProfileComponent },
+            { path: 'ems-profile', component: ProfileComponent },
+            { path: '**', component: PageNotFoundComponent }
+        ]
+    }
 ];
 
 @NgModule({

@@ -31,11 +31,10 @@ export class AuthenticateService {
     return this.cookieService.get("isLoggedIn") === "true";
   }
 
-  authenticate() {    
+  authenticate(userName: string, password: string) {
     return this.backendApiService.sendPostRequest(GlobalConstants.ENDPOINT_AUTH_SIGNIN_URL, {
-      "userName": "admin",
-      "password": "admin"
+      userName,
+      password
     });
-    console.log('----> authenticate()');
   }
 }

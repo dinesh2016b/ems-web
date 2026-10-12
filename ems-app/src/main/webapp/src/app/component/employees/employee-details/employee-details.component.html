@@ -1,65 +1,44 @@
-<div class="container">
-	<div class="row mt-40 mb-10">
-		<div class="col-12 panel-heading heading-text  d-flex justify-content-between">
-			<h1><span class="lead">Employees</span></h1>
-		</div>
-	</div>
+<div class="modal-header">
+  <div>
+    <h2 class="modal-title" id="employee-details-title">Employee Details</h2>
+    <p class="modal-subtitle" *ngIf="employee">
+      {{ employee.firstName }} {{ employee.lastName }}
+    </p>
+  </div>
+  <button
+    *ngIf="activeModal"
+    type="button"
+    class="btn-close"
+    aria-label="Close employee details"
+    (click)="closeMe()">
+  </button>
 </div>
 
-<div class="container">
-	<div class=" ems_table row ">
-		<div class="col-6 mt-15 mb-15">
-			<p class="m-0"><strong>Employees</strong></p>
-		</div>
-		<div class="col-6 mt-15 mb-15 d-flex align-items-end justify-content-end">
-			<span class="ml-5">Add Employee</span>
-		</div>
-	</div>
-	<div class="tab-content">
-		<div class="row tab-pane fade show active">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-30">
-				<div class="ems_table">
-					<div class="row">
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							Employee Number
-						</div>
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							{{ employee.empNo }}
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							Employee First Name
-						</div>
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							{{ employee.firstName }}
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							Employee Last Name
-						</div>
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							{{ employee.lastName }}
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							Employee Birth Date
-						</div>
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							{{ employee.birthDate }}
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							Employee First Name
-						</div>
-						<div class="col-6 col-sm-6 col-md-6 col-lg-6">
-							{{ employee.firstName }}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="modal-body" *ngIf="employee; else loadingEmployee">
+  <dl class="employee-details">
+    <div class="detail-row">
+      <dt>Employee ID</dt>
+      <dd>{{ employee.empNo }}</dd>
+    </div>
+    <div class="detail-row">
+      <dt>First name</dt>
+      <dd>{{ employee.firstName }}</dd>
+    </div>
+    <div class="detail-row">
+      <dt>Last name</dt>
+      <dd>{{ employee.lastName }}</dd>
+    </div>
+    <div class="detail-row">
+      <dt>Birth date</dt>
+      <dd>{{ employee.birthDate | date:"MMM d, yyyy" }}</dd>
+    </div>
+  </dl>
+</div>
+
+<ng-template #loadingEmployee>
+  <div class="modal-body">Loading employee details...</div>
+</ng-template>
+
+<div class="modal-footer" *ngIf="activeModal">
+  <button type="button" class="btn btn-secondary" (click)="closeMe()">Close</button>
+</div>

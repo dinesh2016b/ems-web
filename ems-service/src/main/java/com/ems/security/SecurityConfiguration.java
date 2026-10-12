@@ -7,6 +7,7 @@ import com.ems.exception.AuthEntryPointJwt;
 import com.ems.filters.JwtRequestFilter;
 import com.ems.service.impl.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,25 +28,23 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.List;
 
-
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
 
+    @Value("${app.cors.allowed-origins}")
+    private List<String> ALLOWED_ORIGINS;
+
     private final UserDetailsServiceImpl userDetailsService;
-
     private final AuthEntryPointJwt unauthorizedHandler;
-
     private final JwtRequestFilter jwtRequestFilter;
 
     @Bean
     DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
-
         authProvider.setPasswordEncoder(passwordEncoder());
-
         return authProvider;
     }
 
@@ -69,7 +68,6 @@ public class SecurityConfiguration {
 
         httpSecurity.cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
-                //.x509(x509 -> x509.subjectPrincipalRegex("CN=(.*?)(?:,|$)"))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/services/auth/signin").permitAll();
@@ -77,14 +75,9 @@ public class SecurityConfiguration {
                     auth.requestMatchers("/services/v1/**").permitAll();
                     auth.requestMatchers("/h2-console/**").permitAll();
                     auth.anyRequest().authenticated();
-                    // in case authenticate particular URL
-                    // auth.requestMatchers(antMatcher("/services/v1/employees/**/*")).authenticated();
-                    // auth.requestMatchers(antMatcher("/services/v1/departments/**/*")).authenticated();
-                    // auth.requestMatchers(antMatcher("/services/v1/salaries/**/*")).authenticated();
                 });
 
         httpSecurity.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler));
-
 
         // fix H2 database console: Refused to display ' in a frame because it set
         // 'X-Frame-Options' to 'deny'
@@ -97,15 +90,10 @@ public class SecurityConfiguration {
         return httpSecurity.build();
     }
 
-    // @Bean
+    @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of(
-                "http://localhost:4200",
-                "http://localhost:8080",
-                "https://localhost:4200",
-                "https://localhost:8080"
-        ));
+        configuration.setAllowedOrigins(ALLOWED_ORIGINS);
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList(
                 "Authorization",

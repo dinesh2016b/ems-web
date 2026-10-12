@@ -87,18 +87,18 @@ public class EmployeeServiceImpl implements EmployeeService {
             employeesBean.setCreatedBy(employees.getCreatedBy());
             employeesBean.setUpdatedDate(employees.getUpdatedDate());
             employeesBean.setUpdatedBy(employees.getUpdatedBy());
+
+            String departmentId = "1001";
+            DepartmentsBean departmentsBean = departmentService.getDepartmentsById(departmentId);
+            log.debug("---------> Departments :" + departmentsBean);
+
+            employeesBean.setDepartmentsBean(departmentsBean);
+
+            SalariesBean salariesBean = salariesService.getSalariesByEmployeeId(employees.getEmpNo());
+            employeesBean.setSalariesBean(salariesBean);
         }
 
-        String departmentId = "1001";
-        DepartmentsBean departmentsBean = departmentService.getDepartmentsById(departmentId);
-        log.debug("---------> Departments :" + departmentsBean);
-
-        employeesBean.setDepartmentsBean(departmentsBean);
-
-        SalariesBean salariesBean = salariesService.getSalariesByEmployeeId(employees.getEmpNo());
-        employeesBean.setSalariesBean(salariesBean);
-
-        log.debug("------------> getEmployeesById() : " + employeesBean);
+        log.info("------------> getEmployeesById() : " + employeesBean);
 
         return employeesBean;
     }

@@ -18,12 +18,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestController
-@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600, allowCredentials = "true",
-        allowedHeaders = {"x-auth-token", "x-requested-with", "x-xsrf-token"})
-
 @Slf4j
 @RequiredArgsConstructor
+@RestController
 public class DepartmentController {
 
     private final DepartmentRepository departmentRepository;

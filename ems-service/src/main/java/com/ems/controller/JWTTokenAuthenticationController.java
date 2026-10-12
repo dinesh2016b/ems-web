@@ -23,11 +23,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
-@RestController
-@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600, allowCredentials = "true")
-
 @Slf4j
 @RequiredArgsConstructor
+@RestController
 public class JWTTokenAuthenticationController {
 
 	private final AuthenticationManager authenticationManager;

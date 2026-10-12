@@ -26,12 +26,9 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 
-@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600, allowCredentials = "true",
-		allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token"})
-
-@RestController
 @Slf4j
 @RequiredArgsConstructor
+@RestController
 public class UserProfileController {
 
 	private UserDetailsServiceImpl userDetailsService;

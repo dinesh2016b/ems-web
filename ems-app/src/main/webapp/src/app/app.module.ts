@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule, RoutingComponent } from './app-routing.module';
 
@@ -60,6 +60,7 @@ import { httpInterceptorProviders } from './service/httpRequestInterceptor';
         MatCardModule,
         MatFormFieldModule,
         FormsModule,
+        ReactiveFormsModule,
         NgbModule
     ],
     //providers: [],

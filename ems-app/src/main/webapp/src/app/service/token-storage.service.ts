@@ -9,6 +9,8 @@ export class TokenStorageService {
 
     signOut(): void {
         window.sessionStorage.clear();
+        localStorage.removeItem(TOKEN_KEY);
+        localStorage.removeItem(USER_KEY);
     }
     public saveToken(token: string): void {
         window.sessionStorage.removeItem(TOKEN_KEY);
@@ -17,8 +19,7 @@ export class TokenStorageService {
         localStorage.setItem(TOKEN_KEY, token);
     }
     public getToken(): string | null {
-        //return window.sessionStorage.getItem(TOKEN_KEY);
-        return localStorage.getItem(TOKEN_KEY);
+        return localStorage.getItem(TOKEN_KEY) || window.sessionStorage.getItem(TOKEN_KEY);
     }
     public saveUser(user: any): void {
         window.sessionStorage.removeItem(USER_KEY);

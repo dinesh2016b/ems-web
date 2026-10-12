@@ -17,11 +17,11 @@ export class EmployeeService {
         this.employeeData = this.employeeDataSubject.asObservable();
     }
 
-    public findById(jwtToken: string, employeesId) {
-        console.log('----> employeesId :' + employeesId);
-        console.log(`${ GlobalConstants.ENDPOINT_EMPLOYEE_URL }/${employeesId}`);
-
-        return this.backendAPISerivce.sendGetAPIRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL+'/id',jwtToken);
+    public findById(jwtToken: string, employeesId: string) {        
+        const employee: Employee = new Employee();
+        employee.empNo = employeesId;
+        console.log('----> employee.empNo :' + employee.empNo);
+        return this.backendAPISerivce.sendPostRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL+'/id',{ jwtToken, empNo: employee.empNo });
 
         //return this.http.get<Employee[]>(`${this.employeeUrl}/${employeesId}`);
         //return this.http.get<Employee[]>((`${this.employeeUrl}/${employeesId}`),{ headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});

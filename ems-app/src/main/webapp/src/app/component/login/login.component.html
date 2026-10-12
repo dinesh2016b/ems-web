@@ -22,7 +22,7 @@
         <p>Sign in to your account to continue</p>
       </div>
 
-      <form class="auth-form">
+      <form [formGroup]="loginForm" class="auth-form" (ngSubmit)="onSubmit()" autocomplete="on" novalidate>
         <!-- Username/Email Field -->
         <div class="form-group">
           <label for="username" class="form-label">
@@ -30,16 +30,24 @@
             Username or Email
           </label>
           <div class="input-wrapper">
-            <input 
-              type="email" 
+            <input
+              type="text"
               id="username"
               class="form-input"
               placeholder="Enter your username or email"
-              #username
-              required>
+              formControlName="userName"
+              autocomplete="username"
+              autocapitalize="none"
+              [attr.aria-invalid]="loginForm.get('userName')?.invalid && loginForm.get('userName')?.touched"
+              aria-describedby="username-error">
             <i class="fas fa-envelope input-icon"></i>
           </div>
-          <small class="form-hint">Use your registered email or username</small>
+          <small
+            id="username-error"
+            class="form-error"
+            *ngIf="loginForm.get('userName')?.hasError('required') && loginForm.get('userName')?.touched">
+            Enter your username or email.
+          </small>
         </div>
 
         <!-- Password Field -->
@@ -49,54 +57,41 @@
             Password
           </label>
           <div class="input-wrapper">
-            <input 
-              type="password" 
+            <input
+              type="password"
               id="password"
               class="form-input"
               placeholder="Enter your password"
-              #password
-              required>
+              formControlName="password"
+              autocomplete="current-password"
+              [attr.aria-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+              aria-describedby="password-error">
             <i class="fas fa-key input-icon"></i>
           </div>
-          <small class="form-hint">Must be at least 6 characters</small>
+          <small
+            id="password-error"
+            class="form-error"
+            *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+            Enter your password.
+          </small>
+          <small
+            class="form-error"
+            *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched">
+            Password must be at least 6 characters.
+          </small>
         </div>
 
-        <!-- Remember & Forgot -->
-        <div class="form-options">
-          <div class="checkbox">
-            <input type="checkbox" id="remember" class="checkbox-input">
-            <label for="remember" class="checkbox-label">Remember me</label>
-          </div>
-          <a href="#" class="forgot-link">Forgot password?</a>
-        </div>
+        <div class="login-error" role="alert" *ngIf="loginError">{{ loginError }}</div>
 
         <!-- Submit Button -->
         <button 
-          type="button" 
+          type="submit" 
           class="btn-submit"
-          (click)="onSubmit()">
-          <i class="fas fa-sign-in-alt"></i>
-          Sign In
+          [disabled]="isSubmitting">
+          <i class="fas" [ngClass]="isSubmitting ? 'fa-spinner fa-spin' : 'fa-sign-in-alt'"></i>
+          {{ isSubmitting ? 'Signing In...' : 'Sign In' }}
         </button>
       </form>
-
-      <!-- Divider -->
-      <div class="form-divider">
-        <span>Or continue with</span>
-      </div>
-
-      <!-- Social Login -->
-      <div class="social-login">
-        <button class="social-btn google" type="button">
-          <i class="fab fa-google"></i>
-        </button>
-        <button class="social-btn microsoft" type="button">
-          <i class="fab fa-microsoft"></i>
-        </button>
-        <button class="social-btn github" type="button">
-          <i class="fab fa-github"></i>
-        </button>
-      </div>
 
       <!-- Signup Link -->
       <div class="auth-footer">
@@ -106,20 +101,5 @@
       </div>
     </div>
 
-    <!-- Security Features -->
-    <div class="security-features">
-      <div class="feature">
-        <i class="fas fa-shield-alt"></i>
-        <span>Secure Login</span>
-      </div>
-      <div class="feature">
-        <i class="fas fa-lock"></i>
-        <span>SSL Encrypted</span>
-      </div>
-      <div class="feature">
-        <i class="fas fa-user-check"></i>
-        <span>2FA Available</span>
-      </div>
-    </div>
   </div>
 </div>

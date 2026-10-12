@@ -66,9 +66,13 @@ export class EmployeeListComponent implements OnInit {
         this.router.navigate(['/employees/add']);
     }
 
-    redirectToEmployeeDetailsPage(employee: Employee) {
-        sessionStorage.setItem("employees", JSON.stringify(this.employees));
-        console.log('Employee -->> ' + employee);
+    showEmployeeDetails(employee: Employee) {
+        const modalRef = this.modalService.open(EmployeeDetailsComponent, {
+            size: 'lg',
+            centered: true,
+            scrollable: true
+        });
+        modalRef.componentInstance.employee = employee;
     }
 
     editEmployee(employee: Employee) {

@@ -1,0 +1,50 @@
+.modal-title {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.modal-subtitle {
+  margin: 0.25rem 0 0;
+  color: #7f8c8d;
+}
+
+.employee-details {
+  margin: 0;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.detail-row:last-child {
+  border-bottom: 0;
+}
+
+.detail-row dt {
+  color: #7f8c8d;
+  font-weight: 500;
+}
+
+.detail-row dd {
+  margin: 0;
+  color: #2c3e50;
+  font-weight: 600;
+  text-align: right;
+}
+
+@media (max-width: 480px) {
+  .detail-row {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .detail-row dd {
+    text-align: left;
+  }
+}
