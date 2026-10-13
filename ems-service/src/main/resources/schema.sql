@@ -47,6 +47,7 @@ CREATE TABLE employees (
     last_name   VARCHAR(20)     NOT NULL,
     gender      ENUM ('M','F')  NOT NULL,    
     hire_date   DATE            NOT NULL,
+    is_active   BOOLEAN         DEFAULT TRUE,
     created_date DATE default NULL,
     created_by  VARCHAR(20)default NULL,
     updated_date DATE default NULL,

@@ -48,6 +48,8 @@ public class EmployeeServiceImpl implements EmployeeService {
             employeesBean.setFirstName(employees.getFirstName());
             employeesBean.setLastName(employees.getLastName());
             employeesBean.setBirthDate(employees.getBirthDate());
+            employeesBean.setHireDate(employees.getHireDate());
+            employeesBean.setActive(employees.isActive());
             employeesBean.setCreatedDate(employees.getCreatedDate());
             employeesBean.setCreatedBy(employees.getCreatedBy());
             employeesBean.setUpdatedDate(employees.getUpdatedDate());
@@ -83,6 +85,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             employeesBean.setFirstName(employees.getFirstName());
             employeesBean.setLastName(employees.getLastName());
             employeesBean.setBirthDate(employees.getBirthDate());
+            employeesBean.setHireDate(employees.getHireDate());
             employeesBean.setCreatedDate(employees.getCreatedDate());
             employeesBean.setCreatedBy(employees.getCreatedBy());
             employeesBean.setUpdatedDate(employees.getUpdatedDate());
@@ -113,6 +116,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         employees.setFirstName(employeesBean.getFirstName());
         employees.setLastName(employeesBean.getLastName());
         employees.setBirthDate(employeesBean.getBirthDate());
+        employees.setHireDate(employeesBean.getHireDate());
+        employees.setActive(employeesBean.isActive());
         employees.setCreatedDate(employees.getCreatedDate());
         employees.setCreatedBy(employees.getCreatedBy());
 
@@ -127,7 +132,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         employees.setFirstName(employeesBean.getFirstName());
         employees.setLastName(employeesBean.getLastName());
         employees.setBirthDate(employeesBean.getBirthDate());
-
+        employees.setHireDate(employeesBean.getHireDate());
+        employees.setActive(employeesBean.isActive());
         employeeDAO.updateEmployee(employees);
     }
 
@@ -139,8 +145,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         employees.setFirstName(employeesBean.getFirstName());
         employees.setLastName(employeesBean.getLastName());
         employees.setBirthDate(employeesBean.getBirthDate());
-
+        employees.setHireDate(employeesBean.getHireDate());
+        employees.setActive(employeesBean.isActive());
         employeeDAO.deleteEmployee(employees);
-
     }
 }

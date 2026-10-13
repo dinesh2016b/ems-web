@@ -9,7 +9,7 @@ import { EmployeeService } from '../../../service/employee.service';
   styleUrls: ['./add-employee.component.css']
 })
 export class AddEmployeeComponent implements OnInit {
-  employee: Employee = { empNo: '', firstName: '', lastName: '', birthDate: '', pageNo: '1', size: '20' };
+  employee: Employee = { empNo: '', firstName: '', lastName: '', birthDate: '',"hireDate":'', "active": true, "departmentsBean":null, "salariesBean":null,pageNo: '1', size: '20' };
   TOKEN_KEY = 'auth-token';
 
   constructor(private employeeService: EmployeeService, private router: Router) { }

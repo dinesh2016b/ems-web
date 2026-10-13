@@ -17,7 +17,7 @@ export class EmployeeService {
         this.employeeData = this.employeeDataSubject.asObservable();
     }
 
-    public findById(jwtToken: string, employeesId: string) {        
+    public findById(jwtToken: string, employeesId: string) {
         const employee: Employee = new Employee();
         employee.empNo = employeesId;
         console.log('----> employee.empNo :' + employee.empNo);
@@ -27,9 +27,9 @@ export class EmployeeService {
         //return this.http.get<Employee[]>((`${this.employeeUrl}/${employeesId}`),{ headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});
     }
 
-    public findAll(jwtToken: string, employee: Employee) {
+    public findAll(jwtToken: string, employee: Employee, department: string) {
         console.log('----> employees');
-        return this.backendAPISerivce.sendPostRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL+'/all', { jwtToken, employee });
+        return this.backendAPISerivce.sendPostRequest(GlobalConstants.ENDPOINT_EMPLOYEE_URL+'/all', { jwtToken, employee, department });
 
         //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'));
         //return this.http.get<Employee[]>((this.employeeUrl + '/pageNo/0/size/10'), { headers: { authorization: this.createBasicAuthToken("dinesh", "dinesh") }});

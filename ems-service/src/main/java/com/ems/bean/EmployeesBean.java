@@ -20,6 +20,8 @@ public class EmployeesBean {
 	private String firstName;
 	private String lastName;
 	private String birthDate;
+	private String hireDate;
+	private boolean isActive;
 	private DepartmentsBean departmentsBean;
 	private SalariesBean salariesBean;
 	private Date createdDate;

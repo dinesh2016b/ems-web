@@ -31,6 +31,12 @@ public class Employees implements Serializable {
     @Column(name = "birth_date", nullable = false)
     private String birthDate;
 
+    @Column(name = "hire_date", nullable = false)
+    private String hireDate;
+
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive;
+
     @Column(name = "created_date")
     private Date createdDate;
 

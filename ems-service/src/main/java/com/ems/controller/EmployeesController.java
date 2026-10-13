@@ -55,6 +55,8 @@ public class EmployeesController {
 				employeeResponse.setFirstName(employeesBean.getFirstName());
 				employeeResponse.setLastName(employeesBean.getLastName());
 				employeeResponse.setBirthDate(employeesBean.getBirthDate());
+				employeeResponse.setHireDate(employeesBean.getHireDate());
+				employeeResponse.setActive(employeesBean.isActive());
 				employeeResponse.setDepartmentsBean(employeesBean.getDepartmentsBean());
 				employeeResponse.setSalariesBean(employeesBean.getSalariesBean());
 				employeeResponse.setCreatedBy(employeesBean.getCreatedBy());
@@ -83,8 +85,10 @@ public class EmployeesController {
 				employeeResponse.setFirstName(employeesBean.getFirstName());
 				employeeResponse.setLastName(employeesBean.getLastName());
 				employeeResponse.setBirthDate(employeesBean.getBirthDate());
-				/*employeeResponse.setDepartmentsBean(employeesBean.getDepartmentsBean());
-				employeeResponse.setSalariesBean(employeesBean.getSalariesBean());*/
+				employeeResponse.setHireDate(employeesBean.getHireDate());
+				employeeResponse.setActive(employeesBean.isActive());
+				employeeResponse.setDepartmentsBean(employeesBean.getDepartmentsBean());
+				employeeResponse.setSalariesBean(employeesBean.getSalariesBean());
 				employeeResponse.setCreatedBy(employeesBean.getCreatedBy());
 				employeeResponse.setCreatedDate(employeesBean.getCreatedDate());
 				employeeResponse.setUpdatedBy(employeesBean.getUpdatedBy());
@@ -114,6 +118,8 @@ public class EmployeesController {
 				employeesBean.setFirstName(employeeRequest.getFirstName());
 				employeesBean.setLastName(employeeRequest.getLastName());
 				employeesBean.setBirthDate(employeeRequest.getBirthDate());
+				employeesBean.setHireDate(employeeRequest.getHireDate());
+				employeesBean.setActive(employeeRequest.isActive());
 				employeesBean.setDepartmentsBean(employeeRequest.getDepartmentsBean());
 				employeesBean.setSalariesBean(employeeRequest.getSalariesBean());
 				employeesBean.setCreatedBy(employeeRequest.getCreatedBy());
@@ -144,6 +150,8 @@ public class EmployeesController {
 				employeesBean.setFirstName(employeeRequest.getFirstName());
 				employeesBean.setLastName(employeeRequest.getLastName());
 				employeesBean.setBirthDate(employeeRequest.getBirthDate());
+				employeesBean.setHireDate(employeeRequest.getHireDate());
+				employeesBean.setActive(employeeRequest.isActive());
 				employeesBean.setDepartmentsBean(employeeRequest.getDepartmentsBean());
 				employeesBean.setSalariesBean(employeeRequest.getSalariesBean());
 				employeesBean.setUpdatedDate(new Date(System.currentTimeMillis()));
@@ -174,6 +182,8 @@ public class EmployeesController {
 				employeesBean.setFirstName(employeeRequest.getFirstName());
 				employeesBean.setLastName(employeeRequest.getLastName());
 				employeesBean.setBirthDate(employeeRequest.getBirthDate());
+				employeesBean.setHireDate(employeeRequest.getHireDate());
+				employeesBean.setActive(employeeRequest.isActive());
 				employeesBean.setDepartmentsBean(employeeRequest.getDepartmentsBean());
 				employeesBean.setSalariesBean(employeeRequest.getSalariesBean());
 
@@ -190,5 +200,4 @@ public class EmployeesController {
 
 		return ResponseEntity.created(location).build();
 	}
-
 }

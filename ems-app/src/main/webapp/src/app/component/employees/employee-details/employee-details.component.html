@@ -2,7 +2,7 @@
   <div>
     <h2 class="modal-title" id="employee-details-title">Employee Details</h2>
     <p class="modal-subtitle" *ngIf="employee">
-      {{ employee.firstName }} {{ employee.lastName }}
+      <b>{{ employee.firstName }} {{ employee.lastName }}</b>
     </p>
   </div>
   <button
@@ -31,6 +31,38 @@
     <div class="detail-row">
       <dt>Birth date</dt>
       <dd>{{ employee.birthDate | date:"MMM d, yyyy" }}</dd>
+    </div>
+    <div class="detail-row">
+      <dt>Hire date</dt>
+      <dd>{{ employee.hireDate | date:"MMM d, yyyy" }}</dd>
+    </div>
+    <div class="detail-row">
+      <dt>Status</dt>
+      <dd>
+        <ng-template [ngIf]="employee.active" [ngIfElse]="deactivated">
+          <div>
+            <span class="badge bg-success">Active</span>
+          </div>
+        </ng-template>
+        <ng-template #deactivated>
+          <div>
+            <span class="badge bg-danger">Deactivated</span>
+          </div>
+        </ng-template>
+      </dd>
+    </div>
+    <div class="detail-row">
+      <dt>Department No.</dt>
+      <dd>{{ employee.departmentsBean.deptNo }}</dd>
+    </div>
+    <div class="detail-row">
+      <dt>Department Name</dt>
+      <dd>{{ employee.departmentsBean.deptName }}</dd>
+    </div>
+
+    <div class="detail-row">
+      <dt>Salary</dt>
+      <dd>{{ employee.salariesBean.salary }}</dd>
     </div>
   </dl>
 </div>

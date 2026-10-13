@@ -3,7 +3,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 
 import { Employee } from '../../../model/employee';
+import { Departments } from '../../../model/departments';
 import { EmployeeService } from '../../../service/employee.service';
+import { DepartmentService } from '../../../service/department.service';
 import { EmployeeDetailsComponent } from '../employee-details/employee-details.component';
 import { TokenStorageService } from '../../../service/token-storage.service';
 import { GlobalConstants } from 'src/app/common/global-constants';
@@ -17,49 +19,51 @@ import { GlobalConstants } from 'src/app/common/global-constants';
 export class EmployeeListComponent implements OnInit {
     TOKEN_KEY = 'auth-token';
     employees: Employee[] = [];
+    departments: Departments[] = [];
 
     constructor(private modalService: NgbModal, private employeeService: EmployeeService,
+        private departmentService: DepartmentService,
         private tokenStorageService: TokenStorageService, private router: Router) {
     }
 
     ngOnInit() {
        console.log('Employee -->> ngOnInit()');
+       const department = "All";
        let employeeRequest: Employee ={
            "empNo": "0",
            "firstName": "",
            "lastName": "",
            "birthDate": "",
+           "hireDate":"",
+           "active": true,
+           "departmentsBean":null,
+           "salariesBean":null,
            "pageNo": "1",
            "size": "20"
-       }; 
+       };
         let jwtToken = localStorage.getItem(this.TOKEN_KEY);
         console.log('JWT Token: ', jwtToken);
         if (jwtToken != null && jwtToken !== '') {
             console.log('Fetching employees from endpoint: ', GlobalConstants.ENDPOINT_EMPLOYEE_URL+'/all');
-            this.employeeService.findAll(jwtToken, employeeRequest).subscribe(data => {
+            this.departments = JSON.parse(localStorage.getItem("departments"));
+            if(this.departments == null){
+                this.departmentService.findAll(jwtToken).subscribe(data => {
+                    console.log('Fetched department: ', data);
+                    console.log('Number of department fetched: ', data.length);
+                    this.departments = data ?? [];
+                    localStorage.setItem("departments", JSON.stringify(this.departments));
+                });
+            }else {
+                 console.log('Already department list fetched ');
+            }
+            this.employeeService.findAll(jwtToken, employeeRequest,department).subscribe(data => {
                 console.log('Fetched employees: ', data);
                 console.log('Number of employees fetched: ', data.length);
                 this.employees = data ?? [];
-                sessionStorage.setItem("employees", JSON.stringify(this.employees));
+                localStorage.setItem("employees", JSON.stringify(this.employees));
             });
         }
     }
-/*
-   ngOnInit() {
-       console.log('Employee -->> ngOnInit()');
-      
-        let jwtToken = localStorage.getItem(this.TOKEN_KEY);
-        console.log('JWT Token: ', jwtToken);
-        if (jwtToken == null || jwtToken === '' || jwtToken != undefined) {
-            this.employeeService.findAllEmployee(jwtToken).subscribe(data => {
-                console.log('Fetched employees: ', data);
-                console.log('Number of employees fetched: ', data.length);
-                this.employees = data ?? [];
-                sessionStorage.setItem("employees", JSON.stringify(this.employees));
-            });
-        }
-    }
-*/
 
     onAddEmployee() {
         // Navigate to Add Employee page

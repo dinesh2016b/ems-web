@@ -23,11 +23,9 @@
       <input type="text" placeholder="Search by name or employee ID..." class="search-input">
     </div>
     <div class="filter-controls">
-      <select class="filter-select">
-        <option>All Departments</option>
-        <option>Sales</option>
-        <option>Engineering</option>
-        <option>HR</option>
+      <select class="filter-select">  
+         <option>All Department</option>      
+        <option *ngFor="let department of departments || []">{{ department.deptName }}</option>
       </select>
       <select class="filter-select">
         <option>All Status</option>
@@ -80,8 +78,25 @@
             <span class="info-value">{{ employee.birthDate | date:"MMM d, yyyy" }}</span>
           </div>
           <div class="info-row">
+            <span class="info-label">Hire Date:</span>
+            <span class="info-value">{{ employee.hireDate | date:"MMM d, yyyy" }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Department Name:</span>
+            <span class="info-value">{{ employee.departmentsBean.deptName }}</span>
+          </div>
+          <div class="info-row">
             <span class="info-label">Status:</span>
-            <span class="badge badge-active">Active</span>
+            <ng-template [ngIf]="employee.active" [ngIfElse]="deactivated">
+              <div>
+                <span class="badge badge-active">Active</span>
+              </div>
+            </ng-template>
+            <ng-template #deactivated>
+              <div>
+                <span class="badge bg-danger">Deactivated</span>
+              </div>
+            </ng-template>            
           </div>
         </div>
         <button class="btn-view-details" (click)="showEmployeeDetails(employee)">
