@@ -22,21 +22,21 @@ const routes: Routes = [
         path: '',
         canActivate: [AuthGuard],
         children: [
-            { path: 'ems-home', component: HomeComponent },
-            { path: 'employees', component: EmployeeListComponent },
-            { path: 'employees/add', component: AddEmployeeComponent },
-            { path: 'ems-employees', component: EmployeeListComponent },
-            { path: 'ems-employees/:id', component: EmployeeDetailsComponent },
-            { path: 'ems-employeeDetails', component: EmployeeDetailsComponent },
-            { path: 'departments', component: DepartmentListComponent },
-            { path: 'departments/add', component: AddDepartmentComponent },
-            { path: 'ems-departments', component: DepartmentListComponent },
-            { path: 'ems-departments/:id', component: DepartmentDetailsComponent },
-            { path: 'salaries', component: SalariesComponent },
-            { path: 'ems-salaries', component: SalariesComponent },
-            { path: 'profile', component: ProfileComponent },
-            { path: 'ems-profile', component: ProfileComponent },
-            { path: '**', component: PageNotFoundComponent }
+            { path: 'ems-home', title: 'Home', component: HomeComponent },
+            { path: 'employees', title: 'Employees', component: EmployeeListComponent },
+            { path: 'employees/add', title: 'Add Employee', component: AddEmployeeComponent },
+            { path: 'ems-employees', title: 'Employees', component: EmployeeListComponent },
+            { path: 'ems-employees/:id', title: 'Employee Details', component: EmployeeDetailsComponent },
+            { path: 'ems-employeeDetails', title: 'Employee Details', component: EmployeeDetailsComponent },
+            { path: 'departments', title: 'Departments', component: DepartmentListComponent },
+            { path: 'departments/add', title: 'Add Department', component: AddDepartmentComponent },
+            { path: 'ems-departments', title: 'Departments', component: DepartmentListComponent },
+            { path: 'ems-departments/:id', title: 'Department Details', component: DepartmentDetailsComponent },
+            { path: 'salaries', title: 'Salaries', component: SalariesComponent },
+            { path: 'ems-salaries', title: 'Salaries', component: SalariesComponent },
+            { path: 'profile', title: 'Profile', component: ProfileComponent },
+            { path: 'ems-profile', title: 'Profile', component: ProfileComponent },
+            { path: '**', title: 'Page Not Found', component: PageNotFoundComponent }
         ]
     }
 ];
