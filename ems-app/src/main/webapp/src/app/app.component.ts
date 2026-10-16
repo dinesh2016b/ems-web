@@ -2,7 +2,7 @@ import { Component, OnInit, isDevMode } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { environment } from './../environments/environment';
-import { TokenStorageService } from './service/token-storage.service';
+import { TokenStorageService } from './core/auth/services/token-storage.service';
 
 @Component({
     selector: 'app-root',
